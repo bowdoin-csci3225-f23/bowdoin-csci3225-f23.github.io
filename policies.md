@@ -6,7 +6,6 @@ nav_order: 3
 
 
 ### Late Policy
-
 As we will continuously build upon what we have discussed, it is
 crucial that you do not fall behind on assignments. The due dates in
 place are meant to help you stay on target.
@@ -18,10 +17,11 @@ three days late. Submit what you have before that time, even if it
 does not work as you would like.
 
 
-__Religous holidays__: If a religious holiday interferes with a
-deadline, please be in touch with me.
+### Religous holidays
+If a religious holiday interferes with a deadline, please be in touch with me.
 
-__Emergencies:__ If you have serious circumstances that will impact
+### Emergencies
+If you have serious circumstances that will impact
 your ability to learn, please be in touch as soon as possible so that
 we can make a plan. Please only _serious_ circumstances (for
 e.g. taking two classes with homework deadlines the same day does not
