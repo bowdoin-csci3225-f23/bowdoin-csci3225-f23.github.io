@@ -5,8 +5,7 @@ nav_order: 1
 ---
 
 
-## CSCI 3225: ALgorithms for GIS, Fall 2023
-
+## CSCI 3225: Algorithms for GIS, Fall 2023
 
 ## Syllabus
 
