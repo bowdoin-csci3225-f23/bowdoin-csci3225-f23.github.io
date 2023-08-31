@@ -7,32 +7,22 @@ nav_order: 1
 
 ## CSCI 3225: Algorithms for GIS, Fall 2023
 
-## Syllabus
+- __Professor:__ Laura Toma (she/her)
+- __Email:__ ltoma at bowdoin.edu
+- __Office:__ Searles 219 
+- __Class time:__  TR 2:50-4:15
+- __Classroom:__  Searles 126
 
 
-__Professor:__ Laura Toma (she/her)
+### Prerequisites 
+csci 2200 (Algorithms) and csci 2330 (Systems). In other words, basic knowledge of:
 
-__Email: ltoma at bowdoin.edu
-
-__Office: Searles 219 
-
-__Class time:__  TR 2:50-4:15
-
-__Classroom:__  Searles 126
-
-
-
-
-**Prerequisites:** csci 2200 (Algorithms) and csci 2330 (Systems). In other words, basic knowledge of:
-
--  analysis (asymptotic notation, growth, recurrences); basic algorithms and data structures (searching, sorting, binary search trees, priority queues) and algorithm design techniques (divide-and-conquer, greedy)
-- programming in C/C++, Unix terminal commands and Makefiles
-
-
-**Overview:**
+-  Analysis (asymptotic notation, growth, recurrences); basic algorithms and data structures (searching, sorting, binary search trees, priority queues) and algorithm design techniques (divide-and-conquer, greedy)
+- Programming in C/C++, Unix terminal commands and Makefiles
 
 
 
+### Overview
 
 Geographic Information Systems (GIS) is an umbrella term for systems
   that work with geographically referenced, or geospatial data such as
@@ -55,43 +45,58 @@ modeling sea level rise, visibility, line simplification and surface
 simplification, LiDAR data, Delaunay traingulations, Voronoi diagrams,
 B-trees, quadtrees, parallel processing with OpenMP, cache-efficient
 algorithms, cache-efficient matrix multiplication and space-filling
-curves. This is a projects course --- the class will provide
-opportunities to implement and experiment with some of these
+curves. 
+
+This is a projects course and will provide
+opportunities to design, implement and experimentally analyze some of these
 algorithms.
 
 
-**Learning objectives:** 
+### Learning objectives
 
 - Understand  fundamental problems encountered in GIS and their
   algorithmic solutions
-
 - Understand the importance of algorithm design, complexity analysis
   and generally the interplay between theory and practice
-
 - Gain coding skills in C/C++  and work on a large project
-
-- Improve communication skills by give a presentation and write a paper 
-
+- Improve communication skills through presentations and project reports/paper
 
 
 
+### Syllabus overview
 
-**Syllabus overview:**
+The list below is tentative and  very likely to change to fit our needs. 
 
-The list below is tentative and  very likely to change to best fit our needs. 
-
-- Data models (vector and raster; TINs; TIN representation)
+- Data models (vector and raster, TINs, TIN representation)
 - Contour lines
 - Modeling sea-level rise
 - Drainage: aspect, slope, flow accumulation, watersheds, sink-watershed partition, flooding and pfastetter labeling
 - Visibility: line-of-sight, viewshed, total viewshed
 - Parallelization with OpenMP 
-- Lidar data; classification; lidar-to-raster and lidar-to-TIN
+- Lidar data:  classification, lidar-to-raster and lidar-to-TIN
 - Line simplification and surface simplification.
-- Delaunay triangulation and Voronoi diagrams. 
+- Delaunay triangulation and Voronoi diagrams.
+- Limitation of the RAM model and cache efficiency   
 - Spatial indexing: B-trees,  Quadtrees and R-trees
 - Spatial operations:  nearest neighbor and k-nearest neighbors
 - Space-filling cuves: Z-order and Morton order
+
+
+ 
+### Course requirements
+
+The requirements for the class are attendance and active
+engagement during classes, and completion of projects and other
+assignments.  Evaluation will be as follows: 
+
+- __Class engagement: 20%__ 
+- __Projects: 80%__
+
+Note that __class engagement__ will significantly affect your grade.   Examples of class engagement
+  include: attending class; consistently and independently engaging in
+  discussions, volunteering answers, making observations, talking to
+  your group and classmates about the material; and engaging on Slack.
+
 
 
  
@@ -100,26 +105,4 @@ The list below is tentative and  very likely to change to best fit our needs.
   cancellations or delays. The code to join Slack is posted on Canvas.
 
      
- 
-**Course requirements:**
-
-
-The requirements for the class are as follows: attendance and active
-engagement during classes and completion of projects and other
-assignment. 
-
-Evaluation will be as follows: 
-
-- __Class engagement: 20%__ 
-- __Projects: 80%__
-
-
-Noe that class engagement will significantly affect your grade. What
- does __class engagement__ mean?  Examples of class engagement
-  include: attending class; consistently and independently engaging in
-  discussions, volunteering answers, making observations, talking to
-  your group and classmates about the material; and engaging on Slack.
-
-
-
 
