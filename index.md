@@ -11,20 +11,22 @@ nav_order: 1
 
 
 __Professor:__ Laura Toma (she/her)
+
 __Email: ltoma at bowdoin.edu
+
 __Office: Searles 219 
 
 __Class time:__  TR 2:50-4:15
+
 __Classroom:__  Searles 126
+
 
 
 
 **Prerequisites:** csci 2200 (Algorithms) and csci 2330 (Systems). In other words, basic knowledge of:
 
--  analysis (asymptotic notation, growth, recurrences)
--  basic algorithms and data structures (searching, sorting, binary search trees, priority queues) and algorithm design techniques (divide-and-conquer, greedy)
-- programming in C/C++
-- Unix terminal commands and Makefiles
+-  analysis (asymptotic notation, growth, recurrences); basic algorithms and data structures (searching, sorting, binary search trees, priority queues) and algorithm design techniques (divide-and-conquer, greedy)
+- programming in C/C++, Unix terminal commands and Makefiles
 
 
 **Overview:**
