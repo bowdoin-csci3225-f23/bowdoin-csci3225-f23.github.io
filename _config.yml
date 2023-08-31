@@ -19,7 +19,7 @@
 title: "Algorithms for GIS, Fall 2023, Bowdoin College"
 remote_theme: pmarsceill/just-the-docs
 
-description: Website for  CSCI 3225: Algorithms for GIS, Fall 2023,  Bowdoin College
+description: Website for  CSCI 3225 Algorithms for GIS, Fall 2023,  Bowdoin College
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://bowdoin-csci3225-f23.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
