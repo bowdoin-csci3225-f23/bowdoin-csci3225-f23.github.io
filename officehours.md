@@ -5,7 +5,7 @@ nav_order: 4
 ---
 
 
-### Office hours
+# Office hours
 
 
 Laura's office hours (Searles 219):
