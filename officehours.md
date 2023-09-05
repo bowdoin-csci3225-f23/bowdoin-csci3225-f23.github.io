@@ -13,4 +13,4 @@ Laura's office hours (Searles 219):
 - Fridays 9:30-11am
 - Wednesday, by appointment, virtual (Zoom).
 
-Unfortunately there are  no LAs this semester (noone in the pipeline).
+Unfortunately there are  no LAs this semester as there are no current students in the pipeline.
