@@ -29,10 +29,11 @@ Write code to create a bitmap that stores random colors.
 
 ### Working with rasters in Arc Ascii format 
 
-One of the raster formats is teh so-called [Arc Ascii](https://desktop.arcgis.com/en/arcmap/latest/manage-data/raster-and-images/esri-ascii-raster-format.htm) format. An ArcAScii raster is an ascii file (ie text, not binary) that has the header at the top of the file, followed by the data values.  
+One of the raster formats is the so-called [Arc Ascii](https://desktop.arcgis.com/en/arcmap/latest/manage-data/raster-and-images/esri-ascii-raster-format.htm) format. An ArcAScii raster is an ascii file (ie text, not binary) that has the header at the top of the file, followed by the data values.  
 
 ![Arc Ascii example](arcasciiexample.png)
-Write code to read a raster from file. Define  an appropriate structure to store a grid that contains all other information (rows, columns, xllcorner, etc).  Include a function to read a grid  from file 
+
+Write code to read a raster from file. Define  an appropriate structure for a grid that contains all other information (rows, columns, xllcorner, etc).  Include a function to read a grid  from file . 
 
 _Grid* grid_from_file(FILE* infile)_
 
@@ -44,13 +45,13 @@ Now put the files to work with bitmaps and the grid.{h,c} files in the same fold
 
 The main() functions should read in the grid specified on the command line (argv[1]), and create a bitmap file  of the same size, where each pixel n the image  has a color that is computed based on the height of that point in the grid. We'll want to linearly interpolate from the color based on teh elevation. 
 
-AT the end we'll get something that looks like this: 
+At the end we'll get something that looks like this: 
 
 
-### TO WORK ON/THINK ABOUT NEXT 
+### NEXT : TO think about 
 
-* add more colors so that it looks like a real map. You can divide the height range in a number of intervals.  For e.g.  5 intervals, blue for elev 0-10ft, gray 10-50ft, green 50ft-500ft, brown 500-1000, and dark brown 1000-max]. 
+* Add more colors so that it looks like a real map. You can divide the height range in a number of intervals.  For e.g.  5 intervals, blue for elev 0-10ft, gray 10-50ft, green 50ft-500ft, brown 500-1000, and dark brown 1000-hmax. 
   *  discrete color map: all points in a height interval with same color
   *  cotinuous:  the color of a point interpolated base don the height so that it matches the colors of the intervals.
  
-  *  To read: hillshading 
+* For the first project you'll work on extending what you've done so far to add hillshading. Check out hillshading, how it works and think how you might go about implementing it. 
