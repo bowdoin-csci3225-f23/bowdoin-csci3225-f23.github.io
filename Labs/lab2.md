@@ -12,6 +12,8 @@
 * Ask QGIS to compute the contour lines: Use the Raster->ExtractContours and vizualize the contours overlayed on top of the hillshade.
   Experiment with the interval between contours.
 
+  ![](all.png)
+
 ### GDAL 
 
 [GDAL](https://gdal.org/index.html) is an open source library for raster and vector geospatial data formats and comes with  a variety of useful command line utilities for data translation and processing. 
