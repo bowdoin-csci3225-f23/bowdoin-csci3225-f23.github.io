@@ -111,8 +111,7 @@ When you process a point of height h, you want to find the interval that contain
 
 ### Slope grid
 
-The slope at a point is given by the magnitude of the gradient (as discussed in class). You want to create a grid to store the slope
-(check out _init_grid_ in grid.h), compute the slope, and then create  a grayscale gradient map for it.  Note that here the input to the
+The slope at a point is given by the magnitude of the gradient (as discussed in class). You want to create a grid to store the slope (check out _init_grid_ in _grid.h_), compute the slope, and then create  a grayscale gradient map for it.  Note that here the input to the
 grayscale gradient map is not a height grid, but a slope grid. The logic is the same.  It's  a good idea to write a function to create a grayscale gradient grid, something like:
 
 ```
@@ -125,15 +124,12 @@ slope grid, or an aspect grid (below).
 
 ### Aspect grid
 
-The aspect is defined as the arc-tangent of the ratio of the y and x partial derivatives.  You need to create an
-aspect grid and create a grayscale map for it.  Assuming you wrote your _grayscale_map_ above, you will call it with the aspect grid as
-parameter, and then save it to a file called _out.aspect.bmp_.
+The aspect is defined as the arc-tangent of the ratio of the y and x partial derivatives.  You need to create an aspect grid and  a grayscale map for it.  Assuming you wrote your _grayscale_map()_ function, you will call it with the aspect grid as parameter, and then save it to a file named _map.aspect.bmp_.
 
 
 ### Hillshade map
 
-Once the slope and aspect grids are computed, you can compute the hillshade value at a point with the formula from class. You don't need
-to create a separate grid (and probably should not --waste of memory), just iterate through the slope and aspect grid, compute the hillshade value, and then write it to the pixel buffer.
+Once the slope and aspect grids are computed, you can compute the hillshade value at a point with the formula from class. You don't need to create a separate grid (and probably should not as it's a waste of memory), just iterate through the slope and aspect grid, compute the hillshade value, and then write it to the pixel buffer. Creatung a function to do this is highly encouraged. 
 
 Use the default values for sun altitude and azimuth:
 
@@ -143,15 +139,13 @@ float SUN_zenith_deg = 45;
 float SUN_azimuth_deg = 315;
 ```
 
-Creatung a function to do this is highly encouraged. 
-
-An additional feature you can add to the hillshading is the possibility of exagerating the elevations, through a _z_factor_ which you can set at the top.  This has the effect of making the hillshading more dramatic, which can be useful. 
+An additional feature you can add to the hillshading is the possibility of exagerating the elevations, through a _z_factor_ which you can set at the top.  This has the effect of making the hillshading more dramatic, which is certainly cool to look at and can be useful in understanding the topography. 
 
 ```
 #define Z_FACTOR 2
 ```
 
-You would use this in the function that determines the slope of a point:
+The _z_factor_ is used in the function that determines the slope of a point:
 
 ```
  float slope = atan(Z_FACTOR* sqrt(dzdx*dzdx + dzdy*dzdy));
@@ -167,60 +161,44 @@ The goal here is to overlay the gradient interval color map on top of the hillsh
 
 ### Creating contour lines
 
-Given an arbitrary height h and a DEM, a contour line (also: isoline) is the set of all points in the DEM that have height equal to h.
+Given an arbitrary height _H_ and a DEM, a contour line (also: isoline) is the set of all points in the DEM that have height equal to _H_.
 
 Showing contour lines on top of 2d maps is very common, and is a way to illustrate the topography of the landscape.  The gradient is
 perpendicular on the contour line, so looking at the contours we can tell which way water flows.  The steeper the terrain is, the closer
 the contour lines will be together. Check out a [topographic map](https://ngmdb.usgs.gov/ht-bin/tv_browse.pl?id=75fc7437432951fa0a445f17b20a515d) from 1895 for Portland, from [USGS topoView](https://ngmdb.usgs.gov/topoview/).
 
 
-So given a grid and an arbitrary height h, we want to find all the points in the grid at this height. For example, let's say we have a
-2x2 grid [1, 1] [3, 3], and we want to find the points at height h=2. We note that none of the 4 sample points in the grid have height
-equal to 2. However since neighboring cells have elevation of 1 and 3, it must be that there are points in between them at height 2.  Two points:
+So given a grid and an arbitrary height H, we want to find all the points in the grid at this height. For example, let's say we have a
+2x2 grid [1, 1] [3, 3], and we want to find the points at height _H=2_. We note that none of the 4 sample points in the grid have height equal to 2. However since neighboring cells have elevation of 1 and 3, it must be that there are points in between them at height 2.  Based on this we see that: 
 
-* The points on an isoline will fall "in between" grid points. We'll represent them as a set of points (ie vector format).
+* The points on an isoline may fall "in between" grid points. An isoline is a set of points connected by segments (ie vector format).
 
-* Exactly where these points are will depend based on how we model the surface of the terrain between grid points. The two common models used to model grid surfaces are nearest-neighbor and linear interpolation.
+* The exact coordinates of these points depend on how we model the surface of the terrain between grid points. The two common models used to model grid surfaces are nearest-neighbor and linear interpolation.
 
 
-For the purpose of visualisation, the exact computation of the points on the contours is not necessary. What you'll do in this project is a
-simple approximation: for each grid point (i,j) you will first check it's height h'. If h' is equal to the desired height h of the isoline,
-then we consier point (i,j) to be on the isoline.  If h' < h, then you look at its 8 neighbors. If there exists a neighbor with a height h'' such that hh' < h < h"", then it follows that the isoline falls somewhere between thse two points. Rather than computing it exactly,
-we consider (i, j) to be on the isoline.
+For the purpose of visualisation, the exact computation of the points on the contours is not necessary. What you'll do in this project is a simple approximation: for each grid point _(i,j)_ we first check it's height _h'_. If _h'_ is equal to the desired height _H_ of the isoline, then we consider point _(i,j)_ to be on the isoline.  If _h' < H_,  then we look at its 8 neighbors. If there exists a neighbor with a height _h''_ such that _h' < H < h''_, then it follows that the isoline falls somewhere between these two points; rather than computing it exactly, we consider point _(i, j)_ to be on the isoline.
 
 You'll want to write a function that determines if a point is on an isoline:
 
 ```
-\\return 1 if point (i, j) in grid is on isoline h
-
-\\a point is considered to be on an isoline if (1) it has height equal
-to h , or (2) it has height smaller than h and has a neighbor with a
-height larger than h.
-
+\* returns 1 if point (i, j) is on isoline at height h
+   a point is considered to be on an isoline if (1) it has height equal
+   to h , or (2) it has height smaller than h and has a neighbor with  height larger than h.
+*/
 int is_on_isoline (Grid* grid, int i, int j, float h)
 ```
 
-Now back to the problem. You want to generate isolines at a fixed interval, predefined as a constant: 
+You want to generate isolines at a fixed interval, predefined as a constant: 
 
 ```
 #define ISOLINE_INTERVAL 10 
 ```
 
-And you want to generate isolines starting at _hmin_ + interval. For example, if the interval is 10ft, and the lowest elevation in the grid
-is 3 ft, you want to generate isolines at 13, 23, 33, 43, etc. Note that we want to avoid generating an isoline at h=hmin, because when
-hmin=0 it will label all low-lying areas and rivers as being on an isoline, so we want to start a little higher.
+And you want to generate isolines starting at _hmin_ plus this interval. For example, if the interval is 10ft, and the lowest elevation in the grid is 3 ft, you want to generate isolines at 13, 23, 33, 43, etc. Note that we want to avoid generating an isoline at _h=hmin_, because when _hmin=0_ it will label all low-lying areas and rivers as being on an isoline. To avoid this, we start a little higher.
 
-Remember the goal is to generate a map showing the contours on top of the grayscale gradient and hillshade, respectively. For this you will
-need to determine, for an arbitrary point (i,j) in the grid, if it is  on an isoline or not. If a point is not on an isoline, you set its
-color as you did for the grayscale map. If a point is on an isoline,  you set its color to be the isoline color (predefined, as a constant at the top).
+Remember the goal is to generate a map showing the isolines on top of the grayscale gradient and hillshade, respectively. For this you will need to determine, for an arbitrary point (i,j) in the grid, if it is  on an isoline or not. If a point is not on an isoline, you set its color as you did for the grayscale map. If a point is on an isoline,  you set its color to be the isoline color (predefined, as a constant at the top).
 
 
-
-
-## What to turn in
-
-* Check in your code to the github repository 
-* Message me the printed report, by the deadline. 
 
 
 
@@ -232,3 +210,11 @@ parts and work on one part at a time without being overwhelmed.
 Even though no part of the project is difficult, starting late will certainly make it so. Plan accordingly.
 
 Program well, and enjoy!
+
+
+## What to turn in
+
+* Check in your code to the github repository 
+* Message me the printed report, by the deadline. 
+
+
