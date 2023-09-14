@@ -1,5 +1,5 @@
 
-# Lab 2 - Working with bitmaps and ascii grids
+#--Lab 2: Working with bitmaps and ascii grids
 
 ### QGIS 
 
