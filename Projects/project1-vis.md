@@ -212,7 +212,7 @@ Even though no part of the project is difficult, starting late will certainly ma
 Program well, and enjoy!
 
 
-## What to turn in
+### What to turn in
 
 * Check in your code to the github repository 
 * Message me the printed report, by the deadline. 
