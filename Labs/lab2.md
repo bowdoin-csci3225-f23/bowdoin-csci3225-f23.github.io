@@ -1,5 +1,9 @@
+---
+layout: default 
+title: --Lab2: bitmaps and grids
+nav_order: 22
 
-# --Lab 2: Working with bitmaps and ascii grids
+# Lab 2: Working with bitmaps and ascii grids
 
 ### QGIS 
 
