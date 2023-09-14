@@ -1,5 +1,5 @@
 
-# Lab 3 - Grids or TINs ?
+# --Lab 3: Grid or TIN?
 
 
 __Problem 1:__ Consider an area of 300km-by-300km to be represented as a grid at 
