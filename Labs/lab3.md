@@ -2,6 +2,7 @@
 layout: default 
 title: --Lab 3(grid or TIN?)
 nav_order: 23
+---
 
 # Lab 3: Grid or TIN?
 
