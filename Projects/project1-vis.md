@@ -1,7 +1,7 @@
 ---
 layout: default 
 title: --Project 1 (maps)
-nav_order: 9
+nav_order: 10
 ---
 
 ## Project 1:  Visualizing grids
