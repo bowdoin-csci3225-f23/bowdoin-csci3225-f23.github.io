@@ -1,3 +1,8 @@
+---
+layout: default 
+title: --Lab1: intro 
+nav_order: 10
+
 # --Lab 1: Intro 
 
 
