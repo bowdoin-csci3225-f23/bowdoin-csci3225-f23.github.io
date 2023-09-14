@@ -98,7 +98,7 @@ You will also need to define a color for each interval. You can  define these as
 
 ```
 typedef float Color[3]; 
-Color INTERVAL_COLOR[NB_INTERVALS] = {{0,1,1},...};
+Color INTERVAL_COLOR[NB_INTERVALS] = \{\{0,1,1\},...\};
 ```
 
 For a discrete map: given a point at height _h_, you  want to find the interval that contains it and then draw the pixel with the color
