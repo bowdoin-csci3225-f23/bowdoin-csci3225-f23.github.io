@@ -215,6 +215,6 @@ Program well, and enjoy!
 ### What to turn in
 
 * Check in your code to the github repository 
-* Message me the printed report, by the deadline. 
+* Message me the pdf of the report 
 
 
