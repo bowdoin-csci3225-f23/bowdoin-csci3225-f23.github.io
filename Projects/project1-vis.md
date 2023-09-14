@@ -85,7 +85,7 @@ More precisely,  we map a point of height _h_ to a value _c = (h - hmin)/(hmax-h
 
 
 
-### Color maps using the height interval 
+### Color maps using  height intervals
 
 The idea is to divide the height range in a number of intervals. You can predefine the number of intervals as a constant at the top of your _.c_ file:
 
@@ -104,9 +104,7 @@ For a discrete map: given a point at height _h_, you  want to find the interval 
 correponding to that interval.
 
 
-For a gradient map: In this case you will need one additional color (e.g. for 10 intervals you want 11 colors). Instead of defining the color array to be of size NB_INTERVALS, as above, make it of size NB_INTERVALS +1  (so for the discrete case you will not use the last color). For any given interval, we can find the two heights that define its range, say _h1_ and _h2_, and its two colors, say _c1 = {r1, g1, b1}_ and _c2 = {r2, g2, b2}_ .
-
-When you process a point of height h, you want to find the interval that contains this point, and interpolate the color of this point between _c1_ and _c2_ using _h_. For example, if _h_ is midway between _h1_ and _h2_, we want its color _c = {r,g,b}_ to be midway between _c1_ and _c2_.
+For a gradient map: In this case you will need one additional color (e.g. for 10 intervals you want 11 colors). Instead of defining the color array to be of size NB_INTERVALS, as above, make it of size NB_INTERVALS +1  (so for the discrete case you will not use the last color). For any given interval, we can find the two heights that define its range, say _h1_ and _h2_, and its two colors, say _c1 = {r1, g1, b1}_ and _c2 = {r2, g2, b2}_ . When you process a point of height h, you want to find the interval that contains this point, its height range _h1_ and _h2_ and its color range _c1 = {r1, g1, b1}_ and _c2 = {r2, g2, b2}_.  Then you want to interpolate the color of this point between _c1_ and _c2_ using _h_. For example, if _h_ is midway between _h1_ and _h2_, we want its color _c = {r,g,b}_ to be midway between _c1_ and _c2_.
 
 
 ### Slope grid
@@ -214,7 +212,8 @@ Program well, and enjoy!
 
 ### What to turn in
 
-* Check in your code to the github repository 
+* Check in your code to the github repository
+* Also check in the pdf of the report  <---- added 
 * Message me the pdf of the report 
 
 
