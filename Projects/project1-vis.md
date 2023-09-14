@@ -14,15 +14,15 @@ nav_order: 10
 
 In this first project you will write code to  create the following  maps for a grid DEM: 
 
-(1)  a grayscale gradient map of the DEM
-(1) a discrete color map of the DEM using height intervals 
-(1) a gradient color map of the DEM using height intervals 
-(1) a grayscale map of the slope grid 
-(1) a grayscal emap of the aspect grid
-(1) a hillshade map of the DEM
-(1)  a gradient color map overlayed on the hillshade
-(1) contour lines overlayed on the grayscale map
-(1) contour lines overlayed on the hillshade
+1.  a grayscale gradient map of the DEM
+2.   a discrete color map of the DEM using height intervals
+3.   gradient color map of the DEM using height intervals
+4.   grayscale map of the slope grid
+5.   grayscal emap of the aspect grid
+6.   hillshade map of the DEM
+7.   gradient color map overlayed on the hillshade
+8.   contour lines overlayed on the grayscale map
+9.   contour lines overlayed on the hillshade
 
 ![](p1-maps.png)
 
