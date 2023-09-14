@@ -11,7 +11,9 @@ Come up with an algorithm to  model what parts of a terrain are flooded when the
 
 The inputs to the algorithm are a grid DEM (arcascii order), and a sea-level rise _x_. For example, calling your code with : 
 
-> ./slr brunswick.asc 3
+```
+./slr brunswick.asc 3
+```
 
-will create another grid, say _flooded.asc_, in which every point will be either 1 (if flooded), or 0 (if not flooded). 
+will create another grid, say _flooded.asc_, of the same size and geographical coordinates as _brunswick.asc_,  in which every point will be either 1 or 0 corresponding to whether it is flooded or not flooded,  respectively, when the sea level rises by 3 feet.
 
