@@ -1,6 +1,6 @@
 ---
 layout: default 
-title: ----Project 1 (maps)
+title: Project 1 (maps)
 nav_order: 9
 ---
 
