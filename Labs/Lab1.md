@@ -1,9 +1,9 @@
 ---
 layout: default 
 title: --Lab1: intro 
-nav_order: 10
+nav_order: 21
 
-# --Lab 1: Intro 
+# Lab 1: Intro 
 
 
 ### Some Applications 
