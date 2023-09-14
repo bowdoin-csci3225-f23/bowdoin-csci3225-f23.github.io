@@ -1,6 +1,6 @@
 ---
 layout: default 
-title: --Lab1: intro 
+title: --Lab1 (intro)
 nav_order: 21
 ---
 
