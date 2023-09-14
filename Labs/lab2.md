@@ -1,6 +1,6 @@
 ---
 layout: default 
-title: --Lab2: bitmaps and grids
+title: --Lab2 (bitmaps and grids)
 nav_order: 22
 ---
 
