@@ -181,7 +181,7 @@ For the purpose of visualisation, the exact computation of the points on the con
 You'll want to write a function that determines if a point is on an isoline:
 
 ```
-\* returns 1 if point (i, j) is on isoline at height h
+/* returns 1 if point (i, j) is on isoline at height h
    a point is considered to be on an isoline if (1) it has height equal
    to h , or (2) it has height smaller than h and has a neighbor with  height larger than h.
 */
