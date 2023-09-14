@@ -1,4 +1,4 @@
-# Lab 1 - Intro 
+# --Lab 1: Intro 
 
 
 ### Some Applications 
