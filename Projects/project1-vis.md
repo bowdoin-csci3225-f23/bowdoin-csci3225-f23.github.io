@@ -35,14 +35,14 @@ dataset.  (4) bugs and extra features. (5) Time you spent in:
 Thinking; Programming; Testing; Documenting; Total; (6) Brief reflection
 prompts (you don't need to address all): how challenging did you find this project? what did you learn by doing this project?  What did you wish you did differently?
 If you worked as a team, how did that go?  What would you like to
-explore further?)œ
+explore further?)
 
 
 ***
 
 ### Overview
 
-If you haven't done so already,  download a dataset (for e.g. from [OpenTopo](https://opentopography.org/) that represents an area you are
+If you haven't done so already,  download a dataset (for e.g. from [OpenTopo](https://opentopography.org/)) that represents an area you are
 interested in and convert it to _arcascii grid_ format. You may be able to download the data directly in this format, otherwise you can convert either through QGIS or using GDAL tools in the command line.
 
 Your code  will read the path of a grid DEM (in _arcascii_ format) on the command line, and will generate  the required maps as _.bmp_ files. The files will have fixed names _map.xxxx.bmp_ and will  be in the current directory (no need to handle a path), like so: 
@@ -68,7 +68,7 @@ The conceptual part of the project is making the connection between the elevatio
 of maps you'll be generating. In class we talked in detail about creating grayscale maps, as well as aspect, slope and hillshading
 maps. Explanations on the other types of maps are below. Several of the required maps will overlay two maps, for example contours overlayed on the grayscale or hillshade.
 
-The startup code contains a Makefile and files to work with arcascii grids and with a pixel buffer. It also contains a main file which shows how to read in a grid file, create a pixel buffer, put data in it and save it. We went over these in class, and we also went over generating a grayscale map, but it is included below for completeness. It's nice to start a project knowing you already got part 1. 
+The startup code contains a Makefile and files to work with arcascii grids and with a pixel buffer. It also contains a main file which shows how to read in a grid file, create a pixel buffer, put data in it and save it. We went over these in class, and we also went over generating a grayscale map, but it is included below for completeness (nice to start a project knowing you already got the first part). 
 
 
 
@@ -81,13 +81,13 @@ the other way around). Points in between _hmin_ and _hmax_ are mapped
 based on their height to a color that is a linear interpolation between
 the color for the lowest points (black) and the color for the highest point (white).
 
-More precisely,  we map a point of height _h_ to a value _c = (h - hmin)/(hmax-hmin)_, which is between 0 and 1, and we set the RGB color of the point as _{c, c, c}_. Note that an RGB color where the three components are equal is a shade of gray, so this mapping will create a grayscale gradient between black and white.
+More precisely,  we map a point of height _h_ to a value _c = (h - hmin)/(hmax-hmin)_, which is between 0 and 1, and we set the RGB color of the point as _{c, c, c}_. Note that an RGB color where the three components are equal is a shade of gray, so this mapping will create a grayscale gradient.
 
 
 
 ### Color maps using the height interval 
 
-The idea is to divide the height range in a number of intervals. You can predefine the number of intervals as a constant at the top of your .c file:
+The idea is to divide the height range in a number of intervals. You can predefine the number of intervals as a constant at the top of your _.c_ file:
 
 ```
 #define NB_INTERVALS 10
@@ -97,18 +97,16 @@ You will also need to define a color for each interval. You can  define these as
 
 ```
 typedef float Color[3]; 
-Color INTERVAL_COLOR[NB_INTERVALS] = \{\{0,1,1\},...\};
+Color INTERVAL_COLOR[NB_INTERVALS] = \{ \{ 0,1,1 \},... \};
 ```
 
 For a discrete map: given a point at height _h_, you  want to find the interval that contains it and then draw the pixel with the color
 correponding to that interval.
 
 
-For a gradient map: In this case you will need one additional color (e.g. for 10 intervals you want 11 color). Instead of defining the
-color array to be of size NB_INTERVALS, as above, make it of size NB_INTERVALS +1  (so for the discrete case you will not use the last color). Each interval has two heights that define its range, say _h1_ and _h2_, and two colors, say c_1 = {r1, g1, b1}_ and _c2 = {r2, g2, b2}_ (from the INTERVAL_COLOR array).
+For a gradient map: In this case you will need one additional color (e.g. for 10 intervals you want 11 colors). Instead of defining the color array to be of size NB_INTERVALS, as above, make it of size NB_INTERVALS +1  (so for the discrete case you will not use the last color). For any given interval, we can find the two heights that define its range, say _h1_ and _h2_, and its two colors, say _c1 = {r1, g1, b1}_ and _c2 = {r2, g2, b2}_ .
 
-When you process a point of height h, we want to find the interval that contains this point, and interpolate the color of this point
-between _c1_ and _c2_ using _h_. For example, if _h_ is midway between _h1_ and _h2_, we want its color _c = {r,g,b}_ to be midway between _c1_ and _c2_.
+When you process a point of height h, you want to find the interval that contains this point, and interpolate the color of this point between _c1_ and _c2_ using _h_. For example, if _h_ is midway between _h1_ and _h2_, we want its color _c = {r,g,b}_ to be midway between _c1_ and _c2_.
 
 
 ### Slope grid
