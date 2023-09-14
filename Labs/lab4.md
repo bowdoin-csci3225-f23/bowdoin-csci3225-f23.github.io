@@ -1,3 +1,8 @@
+---
+layout: default 
+title: --Lab 4(aspect, slope, hillshading)
+nav_order: 24
+
 # --Lab 4: Aspect, slope and hillshading 
 
 
