@@ -47,19 +47,17 @@ B-trees, quadtrees, parallel processing with OpenMP, cache-efficient
 algorithms, cache-efficient matrix multiplication and space-filling
 curves. 
 
-This is a projects course and will provide
-opportunities to design, implement and experimentally analyze some of these
+This is a projects course and will provide opportunities to design, implement and experiment with some of these
 algorithms.
 
 
 ### Learning objectives
 
-- Understand  fundamental problems encountered in GIS and their
-  algorithmic solutions
-- Understand the importance of algorithm design, complexity analysis
-  and generally the interplay between theory and practice
+- Understand  fundamental problems encountered in GIS and their algorithmic solutions
+- Gain experience designing algorithms that model GIS phenomena 
+- Understand the importance of algorithm design, complexity analysis and generally the interplay between theory and practice
 - Gain coding skills in C/C++  and work on a large project
-- Improve communication skills through presentations and project reports/paper
+- Improve communication and writing skills through presentations and project reports
 
 
 
@@ -69,7 +67,7 @@ The list below is tentative and  very likely to change to fit our needs.
 
 - Data models (vector and raster, TINs, TIN representation)
 - Contour lines
-- Modeling sea-level rise
+- Sea-level rise
 - Drainage: aspect, slope, flow accumulation, watersheds, sink-watershed partition, flooding and pfastetter labeling
 - Visibility: line-of-sight, viewshed, total viewshed
 - Parallelization with OpenMP 
@@ -85,23 +83,16 @@ The list below is tentative and  very likely to change to fit our needs.
  
 ### Course requirements
 
-The requirements for the class are attendance and active
-engagement during classes, and completion of projects and other
-assignments.  Evaluation will be as follows: 
+The requirements for the class are attendance and active engagement during classes; and completion of 
+assignments and projects.  Evaluation will be as follows: 
 
 - __Class engagement: 20%__ 
 - __Projects: 80%__
 
-Note that __class engagement__ will significantly affect your grade.   Examples of class engagement
-  include: attending class; consistently and independently engaging in
-  discussions, volunteering answers, making observations, talking to
-  your group and classmates about the material; and engaging on Slack.
+Note that __class engagement__ will significantly affect your grade.  Engagement does not mean having the right answers in class, but it means focusing and  working towards getting the right answers.  Examples of class engagement include attending class and consistently and independently engaging in discussions during class, volunteering ideas and making observations, asking questions, working on the whiteboard, coming up with algorithms, drawng diagrams, talking to your peers about the material, and generally maintaining a focus on the class.
 
 
-
- 
-**Communication:** Class communication will be entirely on Slack. You
-  will need to monitor Slack for class updates, including possible
+**Communication:** Class communication will be entirely on Slack. You will need to monitor Slack for class updates, including possible
   cancellations or delays. The code to join Slack is posted on Canvas.
 
      
