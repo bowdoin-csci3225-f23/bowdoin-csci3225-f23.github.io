@@ -24,7 +24,7 @@ In this first project you will write code to  create the following  maps for a g
 8.   contour lines overlayed on the grayscale map
 9.   contour lines overlayed on the hillshade
 
-![](p1-maps.png)
+![](p1-maps9.png)
 
 
 In addition, you will write a brief report containing (1) A brief
