@@ -1,7 +1,7 @@
 ---
 layout: default 
 title: --Lab 6 (SLR)
-nav_order: 25
+nav_order: 26
 ---
 
 # Lab 6: More SLR 
