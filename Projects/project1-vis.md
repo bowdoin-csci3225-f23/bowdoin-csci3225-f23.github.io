@@ -54,8 +54,8 @@ reading raster /Users/ltoma/DEMs/brunswick.asc
 	nrows 532
 	cellsize 26.337635
 generating grayscale map..writing map.grayscale.bmp
-generating discrete color interval map..writing  map.interval.bmp
-generating gradient color interval map..writing  map.interval.bmp
+generating discrete color interval map..writing  map.color-discrete.bmp
+generating gradient color interval map..writing  map.color-gradient.bmp
 generating slope map..writing map.slope.bmp
 generating aspect map..writing map.aspect.bmp
 generating hillshade map..writing map.hillshade.bmp
