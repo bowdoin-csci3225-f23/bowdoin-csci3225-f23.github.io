@@ -22,4 +22,7 @@ Note that with this definition of output, a point that is sea is not considered 
  * Given a point _p = (i, j)_ in the grid, what is the minimum rise _x_ which floods _p_?
  * Do this for the entire grid:   find the level at which _p_ floods for __all__  point _p=(i, j)_ in the grid
 
-Hint: Generalize the BFS from above, and express this as a shortest-path problem. 
+Hint: Generalize the BFS from above, and express this as a shortest-path problem. A path on a grid consists of cells. 
+   * Consider a path between the ocean and a cell p. Imagine the water coming to p along this path, and flooding this path. Which cell along this path tesll you when will p flood?
+   * Use this to define the cost of a path
+   * Of all paths from p to the sea, which one do we want?  
