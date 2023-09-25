@@ -14,4 +14,4 @@ nav_order: 5
 | Thu 9/7 | Data  models (grids, TINs and topological structures for TINs)| [Lab 3](https://bowdoin-csci3225-f23.github.io/Labs/lab3/)|
 | Tue 9/12 | Aspect, slope and hillshading | [Lab 4](https://bowdoin-csci3225-f23.github.io/Labs/lab4/)|
 | Thu 9/14 | Sea level rise. ([Project1](https://bowdoin-csci3225-f23.github.io/Projects/project1-vis/) assigned) | [Lab 5](https://bowdoin-csci3225-f23.github.io/Labs/lab5/) | 
-| Tue 9/19 | More sea-level rise |[Lab 6] (https://bowdoin-csci3225-f23.github.io/Labs/lab6/) | 
+| Tue 9/19 | More sea-level rise |[Lab 6](https://bowdoin-csci3225-f23.github.io/Labs/lab6/) | 
