@@ -1,6 +1,6 @@
 ---
 layout: default 
-title: ----Project 2 (SLR flooding)
+title: --Project 2 (SLR flooding)
 nav_order: 10
 ---
 
