@@ -14,22 +14,20 @@ nav_order: 10
 * Group policy: Partner-optional
 
 In this project you will develop a program to compute and visualize
-the flooding caused by sea-level rise.  Given a grid DEM, an SLR value
-and an increment, the goal is to compute the flooding incrementally, up to the given SLR value. 
-
+the incremental flooding caused by sea-level rise.  
 
 __Input:__ 
-* An elevation grid, the name of the flooded grid, an SLR value and an SLR increment
+* the name of an elevation grid, the name of the flooded grid, an SLR value and an SLR increment
 
-Your program will compute the flooding starting at SLR =
-_slr_increment_, going up by _slr_increment_, up to desired SLR value.
+Your program will read the elevation grid and compute the flooding starting at SLR =
+_slr_increment_, going up by _slr_increment_, up to desired SLR value. 
 
-For example, If the SLR value is 2 and the increment value was .5, you
+For example, if the SLR value is 2 and the increment value is .5, you
 will compute flooding for slr = .5, slr=1, slr=1.5 and slr=2. If the
 SLR value is 3 and the increment is 1, you will compute flooding for
 slr = 1, slr=2 and slr = 3.
 
-The examples assume _southport.asc_ with  SLR value = 3 and increment = 1.
+The following examples assume _southport.asc_ with  SLR value = 3 and increment = 1.
 
 __Output:__
 * A flooded grid
