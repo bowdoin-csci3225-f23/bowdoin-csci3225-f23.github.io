@@ -6,7 +6,7 @@ nav_order: 10
 
 ## Project 2:  Sea-level rise flooding 
 
--- NOTE: EDITING IN PROGRESS -- 
+-- still fie tuning  -- 
 
 *** 
 * __Assigned:__ Tuesday, September 26
