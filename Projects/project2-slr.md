@@ -11,10 +11,10 @@ nav_order: 10
 * __Due:__ Friday October 6th, 4pm <--- Note: right before fall break!
 * Group policy: Partner-optional
 
-In this project you will develop a program to compute and visualize
-the incremental flooding caused by sea-level rise.  
+In this project you will develop a program to compute and visualize the incremental flooding caused by sea-level rise, and write a report to summarize your work.  
 
-__Input:__ the name of an elevation grid, the name of the flooded grid, an SLR value and an SLR increment
+
+__Input__: the name of an elevation grid, the name of the flooded grid, an SLR value and an SLR increment.
 
 Your program will read the elevation grid and compute the flooding starting at SLR =
 _slr_increment_, going up by _slr_increment_, up to desired SLR value. 
@@ -22,63 +22,54 @@ _slr_increment_, going up by _slr_increment_, up to desired SLR value.
 For example, if the SLR value is 2 and the increment value is .5, you
 will compute flooding for slr = .5, slr=1, slr=1.5 and slr=2. If the
 SLR value is 3 and the increment is 1, you will compute flooding for
-slr = 1, slr=2 and slr = 3.
+slr = 1, slr = 2 and slr = 3.
 
-The following examples assume _southport.asc_ with  SLR value = 3 and increment = 1.
+
 
 __Output:__ A flooded grid; The SLR value that gives the largest incremental change; Some maps. 
 
-*** 
 
-__The flooded grid:__ The program will create a flooded grid which
-records  what parts of the terrain will be flooded, and at what SLR
-value. Each point in this grid  should be set to:
+* _The flooded grid:_ The program will create a flooded grid which records  what parts of the terrain will be flooded and at what SLR
+value. 
 
-* 1 if the point is land  but  gets flooded at slr = 1;
-* 2 is the point is land and not flooded at slr=1, but gets flooded at slr=2
-* 3 if the poimt is land and not flooded at slr = 2, but gets flooded at slr = 3
-* _nodata_ otherwise 
+For example, when flooding with  SLR value = 3 and increment = 1, each point in the flooded grid  should be set to:
 
-Note that a point being set to _nodata_ in the flooded grid means that
-the point does not flood at the given SLR value.  This could be
-because the elevation of the point is _nodata_, or because the point
-is land but eitehr it is not reachable by the flood or it is reached
-by the flood but its elevation is larger than the SLR value.  In other
-words, the flooded grid records whether a point floods, not whether a poit is water.
+	* 1 if the point is land  but  gets flooded at slr = 1;
+	* 2 is the point is land and not flooded at slr=1, but gets flooded at slr=2
+	* 3 if the poimt is land and not flooded at slr = 2, but gets flooded at slr = 3
+	* _nodata_ otherwise 
+
+Note that a point being set to _nodata_ in the flooded grid means that the point does not flood.   This could be
+because the elevation of the point is _nodata_, or because the point is land but either it is not reachable by the flood,  or,  it is reached
+by the flood but its elevation is larger than the SLR value.  In other words, the flooded grid records whether a point floods, not whether a poit is water.
 
 
-__The largest incremental change:__ The program will compute the SLR
-which causes the largest number of flooded points. For example,
+* _The largest incremental change:_ The program will compute the SLR which causes the largest number of flooded points. For example,
 
-For example, 
 ```
-compute SLR flooding up to 3.0 (with incr=1.0)
-	At rise =1.0:  flooding 2881281 new cells
-	At rise =2.0:  flooding 814266 new cells
-	At rise =3.0:  flooding 121239 new cells
+compute SLR flooding up to slr=3.0 (incr=1.0)
+	At slr =1.0:  flooding    2881281 new cells
+	At slr =2.0:  flooding     814266 new cells
+	At slr =3.0:  flooding     121239 new cells
 total nb. cells flooded: 3816786 (46.92 percent)
 largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
 ```
 
 
-__The maps:__ You will create the following maps: 
+* _Maps:_ You will create the following maps: 
 
-
-* map.hilshade.bmp:
-  * hillshade of the elevation grid  (you have it from project 1)
-* map.elev-over-hillshade.bmp:
-  * elevation grid color gradient overlayed on hillshade (you have it from project 1)
-* map.flooded.colordiscrete.bmp:
-  * flooded grid, with discrete colors 
-* map.flooded-over-hillshade.bmp:
-  * flooded grid with discrete colors overlayed on hillshade
-
+	* map.hilshade.bmp:  hillshade of the elevation grid  
+	* map.elev-over-hillshade.bmp: elevation grid color gradient overlayed on hillshade 
+	* map.flooded.colordiscrete.bmp: flooded grid, with discrete colors 
+	* map.flooded-over-hillshade.bmp: flooded grid with discrete colors overlayed on hillshade
 
 
 ![](p2-all1.png)
 
 
-__Report:__ You will write a brief report containing (1) A brief
+### The Report 
+
+You will write a brief report containing (1) A brief
 description of the dataset you used, location, number of rows and
 columns, resolution and provenance; (2) the command line to run your
 code; (3) pictures of the maps generated by your code on your test
