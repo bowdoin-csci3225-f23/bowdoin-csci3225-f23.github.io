@@ -103,15 +103,18 @@ from Lidar, it has 2214 cols and 3674 rows, and 2m resolution.
 [TO DO: UPLOAD SOUTHPORT.ASC]
 
 
-### Interface 
+### The interface 
 
 Your code will read on the command line the name of an elevation grid,
 the name of a flooded grid, an SLR value and an SLR increment. 
 
-For example.  ``` %./slr ~/DEM/southport.asc southport-flooded.asc 3 1
+For example, 
+
+```
+%./slr ~/DEM/southport.asc southport-flooded.asc 3 1
 ```
 
-This will flood _southport.asc_ with _slr=1, 2, 3_ and write the
+This will flood _southport.asc_ with _slr = 1, 2, 3_ and write the
 output flooded grid in a file in the current directory called
 _southport-flooded.asc_.
 
@@ -130,25 +133,25 @@ in arbitraty order. For example,
 % ./slr -e ~/DEMs/southport.asc -o southport-flooded.asc -r 3  -i 1
 ```
 
-
-### Computing the SLR flooding
-
-For simplicity, let's assume that we want to compute flooding up to
-slr=3 in increments of 1.  In class you came up with two approaches,
-one recursive and one BFS-like. Because we want to flood incrementally
---- first at slr=1, then at slr=2, then at slr=3--- the BFS approach
-will work more efficiently.
+Note: If you want to look into _getopt()_, this is something you'll add at the end, once the main functionality of the program works. 
 
 
+## Computing the SLR flooding
 
-#### Flooding at slr=1. 
+For these examples we will assume that we want to compute flooding up to slr=3 in increments of 1. 
+
+In class you came up with two approaches, one recursive and one BFS-like. Because we want to flood incrementally
+--- first at slr = 1, then at slr = 2, then at slr = 3 --- the BFS approach will work more efficiently.
+
+
+
+### Flooding at slr = 1. 
 
 For the initial flood you will want to traverse the boundary of the
 grid, find all points that are _nodata_ and put them in a queue. These
 will be the "sources" of the flooding.
 
-To compute the flooding, you will repeatedly pop a point from the
-queue and check  all its neighbors: 
+To compute the flooding, we'll need to keep track of what points have  been visited, and for that we'll use the flooded grid (so it needs to be initialized as _NOT_VISITED_).   We will repeatedly pop a point from the queue and check  all its neighbors, and push those that are unvisited and flooded to the queue, so that the flood propagates further. 
 
 * if the neighbor has already been visited: there's nothing to do, continue
 
@@ -161,9 +164,7 @@ queue and check  all its neighbors:
 
 When the queue is empty, flooding is done.
 
-Note that along the way the flooded grid will be used to mark the
-points that are reached by the flood (so it needs to be initialized as
-_NOT_VISITED_).
+
 
 At the end of the flooding process, the points can be conceptually
 classified as: not visited (not reached by the flood); visited and
@@ -173,11 +174,9 @@ but you can, if you need to.
 
 
 
-#### Incremental flooding
+### Incremental flooding
 
-After flooding with slr=1 we would like to continue with slr=2. Can
-you do based on te hflooding at slr=1, without starting it all over
-again?
+After flooding with slr = 1 we would like to continue with slr = 2. Obviously we could repeat the flooding process, this time with slr = 2. Can we do better?  Could we base flooding at slr = 2 on the flooding at slr = 1, without starting it all over again?
 
 Once you think about it, the idea is quite natural: To flood at slr=2,
 we want to start from the boundary of the flood at slr=1---namely the
