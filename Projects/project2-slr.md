@@ -194,9 +194,7 @@ will look something like this:
 ```
 bnd_queue = all points on the boundary of the grid that are _nodata_
 for (rise = slr_incr; rise <= slr_final; rise += slr_incr) {
-
     bnd_queue = compute_flood(elev_grid, flooded_grid, rise, bnd_queue) 
-
 } 
 ```
 
@@ -285,28 +283,26 @@ Note that 4 colors may not be enough for the flooded grid (for example, if we fl
 
 * map.flooded-over-hillshade.bmp: flooded grid with discrete colors overlayed on hillshade
 
-This is the same type of map you did for project1.  Consider
-implementing a function to overlay two pixel buffers, like so:
+This is the same type of map you did for project1.  Consider implementing a function to overlay two pixel buffers, like so:
 
 ```
-/* overlay pb2 on top of pb1, with given transparency alpha. When
-   alpha=1, show pb1; when alpha=0, show pb2. Write the output in pb1. 
+/* overlay pb2 on top of pb1, with transparency alpha. 
+   Interpolate between pb1 and pb2 based on alpha: If alpha=1, show pb1; if alpha=0, show pb2.
+   Write the output in pb1. 
 */
 void pixelbuffer_overlay(PixelBuffer pb1, PixelBuffer pb2, float alpha) 
 ```
 
 To overlay the flooded grid on the hillshade you can call it like so:
 
-
 ```
   PixelBuffer pb1, pb2;
   ...
-
   //create  bitmap  for hillshade 
-  pixelbuffer_from_hillshade(hillshade_grid, pb1);
+  grid_hillshade_to_pixelbuffer(hillshade_grid, pb1);
 
   //flooded grid, colors intervals discrete
-  pixelbuffer_from_flooded(flooded_grid, pb2, ..);
+  grid_flood_to_pixelbuffer(flooded_grid, pb2, ..);
   printf("writing map.flooded.colordiscrete\n"); 
   save_pixel_buffer_to_file(&pb2, "map.flooded.colordiscrete.bmp");
 
