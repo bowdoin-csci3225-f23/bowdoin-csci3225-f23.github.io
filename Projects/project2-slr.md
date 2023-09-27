@@ -73,8 +73,6 @@ __The maps:__ You will create the following maps:
   * hillshade of the elevation grid  (you have it from project 1)
 * map.elev-over-hillshade.bmp:
   * elevation grid color gradient overlayed on hillshade (you have it from project 1)
-* map.flooded.grayscale.bmp:
-  * flooded grid, in grayscale gradient 
 * map.flooded.colordiscrete.bmp:
   * flooded grid, with discrete colors 
 * map.flooded-over-hillshade.bmp:
@@ -82,8 +80,7 @@ __The maps:__ You will create the following maps:
 
 
 
-![](slr-maps.png)
-[TO DO: ADD THE MAPS]
+![](p2-all1.png)
 
 
 __Report:__ You will write a brief report containing (1) A brief
