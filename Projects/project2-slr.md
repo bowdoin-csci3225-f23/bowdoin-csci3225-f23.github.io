@@ -399,50 +399,16 @@ You will write a  report showcasing your work.  Include:
 1. The dataset you used, location, number of rows and columns, resolution and provenance. 
 
 1. Results 
-* run your code with southport.asc, slr=3, incr=1 and show the maximum flood reported, like so
-```
-compute SLR flooding up to slr=3.0 (incr=1.0)
-	At slr =1.0:  flooding    2881281 new cells
-	At slr =2.0:  flooding     814266 new cells
-	At slr =3.0:  flooding     121239 new cells
-total nb. cells flooded: 3816786 (46.92 percent)
-largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
-```
-  
-* run your code with southport.asc, slr=20, incr=1 and show the maximum flood reported, like so
-  ```
-  compute SLR flooding up to slr=20.0 (incr=1.0)
-	At slr =1.0:  flooding    2881281 new cells
-	At slr =2.0:  flooding     814266 new cells
-	At slr =3.0:  flooding     121239 new cells
-	At slr =4.0:  flooding     134888 new cells
-	At slr =5.0:  flooding     178558 new cells
-	At slr =6.0:  flooding     170112 new cells
-	At slr =7.0:  flooding     170508 new cells
-	At slr =8.0:  flooding     156614 new cells
-	At slr =9.0:  flooding     151408 new cells
-	At slr =10.0:  flooding     135535 new cells
-	At slr =11.0:  flooding     131409 new cells
-	At slr =12.0:  flooding     140389 new cells
-	At slr =13.0:  flooding     131062 new cells
-	At slr =14.0:  flooding     126393 new cells
-	At slr =15.0:  flooding     117507 new cells
-	At slr =16.0:  flooding     117216 new cells
-	At slr =17.0:  flooding      97374 new cells
-	At slr =18.0:  flooding      86341 new cells
-	At slr =19.0:  flooding      79914 new cells
-	At slr =20.0:  flooding      88629 new cells
-total nb. cells flooded: 6030643 (74.14 percent)
-largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
-```
+* run your code with southport.asc, slr=3, incr=1 and show the maximum flood reported
+* run your code with southport.asc, slr=20, incr=1 and show the maximum flood reported
 * run your code with YOUR_DATASET.asc, slr=3, incr=1 and show the maximum flood reported
 * run your code with YOUR-DATASET.asc, slr=20, incr=1 and show the maximum flood reported
 
 1. Maps 
 * for southport
-	* hillshade 
-	* color gradient over hillshade 
-	* slr=3, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
+ 	* hillshade 
+	 * color gradient over hillshade 
+	 * slr=3, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
  	* slr=20, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
 * for YOUR-DATASET
 	* hillshade
@@ -452,12 +418,16 @@ largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
 
 1. Bugs and extra features. 
 
-1. Reflect
-Time you spent in: thinking, Programming; Testing; documenting; total; (6) Reflection
-(Prompts: how challenging did you find this project? what did you
+1. Effort
+
+   Time you spent in: thinking, Programming; Testing; documenting; total.
+
+1. Reflection
+
+Prompts: how challenging did you find this project? what did you
 learn by doing this project?  What did you wish you did differently?
 If you worked as a team, how did that go?  What would you like to
-explore further? --- you don't need to address all)
+explore further? --- you don't need to address all. 
 
 
 
@@ -487,5 +457,42 @@ where teh error is coming from. Use the bitmaps and prints to know what you are 
 Enjoy! 
 
 
+***
+
+### Results for Southport
 
 
+```
+compute SLR flooding up to slr=3.0 (incr=1.0)
+	At slr =1.0:  flooding    2881281 new cells
+	At slr =2.0:  flooding     814266 new cells
+	At slr =3.0:  flooding     121239 new cells
+total nb. cells flooded: 3816786 (46.92 percent)
+largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
+```
+  
+```
+  compute SLR flooding up to slr=20.0 (incr=1.0)
+	At slr =1.0:  flooding    2881281 new cells
+	At slr =2.0:  flooding     814266 new cells
+	At slr =3.0:  flooding     121239 new cells
+	At slr =4.0:  flooding     134888 new cells
+	At slr =5.0:  flooding     178558 new cells
+	At slr =6.0:  flooding     170112 new cells
+	At slr =7.0:  flooding     170508 new cells
+	At slr =8.0:  flooding     156614 new cells
+	At slr =9.0:  flooding     151408 new cells
+	At slr =10.0:  flooding     135535 new cells
+	At slr =11.0:  flooding     131409 new cells
+	At slr =12.0:  flooding     140389 new cells
+	At slr =13.0:  flooding     131062 new cells
+	At slr =14.0:  flooding     126393 new cells
+	At slr =15.0:  flooding     117507 new cells
+	At slr =16.0:  flooding     117216 new cells
+	At slr =17.0:  flooding      97374 new cells
+	At slr =18.0:  flooding      86341 new cells
+	At slr =19.0:  flooding      79914 new cells
+	At slr =20.0:  flooding      88629 new cells
+total nb. cells flooded: 6030643 (74.14 percent)
+largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
+```
