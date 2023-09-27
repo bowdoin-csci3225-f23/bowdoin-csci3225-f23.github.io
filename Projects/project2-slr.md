@@ -6,8 +6,6 @@ nav_order: 10
 
 ## Project 2:  Sea-level rise flooding 
 
--- still fie tuning  -- 
-
 *** 
 * __Assigned:__ Tuesday, September 26
 * __Due:__ Friday October 6th, 4pm <--- Note: right before fall break!
@@ -16,8 +14,7 @@ nav_order: 10
 In this project you will develop a program to compute and visualize
 the incremental flooding caused by sea-level rise.  
 
-__Input:__ 
-* the name of an elevation grid, the name of the flooded grid, an SLR value and an SLR increment
+__Input:__ the name of an elevation grid, the name of the flooded grid, an SLR value and an SLR increment
 
 Your program will read the elevation grid and compute the flooding starting at SLR =
 _slr_increment_, going up by _slr_increment_, up to desired SLR value. 
@@ -29,11 +26,9 @@ slr = 1, slr=2 and slr = 3.
 
 The following examples assume _southport.asc_ with  SLR value = 3 and increment = 1.
 
-__Output:__
-* A flooded grid
-* The SLR value that gives the largest incremental change
-* Some maps
+__Output:__ A flooded grid; The SLR value that gives the largest incremental change; Some maps. 
 
+*** 
 
 __The flooded grid:__ The program will create a flooded grid which
 records  what parts of the terrain will be flooded, and at what SLR
