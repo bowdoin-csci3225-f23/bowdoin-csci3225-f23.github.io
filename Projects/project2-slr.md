@@ -278,9 +278,6 @@ Color BLUE[4] = {
 ```
 Note that 4 colors may not be enough for the flooded grid (for example, if we flood with slr=10, incr=1, we will get values 1 through 10). In the _grid_flood_to_pixelbuffer_ function,  flood values  <= 4 are colored with BLUE, and values above 4 are colored  with random colors. Basically the first step in this function is to generate a color array, which is BLUE[i] for i=1,2,3,4 and a random color for i >4.  Then a value of x in the flooded grid will be colored with color[x]. 
 
-![](p2-slr10.png)
-
-
 * map.flooded-over-hillshade.bmp: flooded grid with discrete colors overlayed on hillshade
 
 This is the same type of map you did for project1.  Consider implementing a function to overlay two pixel buffers, like so:
@@ -312,6 +309,9 @@ To overlay the flooded grid on the hillshade you can call it like so:
   save_pixel_buffer_to_file(&pb1, "map.flooded-over-hillshade.bmp");
   ...
 ```
+
+
+![](p2-slr10.png)
 
 
 
