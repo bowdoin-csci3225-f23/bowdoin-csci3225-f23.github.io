@@ -434,7 +434,7 @@ explore further? --- you don't need to address all.
 ***
 
 
-## What to turn in
+### What to turn in
 
 * Check in your code to the github repository 
 * Message me the report. 
@@ -452,7 +452,7 @@ learn.
 
 
 A 3000-level class means you work towards being independent and debugging your code independently.  Use the internet as much as you can, to answer your questions on how to do things in C/C++, syntax and so on. Write code incrementally, in small pieces at a time, so that you always know
-where teh error is coming from. Use the bitmaps and prints to know what you are computing at all times.
+where the error is coming from. Use the bitmaps and prints to know what you are computing at all times.
 
 Enjoy! 
 
@@ -460,6 +460,8 @@ Enjoy!
 ***
 
 ### Results for Southport
+
+![](p2-closeup.png)
 
 
 ```
