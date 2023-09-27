@@ -138,7 +138,7 @@ Note: If you want to look into _getopt()_, this is something you'll add at the e
 
 ## Computing the SLR flooding
 
-For these examples we will assume that we want to compute flooding up to slr=3 in increments of 1. 
+For these examples we will assume that we want to compute flooding up to slr = 3 in increments of 1. 
 
 In class you came up with two approaches, one recursive and one BFS-like. Because we want to flood incrementally
 --- first at slr = 1, then at slr = 2, then at slr = 3 --- the BFS approach will work more efficiently.
@@ -178,24 +178,22 @@ but you can, if you need to.
 
 After flooding with slr = 1 we would like to continue with slr = 2. Obviously we could repeat the flooding process, this time with slr = 2. Can we do better?  Could we base flooding at slr = 2 on the flooding at slr = 1, without starting it all over again?
 
-Once you think about it, the idea is quite natural: To flood at slr=2,
-we want to start from the boundary of the flood at slr=1---namely the
-points that were visited and not flooded for slr=1. So if we ask
-flooding at slr=1 to produce the boundary of its flood, we can use it
-to start the flooding at slr=2.
+Once you think about it, the idea is quite natural: To flood at slr = 2,
+we want to start from the boundary of the flood at slr = 1 --- namely the
+points that were visited and not flooded for slr = 1. So if we ask
+flooding at slr = 1 to produce the boundary of its flood, we can use it
+to start the flooding at slr = 2.
 
 And so on.
 
-Your function to compute the flood will take as a parameter the queue
-that contains the starting boundary of the flood, and will compute and
+Based on this insight, your function to compute the flood at a given slr will take as a parameter the queue that contains the starting boundary of the flood, and will compute and
 return a queue that contains the ending boundary of the flood.  This
-queue will be used as the starting boundary for the next level.  It
+queue will be used as the starting boundary for the next slr level.  It
 will look something like this:
-
 
 ```
 bnd_queue = all points on the boundary of the grid that are _nodata_
-for (rise=slr_incr; rise <= slr_final; rise+= slr_incr) {
+for (rise = slr_incr; rise <= slr_final; rise += slr_incr) {
 
     bnd_queue = compute_flood(elev_grid, flooded_grid, rise, bnd_queue) 
 
@@ -206,16 +204,16 @@ for (rise=slr_incr; rise <= slr_final; rise+= slr_incr) {
 ### Largest incremental flood 
 
 
-As you compute each flood level,  you'll want to keep track of how many points are flooded at that level, and the overall largest flood,  something like this: 
+As you compute each flood level,  you will want to keep track of how many points are flooded at that level, and the overall largest flood.  For example, 
 
 
 ```
 compute SLR flooding up to 3.0 (with incr=1.0) 
-	At rise =1.0:flooding 2881281 new cells
-	At rise =2.0: flooding 814266 new cells
-	At rise =3.0: flooding 121239 new cells
+	At rise =1.0: flooding 2881281 new cells
+	At rise =2.0: flooding  814266 new cells
+	At rise =3.0: flooding  121239 new cells
 total nb. cells flooded: 3816786 (46.92 percent)
-largest flood is from slr=0.0 to slr=1.0, total 2881281 cells ```
+largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
 ```
 
 
@@ -223,9 +221,7 @@ largest flood is from slr=0.0 to slr=1.0, total 2881281 cells ```
 ### The flooded grid
 
 
-You'll want to create the flooded grid to be the same as the elevation
-grid, which can be easily done using the _grid_init_from()_ function
-provided in _grid.c_:
+You will want to create the flooded grid to be the same as the elevation grid, which can be easily done using the _grid_init_from()_ function provided in _grid.c_:
 
 ```
  //create the flooded grid 
@@ -250,14 +246,8 @@ the function in _grid.c_:
 ### Visualizing the flooding
 
 In addition to the hillshade of the elevation grid, and the shaded relief
-(color gradient overlayed on hillshade), you will create three maps to
-visualize the flooded grid:
-
-* map.flooded.grayscale.bmp: flooded grid, in grayscale gradient
-
-This is a standard grayscale map, and you have a function to do this
-in project 1.  Call this function passing the flooded grid as an
-argument.
+(color gradient overlayed on hillshade), you will create  two maps to
+visualize the flooding:
 
 * map.flooded.colordiscrete.bmp: flooded grid, with discrete colors
 
@@ -267,10 +257,10 @@ this just because I wanted blue colors.
 
 ```
 /* classify the values in the grid in intervals and map each
-interval to a different (blue) color. Set the pixel buffer corresponding
-to these colors. 
+  interval to a different (blue) color. Set the pixel buffer corresponding
+  to these colors. 
 */
-void pixelbuffer_set_flooded(const Grid* grid, PixelBuffer pb)
+void grid_flood_to_pixelbuffer(const Grid* grid, PixelBuffer pb)
 
 ```
 
@@ -280,15 +270,17 @@ for e.g..
 
 
 ```
-//here I chose a map of 4 colors, need to extend it 
+//here I chose a map of 4 colors
 Color BLUE[4] = {
   {.68, .85, .90}, //light blue rgb(173,216,230) 
-  {.64, .76, .68}, //cambridge blue
   {.31, .53, .97}, //royal rgb(79,134,247)
-  {.15, .23, .89} //palatinate rgb(39,59,226)
+  {.15, .23, .89}, //palatinate rgb(39,59,226)
+  {.64, .76, .68} //cambridge blue
 } ;
-
 ```
+Note that 4 colors may not be enough for the flooded grid (for example, if we flood with slr=10, incr=1, we will get values 1 through 10). In the _grid_flood_to_pixelbuffer_ function,  flood values  <= 4 are colored with BLUE, and values above 4 are colored  with random colors. Basically the first step in this function is to generate a color array, which is BLUE[i] for i=1,2,3,4 and a random color for i >4.  Then a value of x in the flooded grid will be colored with color[x]. 
+
+![](p2-all2.png)
 
 
 * map.flooded-over-hillshade.bmp: flooded grid with discrete colors overlayed on hillshade
