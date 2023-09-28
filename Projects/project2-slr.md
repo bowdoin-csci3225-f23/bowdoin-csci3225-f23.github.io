@@ -64,7 +64,9 @@ largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
 	* map.flooded-over-hillshade.bmp: flooded grid with discrete colors overlayed on hillshade
 
 
-![](p2-all1.png)
+
+![](p2-sp-hs.png)
+![](p2-sp-slr123.png)
 
 
 
@@ -496,3 +498,5 @@ largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
 total nb. cells flooded: 6030643 (74.14 percent)
 largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
 ```
+![](p2-sp-slr20.png)
+![](p2-sp-slr30.png)
