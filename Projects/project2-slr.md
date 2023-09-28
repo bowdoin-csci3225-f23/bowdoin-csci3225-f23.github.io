@@ -442,8 +442,7 @@ explore further? --- you don't need to address all.
 
 ### Final remarks
 
-There are many small steps to this project, and starting the day it is
-assigned and making progress every day is important so that you learning
+There are many small steps to this project, and starting early and making progress every day is important so that you learning
 is rewarding and enjoyable.  Coding projects can quickly become overwhelming if put off too
 long.  Think one piece at a time, and remember you are not expected to
 have worked on larger projects before --- this is an opportunity to
