@@ -463,7 +463,7 @@ Enjoy!
 
 ![](p2-closeup.png)
 
-![](p2-sp1.png)![](p2-sp2.png)![](p2-sp3.png)
+![](p2-sp3.png)
 
 ```
 compute SLR flooding up to slr=5.0 (incr=1.0)
