@@ -295,7 +295,7 @@ To overlay the flooded grid on the hillshade you can call it like so:
 ```
 
 
-![](p2-slr10.png)
+![](p2-sp-slr10.png)
 
 
 
