@@ -405,15 +405,15 @@ You will write a  report showcasing your work.  Include:
 
 1. Maps 
 * for southport
- 	* hillshade 
-	 * color gradient over hillshade 
-	 * slr=3, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
- 	* slr=20, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
+  - hillshade
+  - color gradient over hillshade
+  - slr=3, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
+  - slr=20, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
 * for YOUR-DATASET
-	* hillshade
-	* color gradient over hillshade 
-	* slr=3, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
-	* slr=20, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
+  - hillshade
+  - color gradient over hillshade
+  - slr=3, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
+  - slr=20, incr=1: flooded-discrete, and flooded-discrete-over-hillshade
 
 1. Bugs and extra features. 
 
