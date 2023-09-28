@@ -8,7 +8,7 @@ nav_order: 10
 
 *** 
 * __Assigned:__ Tuesday, September 26
-* __Due:__ Friday October 6th, 4pm <--- Note: right before fall break!
+* __Due:__ Friday October 6th, 4pm <--- Note: right before fall break
 * Group policy: Partner-optional
 
 In this project you will develop a program to compute and visualize the incremental flooding caused by sea-level rise, and write a report to showcase your work.  
@@ -111,13 +111,12 @@ increment in _argv[4]_.
 
 _Optional:_ Ideally reading the command line parameters should be done
 with the _getopt()_ function, which will allow to enter these params
-in arbitraty order. For example,
+in arbitrary order. For example,
 
 ```
 % ./slr -e ~/DEMs/southport.asc -o southport-flooded.asc -r 3  -i 1
 ```
 
-Note: If you want to look into _getopt()_, this is something you'll add at the end, once the main functionality of the program works. 
 
 
 ### Computing the SLR flooding
