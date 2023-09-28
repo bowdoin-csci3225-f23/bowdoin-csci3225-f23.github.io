@@ -48,11 +48,12 @@ by the flood but its elevation is larger than the SLR value.  In other words, th
 
 ```
 compute SLR flooding up to slr=3.0 (incr=1.0)
-	At slr =1.0:  flooding    2881281 new cells
-	At slr =2.0:  flooding     814266 new cells
-	At slr =3.0:  flooding     121239 new cells
-total nb. cells flooded: 3816786 (46.92 percent)
-largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
+	findBoundarySea: rise=1.0, min elev=0.2, nb.bnd.nodata = 3659, returns 8333 bnd sea points
+	At slr =1.0:  flooding    2761813 new cells
+	At slr =2.0:  flooding     928935 new cells
+	At slr =3.0:  flooding     117043 new cells
+total nb. cells flooded: 3807791 (46.81 percent)
+largest flood is from slr=0.0 to slr=1.0, total 2761813 cells
 ```
 
 
@@ -133,29 +134,26 @@ In class you came up with two approaches, one recursive and one BFS-like. Becaus
 ### Flooding at slr = 1. 
 
 For the initial flood you will want to traverse the boundary of the
-grid, find all points that are _nodata_ and put them in a queue. These
-will be the "sources" of the flooding.
+grid, find all points that are _nodata_ (to deal with datasets that don't have NODATA on the boundary, I added this: OR, their elevation is < rise) and put them in a queue. These will be the "sources" of the flooding.
 
-To compute the flooding, we'll need to keep track of what points have  been visited, and for that we'll use the flooded grid (so it needs to be initialized as _NOT_VISITED_).   We will repeatedly pop a point from the queue and check  all its neighbors, and push those that are unvisited and flooded to the queue, so that the flood propagates further. 
+To compute the flooding, we'll need to keep track of what points have  been visited, and for that we'll use the flooded grid (so it needs to be initialized as _NOT_VISITED_).   We will repeatedly pop a point from the queue and check  all its neighbors; we  push the neighbors that are unvisited and flooded to the queue, so that the flood propagates further. 
 
 * if the neighbor has already been visited: there's nothing to do, continue
 
 * if the neighbor has not been visited, and it's elevation is
- _nodata_: add it to the queue and mark it as visited (this point is
- assumed to be SEA)
+ _nodata_: add it to the queue and mark it as SEA 
 
 * if the neighbor has not been visited and its elevation < slr:  add
-  it to the queue and mark it as flooded.
+  it to the queue and mark it as flooded at this level.
 
 When the queue is empty, flooding is done.
 
 
 
-At the end of the flooding process, the points can be conceptually
-classified as: not visited (not reached by the flood); visited and
-sea; visited and flooded; visited and not flooded (elevation above
-rise). You may not need to distinguish between these different classes
-but you can, if you need to.
+At the end of the flooding process, the points in the flooded grid will be marked as : 
+not visited (not reached by the flood); sea; flooded; not flooded (elevation above
+rise). Since the flooded grid must be set to nodata for all points but the ones that flood, you need to do one final traversal through the flooded grid and set all points that are not flooded to nodata. 
+
 
 
 
@@ -179,7 +177,7 @@ will look something like this:
 ```
 bnd_queue = all points on the boundary of the grid that are _nodata_
 for (rise = slr_incr; rise <= slr_final; rise += slr_incr) {
-    bnd_queue = compute_flood(elev_grid, flooded_grid, rise, bnd_queue) 
+    bnd_queue = compute_flood(elev_grid, flooded_grid, rise, bnd_queue, ...) 
 } 
 ```
 
@@ -191,12 +189,13 @@ As you compute each flood level,  you will want to keep track of how many points
 
 
 ```
-compute SLR flooding up to 3.0 (with incr=1.0) 
-	At rise =1.0: flooding 2881281 new cells
-	At rise =2.0: flooding  814266 new cells
-	At rise =3.0: flooding  121239 new cells
-total nb. cells flooded: 3816786 (46.92 percent)
-largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
+compute SLR flooding up to slr=3.0 (incr=1.0)
+	findBoundarySea: rise=1.0, min elev=0.2, nb.bnd.nodata = 3659, returns 8333 bnd sea points
+	At slr =1.0:  flooding    2761813 new cells
+	At slr =2.0:  flooding     928935 new cells
+	At slr =3.0:  flooding     117043 new cells
+total nb. cells flooded: 3807791 (46.81 percent)
+largest flood is from slr=0.0 to slr=1.0, total 2761813 cells
 ```
 
 
@@ -465,38 +464,42 @@ Enjoy!
 
 
 ```
-compute SLR flooding up to slr=3.0 (incr=1.0)
-	At slr =1.0:  flooding    2881281 new cells
-	At slr =2.0:  flooding     814266 new cells
-	At slr =3.0:  flooding     121239 new cells
-total nb. cells flooded: 3816786 (46.92 percent)
-largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
+compute SLR flooding up to slr=5.0 (incr=1.0)
+	findBoundarySea: rise=1.0, min elev=0.2, nb.bnd.nodata = 3659, returns 8333 bnd sea points
+	At slr =1.0:  flooding    2761813 new cells
+	At slr =2.0:  flooding     928935 new cells
+	At slr =3.0:  flooding     117043 new cells
+	At slr =4.0:  flooding     155553 new cells
+	At slr =5.0:  flooding     190139 new cells
+total nb. cells flooded: 4153483 (51.06 percent)
+largest flood is from slr=0.0 to slr=1.0, total 2761813 cells
 ```
   
 ```
-  compute SLR flooding up to slr=20.0 (incr=1.0)
-	At slr =1.0:  flooding    2881281 new cells
-	At slr =2.0:  flooding     814266 new cells
-	At slr =3.0:  flooding     121239 new cells
-	At slr =4.0:  flooding     134888 new cells
-	At slr =5.0:  flooding     178558 new cells
-	At slr =6.0:  flooding     170112 new cells
-	At slr =7.0:  flooding     170508 new cells
-	At slr =8.0:  flooding     156614 new cells
-	At slr =9.0:  flooding     151408 new cells
-	At slr =10.0:  flooding     135535 new cells
-	At slr =11.0:  flooding     131409 new cells
-	At slr =12.0:  flooding     140389 new cells
-	At slr =13.0:  flooding     131062 new cells
-	At slr =14.0:  flooding     126393 new cells
-	At slr =15.0:  flooding     117507 new cells
-	At slr =16.0:  flooding     117216 new cells
-	At slr =17.0:  flooding      97374 new cells
-	At slr =18.0:  flooding      86341 new cells
-	At slr =19.0:  flooding      79914 new cells
-	At slr =20.0:  flooding      88629 new cells
-total nb. cells flooded: 6030643 (74.14 percent)
-largest flood is from slr=0.0 to slr=1.0, total 2881281 cells
+ compute SLR flooding up to slr=20.0 (incr=1.0)
+	findBoundarySea: rise=1.0, min elev=0.2, nb.bnd.nodata = 3659, returns 8333 bnd sea points
+	At slr =1.0:  flooding    2761813 new cells
+	At slr =2.0:  flooding     928935 new cells
+	At slr =3.0:  flooding     117043 new cells
+	At slr =4.0:  flooding     155553 new cells
+	At slr =5.0:  flooding     190139 new cells
+	At slr =6.0:  flooding     181074 new cells
+	At slr =7.0:  flooding     179454 new cells
+	At slr =8.0:  flooding     164275 new cells
+	At slr =9.0:  flooding     157622 new cells
+	At slr =10.0:  flooding     140891 new cells
+	At slr =11.0:  flooding     138100 new cells
+	At slr =12.0:  flooding     146128 new cells
+	At slr =13.0:  flooding     135700 new cells
+	At slr =14.0:  flooding     125785 new cells
+	At slr =15.0:  flooding     126373 new cells
+	At slr =16.0:  flooding     120901 new cells
+	At slr =17.0:  flooding     100824 new cells
+	At slr =18.0:  flooding      89243 new cells
+	At slr =19.0:  flooding      82788 new cells
+	At slr =20.0:  flooding      90665 new cells
+total nb. cells flooded: 6133306 (75.40 percent)
+largest flood is from slr=0.0 to slr=1.0, total 2761813 cells
 ```
 ![](p2-sp-slr20.png)
 ![](p2-sp-slr30.png)
