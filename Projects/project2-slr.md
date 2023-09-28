@@ -501,5 +501,5 @@ largest flood is from slr=0.0 to slr=1.0, total 2761813 cells
 total nb. cells flooded: 6133306 (75.40 percent)
 largest flood is from slr=0.0 to slr=1.0, total 2761813 cells
 ```
-![](p2-sp-slr20.png)
-![](p2-sp-slr30.png)
+![](p2-sp-slr20-30.png)
+
