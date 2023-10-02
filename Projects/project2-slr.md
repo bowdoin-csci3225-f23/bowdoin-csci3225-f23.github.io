@@ -83,11 +83,11 @@ need to download a new one.
 
 _Test dataset:_ You can download the dataset I used to generate the
 maps on this page
-[here](https://tildesites.bowdoin.edu/~ltoma/DEM/southport.asc). It
+[here](https://tildesites.bowdoin.edu/~ltoma/teaching/DEM/southport-2m.asc). It
 covers the Southport Island off the coast of Maine, it is obtained
 from Lidar, it has 2214 cols and 3674 rows, and 2m resolution.
 
-[TO DO: UPLOAD SOUTHPORT.ASC]
+
 
 
 ### The interface 
