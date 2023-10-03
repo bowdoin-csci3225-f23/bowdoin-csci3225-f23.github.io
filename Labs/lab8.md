@@ -1,6 +1,6 @@
 ---
 layout: default 
-title: --Lab 8 (Drainage on flat areas)
+title: --Lab 8 (Flat areas)
 nav_order: 28
 ---
 
