@@ -20,3 +20,4 @@ nav_order: 5
 | Thu 9/28 | _class cancelled - work on project 2_|| 
 | Tue 10/3 | Drainage on flat areas | [Lab 8](https://bowdoin-csci3225-f23.github.io/Labs/lab8/) | 
 | Thu 10/5 | Watersheds and watershed hierarchy. Viewsheds on terrains.  | | 
+| Thus 10/12 |  | | 
