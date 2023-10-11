@@ -15,7 +15,7 @@ nav_order: 11
 
 The goal of this project is flow on terrains. You will create a
 program to compute and visualize the flow network derived from flow
-direction and flow accumulation, and write a report to showcase your
+direction and flow accumulation and write a report to showcase your
 work.
 
 
@@ -29,7 +29,7 @@ and also the name of the flow direction grid and flow accumulation
 grid which are to be created. For example, running with
 
 ```
-./flow -e ~/DEMs/set1.asc    -d fd.asc -a fa.asc
+./flow -e ~/DEMs/set1.asc -d fd.asc -a fa.asc
 ```
 
 or
@@ -37,19 +37,19 @@ or
 ./flow ~/DEMs/set1.asc fd.asc fa.asc
 ```
 
-will work with the grid ~/DEMs/set1.as and create a flow direction and
+will read _~/DEMs/set1.as_ as the elevation grid and will create a flow direction and
 flow accumulation grid in the current directory called _fd.asc_ and
 _fa.asc_ respectively (all grids in arcascii format).  
 
-The bitmaps:
+You will create the following bitmaps:
 
 * elevation overlayed on hillshade
-* flow direction without flat areas, grayscale 
-* flow accumulation without flat areas, color intervals
-* flow direction with flat areas (no pit flooding), grayscale
-* flow accumulation with flat areas (no pit flooding), color interval
+* flow direction (without handling flat areas), grayscale 
+* flow accumulation (without flat areas), color intervals
+* flow direction (with plateaus but no flooding), grayscale
+* flow accumulation (with plateaus but no flooding), color interval
 * same as above, overlayed on hillshade
-* flow accumulation with flat areas and pit flooding, color interval
+* flow accumulation (with flooding and plateaus), color interval
 * same as above, overlayed on hillshade
 
 
@@ -57,101 +57,91 @@ The bitmaps:
 ### Datasets
 
 
-You can use the same dataset as in the previous project, although the
-flow network will look better on a mountainous terrain.
+You can use the same dataset as in the previous project. The
+flow network will look better on a mountainous terrain, but the effects of handling plateaus and flooding wil be larger on flat terrains.
 
-_Test datasets:_ You can download the datasets I used to generate the
+_Test datasets:_ You can download the datasets used to generate the
 maps on this page [here](https://tildesites.bowdoin.edu/~ltoma/teaching/DEM/). 
 
 
 ### Overview
 
 
-You will start by reading the elevation grid and printing basic
-information about it (_grid.c_ has a function to do this). While you
-are at it, you can create a hillshade grid  and a pixel_buffer,
-and an elevation bitmap overlayed on the hillshade.
+You will start by reading the elevation grid and printing basic information about it (_grid.c_ has a function to do this). While you
+are at it,  create a hillshade grid, a pixel_buffer, and use them to create a bitmap of the elevation overlayed on the hillshade.
 
-Then you'll want to create the flow direction and flow accumulation grids (_grid.c_ has a
-function to create/initialize a grid based on on another grid, like this): 
+Then you'll want to create the flow direction and flow accumulation grids. The module _grid.c_ has a function to create/initialize a grid based on on another grid, for e.g. 
+```Grid * fd_grid = grid_init_from(elev_grid);```
+ 
+In order to see the differences, you will compute  the flow direction (FD) in three, increasingly better variants: 
 
-```
-//create the flow dir grid 
-Grid * fd_grid = grid_init_from(elev_grid);
- ```
+1. The simplest version of FD assigns d8 flow direction to all points that have at least one lower neighbor; all points that do not have a lower neighbor are assigned a special "flat" direction (for e.g. you could define FLAT_DIR to be -1) 
 
+1. The second version of FD is the same as above, but it also assigns flow  direction to flat areas that have outlet points (the plateaus). The idea here is to traverse the plateau from the outlet points and direct points on the plateau  towards the the outlets. 
 
-In order to see the differences betwween their results, you'll compute  the flow direction (FD) and flow accumulation (FA) in three variants: 
+1. The third version of FD  first floods the terrain to eliminate the pits and then assigns FD on the flooded terrain as in (2) above.  A flooded terrain does not have pits and all the flat areas will have outlet points, so  this approach will assign FD to all points. 
 
-1. FD while  skipping/ignoring flat area
-1. FD while handling flat areas that have outlet points (the plateaus)
-1. FD handling all flat areas, by first flooding the terrain
-
-In each case you'll use the resulting FD grid to compute the flow
-accumulation.  You'll encapsulate computing FD and FA in two functions
-and below are the names and parameters suggested (you can use these
-as they are, or feel free to adjust to match your style):
+For each variant, you will use the resulting FD grid to compute the corresponding flow accumulation (FA) grid.  You'll encapsulate computing the FD and FA grids in two functions and below are the names and parameters suggested (you can use these as they are, or feel free to adjust to match your style):
 
 ```
-//compute FD, leave flat areas undefined 
-//elev_grid: input elevation grid
-//fd_grid: output flowdir grid 
-void compute_d8flowdir_grid_noflat(const Grid* elev_grid, Grid* fd_grid);
 
-//compute FD, handle plateaus (plateau=flat area with outlets)
-//elev_grid: input elevation grid
-//fd_grid: output flowdir grid 
-void compute_d8flowdir_grid_with_plateaus(const Grid* elev_grid, Grid* fd_grid);
+/*
+  elev_grid: input elevation grid
+  fd_grid:   output flowdir grid, initialized
+  populates fd_grid with d8 flow direction values; all points with no lower neighbors are assigned FLAT_DIR 
+*/
+void compute_d8_grid_skipflat(const Grid* elev_grid, Grid* fd_grid);
 
-//compute FA grid based on FD grid
-//elev_grid: input elevation grid
-//fd_grid: input flowdir grid
-//fa_grid: output flowaccu grid 
+/*
+  elev_grid: input elevation grid
+  fd_grid:   output FD grid, initialized
+  populates fd_grid with d8 flow direction values.
+  FD of points on flat areas that have outlets is set towards the outlets.
+*/
+void compute_d8_grid_withplateaus(const Grid* elev_grid, Grid* fd_grid);
+
+/*
+  elev_grid: input elevation grid
+  fd_grid:   input FD grid
+  fa_grid:   output FA grid, assume initialized
+  distribute flow according to fd_grid and populate fa_grid with FA values 
+*/
 void compute_fa_grid(const Grid* elev_grid, const Grid* fd_grid, Grid* fa_grid);
+
 ```  
 
-In your main() function you'll first call the function to create the
-FD without handling the flat areas and then compute FA using this FD
-grid. Then you will call the function to create the FD while handling
-plateaus and call the function to compute the FA grid using this FD
-grid. Finally, you will call the function to flood the sinks and
-create a flooded terrain, and then compute the FA on this flooded
-terrain. For each of the FD and FA grid computed, you will create
-bitmaps to visualize them. Your main code will end up looking
-something like this (again, feel free to use like this or adjust to
-match your style):
+### The main() function 
+
+In your main() function you will call the three functions to compute FD as above, and for each FD grid computed you will call the function to compute a FA grid corresponding to this FD grid, and then create the bitmaps you need.  If you encapsulated your code in functions as above, the main() function will look nice and easy: 
+
 
 ```
-  printf("\n\nFD AND FA SKIPPING FLAT AREAS\n"); 
-  compute_d8flowdir_grid_skipflat(elev_grid,  fd_grid);
+
+  printf("\n\nFD AND FA SKIPPING FLAT AREAS\n");
+
+  compute_d8_grid_skipflat(elev_grid,  fd_grid);
   //create grayscale bitmap 
   //save_pixel_buffer_to_file(&pb, "map.fd-skipflat.bmp");
 
   compute_fa_grid(elev_grid, fd_grid, fa_grid);
-  //create bitmap
-  //save_pixel_buffer_to_file(&pb, "map.fa-skipflat.bmp");	
+  //create bitmaps "map.fa-skipflat.bmp" and  "map.fa_over-hillshade.bmp"
 
-  printf("\n\nFD AND FA WITH PLATEAUS BUT NO FLOODING\n"); 
-  compute_d8flowdir_grid_withplateaus(elev_grid,  fd_grid);
-  //bitmap
+  printf("\n\nFD AND FA WITH PLATEAUS BUT NO FLOODING\n");
+
+  compute_d8_grid_withplateaus(elev_grid,  fd_grid);
+  //create grayscale bitmap
   //save_pixel_buffer_to_file(&pb, "map.fd-withplateaus.bmp");
 
   compute_fa_grid(elev_grid, fd_grid, fa_grid);
-  //bitmap 
-  //save_pixel_buffer_to_file(&pb, "map.fa-withplateaus.bmp");
-  //overlay on hillshade
-  //save_pixel_buffer_to_file(&pb, "map.fa-withplateaus-over-hillshade.bmp");
+  //create bitmaps  "map.fa-withplateaus.bmp" and "map.fa-withplateaus-over-hillshade.bmp"
 
+  printf("\n\nFD AND FA WITH FLOODING AND PLATEAUS\n");
 
-  printf("\n\nFD AND FA WITH FLOODING AND PLATEAUS\n"); 
   //flood sinks and create a flooded grid
-  compute_d8flowdir_grid_withplateaus(flooded_grid,  fd_grid);
+  compute_d8_grid_withplateaus(flooded_grid,  fd_grid);
 
   compute_fa_grid(flooded_grid, fd_grid, fa_grid);
-  //bitmap 
-  //save_pixel_buffer_to_file(&pb, "map.fa-flooded.bmp");
-  //overlay on hillshade
-  //save_pixel_buffer_to_file(&pb, "map.fa-flooded-over-hillshade.bmp");
+  //create bitmaps "map.fa-flooded.bmp" and "map.fa-flooded-over-hillshade.bmp"
 
 ```
 
