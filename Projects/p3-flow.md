@@ -362,3 +362,70 @@ Put differently, if you don't approach coding incrementally, you won't
 be able to debug your code.
 
 Enjoy!
+
+***
+
+### Results 
+
+```
+(base) ltoma@XVR66RXWMT project3-flow-code % ./flow -e ~/DEMs/set1.asc -d fd.asc -a fa.asc
+running with arguments:
+	elev_name: /Users/ltoma/DEMs/set1.asc 
+	fd_name: fd.asc 
+	fa_name=fa.asc
+reading /Users/ltoma/DEMs/set1.asc
+grid /Users/ltoma/DEMs/set1.asc: 
+	n=184552 [rows=472,cols=391], range=[615.00, 1531.00], NODATA values=8779 (4.76 percent)
+writing map.hillshade.bmp
+gradient_colorintervals_to_pixelbuffer: 
+	grid range [615.0, 1531.0], intervals: [615.00 745.86 876.71 1007.57 1138.43 1269.29 1400.14 1531.00 ]
+writing map.elev-over-hillshade.bmp
+
+
+FD AND FA SKIPPING FLAT AREAS
+compute_d8_skipflat:
+        nb flat points=7959, nb pits = 14
+writing map.fd-skipflat.grayscale.bmp
+compute_fa_grid
+grid_flow_accu_to_pixelbuffer:
+        max_fa=4566.0, logn=8.4
+        grid range [-1.0, 4566.0] flow intervals: [-1.00 1.10 42.13 84.26 4566.00 ]
+writing map.fa-skipflat.bmp
+
+
+FD AND FA WITH PLATEAUS, BUT NO FLOODING
+compute_d8_withplateaus: 
+	      finished creating outlet queue, size=1621
+	      nb flat points=81, nb pits = 14
+writing map.fd-withplateaus.grayscale.bmp
+compute_fa_grid
+grid_flow_accu_to_pixelbuffer:
+	      max_fa=85122.0, logn=11.4
+	      grid range [-1.0, 85122.0] flow intervals: [-1.00 1.10 56.76 113.52 85122.00 ]
+writing map.fa-withplateaus.bmp
+writing map.fa-withplateaus-over-hillshade.bmp
+
+
+FD AND FA WITH FLOODING AND PLATEAUS
+flood_sinks:
+	      flood_sinks: initial pq size = 1722
+	      flood_sinks: raised 0 points
+compute_d8_withflatareas: 
+	      finished creating outlet queue, size=1621
+	      nb flat points=81, nb pits = 14
+compute_fa_grid
+grid_flow_accu_to_pixelbuffer:
+	      max_fa=85122.0, logn=11.4
+	      grid range [-1.0, 85122.0] flow intervals: [-1.00 1.10 56.76 113.52 85122.00 ]
+writing map.fa-flooded.bmp
+writing map.fa-flooded-over-hillshade.bmp
+writing flooded grid as flooded.asc
+grid flooded.asc: 
+	     n=184552 [rows=472,cols=391], range=[615.00, 1531.00], NODATA values=8779 (4.76 percent)
+
+writing fd.asc
+writing fa.asc
+```
+
+
+![](p3-southport-fa.png)
