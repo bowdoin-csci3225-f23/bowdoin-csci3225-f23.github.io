@@ -6,7 +6,7 @@ nav_order: 11
 
 ## Project 3:  Computing Flow on Terrains  
 
-(todo: add pics, and pqueue example) 
+
 
 *** 
 * __Assigned:__ Thursday, October 12
@@ -319,7 +319,90 @@ You will also need to modify the Makefile from the previous project.
 
 ### Working with a priority queue in C++
 
-[to do]
+
+To define a priority queue you need a type for the objects in the queue, and a compare function. 
+
+For example,  here is a priority queue of Persons: 
+
+```
+#include <queue>
+
+struct person {
+  int age;
+  std::string name;
+} 
+
+ std::priority_queue<person, std::vector<person>, compare >  pq;
+```
+
+ Let's say we want the persons to be ordered in increasing order by age, and for equal age, in alphabetical order of names. _std::priority_queue_ is implemented  as a max priority queue, so if we want a min priority queue we need to invert the compare function. 
+
+```
+/*
+  function used by the pq to compare.
+   NOTE: the pq is a max-pqueue, so if we want a min-pqueue we need to
+  define the compare to return when a > b.
+ */
+  struct compare {
+  bool operator()(const person  & a, const person & b) {
+    if (a.age == b.age) 
+	return a.name  > b.name;
+      else
+	return a.age > b.age; 
+  }
+};
+
+```
+
+
+We can insert persons in the queue in the usual way: 
+
+```
+person p1, p2, p3, p4;
+
+  p1.age=13; p1.name = "tommy"; 
+  p2.age=11; p2.name = "rowan"; 
+  p3.age=8; p3.name = "phoebe";
+  p4.age=11; p4.name = "ana"; 
+
+  pq.push(p1);
+  pq.push(p2);
+  pq.push(p3);
+  pq.push(p4);
+```
+And then pop them in order: 
+```
+ while (!pq.empty()) {
+    person x  = pq.top();
+    pq.pop();
+    std::cout << "person: age=" << x.age << ", name=:" << x.name << std::endl; 
+  }
+```
+Try this out and see what will print! 
+
+
+Another way to specify the orderi is to  define the < operator on the Person, like: 
+```
+struct person {
+
+  int age;
+  std::string name;
+  /* 
+     the pq implements a max-pq, so if we want a min pq, we would need to
+     invert the < operator (which may have unintended effects if used elsewhere) 
+  */
+  
+   bool operator < (const struct person & p) const  {
+        if(age ==p.age)  {
+              return name  < p.name;
+        } else {
+              return age > p.age;
+        }
+    } 
+}; 
+```
+
+Personally, I am less fond of this second way, because it is unintuitive to invert the < operator. 
 
 
 ### The Report
