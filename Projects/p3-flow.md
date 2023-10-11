@@ -286,41 +286,24 @@ A good  point to start  is to use the maximum value in the FA grid  (_fa_grid->m
 ### Structure of the code
 
 
-Good coding practices recommend breaking the code into files that encapsulate parts of the functionality, similar to how you would break your code into classes (remember Data Structures projects).
-
+Good coding practices recommend breaking the code into files that encapsulate parts of the functionality. 
 These are the files that were given with last project, which you’ll use again:
 
-    stb_image_write.h
-    grid.h, grid.c
-    pixel_buffer.h, pixel_buffer.c
+* stb_image_write.h
+* pixel_buffer.h, pixel_buffer.c
+* grid.h, grid.c
 
 From the previous project you'll use:
-    map.h, map.c
+* map.h, map.c: Need to include _grid.h_ and _pixel_buffer.h_. All functions to create bitmaps from grids are here.  Add your functions to create bitmaps for FD and FA.
 
 You'll create the following additional files:
+* drainage.hpp, drainage.cpp: Need to include _grid.h_. All the functions to compute  FD and FA are here. The main functions that you need to implement are in the header, but you will likely add more helper functions. 
+* flowmain.c: The main() function is here. Read parameters from user, create grids, compute the FD and FA grids  and create the bitmaps. Includes _grid.h, map.h, drainage.hpp_.
 
 
-    drainage.hpp, drainage.cpp
-    flowmain.c
+Note that the drainage files need to use a priority queue and we'll use _std::priority_queue_ for that. Currently the compiler allows to mix c and c++ code in a project so we'll do that (although you’ll get a warning).
 
-
-map.{h,c}: All functions to create bitmaps from grids. Need to include grid.h, pixel_buffer.h. Add your functions to create bitmaps for FD and FA.
-
-
-drainage.{hpp, cpp}: Functions to compute the FD and FA. Include grid.h
-
-flowmain.c: The main() function is here. Read parameters from user, create grids, compute the FD and FA grids  and create the bitmaps. Include grid.h, map.h, drainage.hpp
-
-Note that the drainage files need to use a priority queue, and we'll use a c++ structure. Currently the compiler allows to mix c and c++ code in a project so we'll do that (although you’ll get a warning).
-
-Once you accept the code on github classroom, a good place to start is
-by copying all code from project2 over into project3, except slrmain().
-Then create a file flowmain.c where you add a main function
-— here you will eventually call the functions to create FD and FA grids and visualize the
-flooding. As you get things to compile, start with an empty main
-function, and then gradually add code to open a grid, create maps and
-so on.
-
+Once you accept the code on github classroom, a good place to start is by copying all code from project2 over into project3. Either rename _slrmain.c_ into _flowmain.c_ or you could start _flowmain.c_ from scratch; This file will only have a _main()_ function which  will call the functions to read the elevation grid and create FD and FA grids and the maps. As you get things to compile, start with an empty _main()_ function and empty functions for computing FD and FA, and then gradually add  the code in, one small piece at a time. 
 You will also need to modify the Makefile from the previous project.
 
 
@@ -332,37 +315,24 @@ You will also need to modify the Makefile from the previous project.
 
 ### The Report
 
-You will write a report showcasing your work. Include:
+You will write a report showcasing your work including: 
 
-    1. The dataset you used, location, number of rows and columns, resolution and provenance.
-    1. Results
-        * run your code with southport.asc
-        * run your code with set1.asc
-        * run your code with YOUR_DATASET.asc
-    1. Maps: for each dataset create the following maps:
-     * color gradient over hillshade
-     * the simplest FD (that does not handle flat areas) grayscale
-     * three FA maps, each one as a color gradient and also overlayed on hillshade (total 6 maps)
-     Total 8 maps for each dataset 
-    
-    Note that if the bitmaps are large  you should NOT add them to the repository.  Just make a note and connect with me so that I can get them from you another way (a link to drop box for e.g.). 
+1. The dataset you used, location, number of rows and columns, resolution and provenance.
+2.  Results. Run your code with southport.asc, set1.asc and YOUR_DATASET.asc
+3. Maps.  For each dataset create the following maps: (a) color gradient over hillshade (b) the simplest FD (that does not handle flat areas) grayscale; (c) three FA maps, each one as a color gradient and also overlayed on hillshade (total 6 maps). Total 8 maps for each dataset. Note that if the bitmaps are large  you should NOT add them to the repository (github won't let you anyways).  Just make a note and connect with me so that I can get them from you another way (a link to drop box for e.g.). 
             
+4. Bugs and extra features.
 
-    1. Bugs and extra features.
+5. Effort.  Time you spent in: thinking, Programming; Testing; documenting; total.
 
-    1. Effort
-
-    Time you spent in: thinking, Programming; Testing; documenting; total.
-    Reflection
-
- Prompts: how challenging did you find this project? what did you learn by doing this project? What did you wish you did differently? If you worked as a team, how did that go? What would you like to explore further? — you don’t need to address all.
+6. Reflection. Prompts: how challenging did you find this project? what did you learn by doing this project? What did you wish you did differently? If you worked as a team, how did that go? What would you like to explore further? — you don’t need to address all.
 
 
 
 ### What to turn in
 
-    Check in your code to the github repository
-    Message me the report.
+* Check in your code to the github repository
+* Message me the report.
 
 ### Final remarks
 
