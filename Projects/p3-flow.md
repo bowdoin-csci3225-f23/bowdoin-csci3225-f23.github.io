@@ -53,7 +53,7 @@ You will create the following bitmaps:
 * flow accumulation (with flooding and plateaus), color interval
 * same as above, overlayed on hillshade
 
-
+![](p3-set1-all.png)
 
 ### Datasets
 
@@ -64,7 +64,8 @@ flow network will look better on a mountainous terrain, but the effects of handl
 _Test datasets:_ You can download the datasets used to generate the
 maps on this page [here](https://tildesites.bowdoin.edu/~ltoma/teaching/DEM/). 
 
-![](datasets.png)
+![](p3-datasets.png)
+
 
 ### Overview
 
@@ -82,6 +83,8 @@ In order to see the differences, you will compute  the flow direction (FD) in th
 1. The second version of FD is the same as above, but it also assigns flow  direction to flat areas that have outlet points (the plateaus). The idea here is to traverse the plateau from the outlet points and direct points on the plateau  towards the the outlets. 
 
 1. The third version of FD  first floods the terrain to eliminate the pits and then assigns FD on the flooded terrain as in (2) above.  A flooded terrain does not have pits and all the flat areas will have outlet points, so  this approach will assign FD to all points. 
+
+![](p3-set1-fd.png)
 
 For each variant, you will use the resulting FD grid to compute the corresponding flow accumulation (FA) grid.  
 
