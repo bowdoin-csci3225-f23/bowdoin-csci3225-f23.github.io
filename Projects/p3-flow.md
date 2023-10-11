@@ -382,7 +382,7 @@ And then pop them in order:
 Try this out and see what will print! 
 
 
-Another way to specify the orderi is to  define the < operator on the Person, like: 
+Another way to specify the order is to  define the < operator on the Person, like: 
 ```
 struct person {
 
@@ -430,7 +430,7 @@ You will write a report showcasing your work including:
 ### Final remarks
 
 There are many small steps to this project, and starting early and
-making progress every day is important so that you learning is
+making progress every day is important so that your learning is
 rewarding and enjoyable. Coding projects can quickly become
 overwhelming if put off too long. Think one piece at a time, and
 remember this is an opportunity to learn.
@@ -442,7 +442,7 @@ so on. Write code incrementally, in small pieces at a time, so that
 you always know where the error is coming from. Use the bitmaps and
 prints to know what you are computing at all times.
 
-Put differently, if you don't approach coding incrementally, you won't
+Put differently, if you don't start early, you won't be able to finish, and if you don't approach coding incrementally, you won't
 be able to debug your code.
 
 Enjoy!
