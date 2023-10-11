@@ -83,7 +83,11 @@ In order to see the differences, you will compute  the flow direction (FD) in th
 
 1. The third version of FD  first floods the terrain to eliminate the pits and then assigns FD on the flooded terrain as in (2) above.  A flooded terrain does not have pits and all the flat areas will have outlet points, so  this approach will assign FD to all points. 
 
-For each variant, you will use the resulting FD grid to compute the corresponding flow accumulation (FA) grid.  You'll encapsulate computing the FD and FA grids in two functions and below are the names and parameters suggested (you can use these as they are, or feel free to adjust to match your style):
+For each variant, you will use the resulting FD grid to compute the corresponding flow accumulation (FA) grid.  
+
+![](p3-fa.png)
+
+You'll encapsulate computing the FD and FA grids in two functions and below are the names and parameters suggested (you can use these as they are, or feel free to adjust to match your style):
 
 ```
 
