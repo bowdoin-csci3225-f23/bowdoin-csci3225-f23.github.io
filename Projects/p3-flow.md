@@ -154,42 +154,44 @@ need to free the memory for the grids and the pixel buffers.
 
 
 
-### Details on d8 flow direction
+### The D8 flow direction
 
 
-Computing a D8-flow direction for a point is encapsulated in couple of functions: 
+To compute the FD grid we need to compute FD for each point in the grid, so naturally we want to encapsulate this in a function, like so:
+
 
 ```
 /*
-  elev_grid: input elevation grid
-  r, c: row and column of a point in the grid 
+  elev_grid:  input elevation grid
+  r, c:       row and column of a point in the grid 
   return: the d8 flow direction of (r,c)
-  - Points on the edge of the grid  flow outside.
+  - Points on the edge of the grid  are set to flow outside.
   - Points with elev=nodata, return  nodata
-  - Points  with all neighbors > elev[r,c] return  PIT_DIR 
-  - Points with all neighbors  at same elevation as elev[r,c] return FLAT_DIR
-    (nodata neighbors are ignored in these calculations)
-  
+  - Points  with all neighbors > , return  PIT_DIR
+  - Points with all neighbors  at same elevation, return FLAT_DIR
   d8 dir convention:
-  32 64 128
-  16  x  1
-  8   4  2
+     32 64 128
+     16  x  1
+     8   4  2
 */
-int d8(const Grid* elev_grid, int r, int c);
+int d8(const Grid* elev_grid, int r, int c); 
+
 ```
 
-where 
+where for example we define special FD values for points that are flat (all their neighbor are at the same elevation) or pits (no lower neighbor, some higher neighbor).
+
 ```
 #define FLAT_DIR -1
 #define PIT_DIR  -2
 ```
 
-And the second function  will be convenient when accumulating flow:
+
+A second function  will be convenient when accumulating flow:
 
 ```
-/* fd_grid: input fd grid
+/* fd_grid: input FD grid 
    (a,b) and (c,d) are points in the grid 
-   return 1 if (a, b) is a neighbor of (c, d) and (a,b) flowdir points to (c, d)
+   return 1 if (a, b) is a neighbor of (c, d) and fd_grid[a,b]  points towards (c, d)
    return 0 otherwise 
 
    d8 dir convention: 
@@ -198,7 +200,54 @@ And the second function  will be convenient when accumulating flow:
    8   4  2
 */
 int flows_into(const Grid* fd_grid, int a, int b, int c, int d);
+
 ```
+
+### Computing FD on plateaus 
+
+The idea is to find the outlet of the plateaus (points that have a FD and have neighbors) that are at the same elevation but do not  have FD). Once you find all these points you can add them to a queue and start traversing the plateaus.  So teh points in the queue have FD, and we will want to maintain this invariant.  When a point comes out of the  queue it will find its neighbors that are at the same elevation and don't have FD, and will set their FD towards it, and add them to the queue. 
+
+A problem you will have to solve here is how to assign the fd of one point so that it points towards another one. For example, say point (2,3) comes out of the queue and sees that its neighbor (2,4) is at the same height and does not have a FD, so it will assign its FD towards (2,3).  What value of D8 points the flow of (2,4) toards (2,3)? In this case, it is 16.   You'll want to encapsulate this in a function, perhapes something like so: 
+```
+//return the d8 direction which makes (a,b) point towards (c,d)
+int  d8_towards(int a, int b, int c, int d)
+```
+For example  _d8_towards(2,4,2,3)_ will return 16. 
+
+
+
+### Computing the FA grid 
+
+As discussed in class,  the idea is that every point in the grid starts with one unit of "water" and send its water (initial, as well as incoming) to the neighbor pointed to by its FD. The FA value at a point is the total amount of flow draining though that point. 
+
+You will write a nice recursive function to  compute the flow at a point 
+```
+
+/*
+  elev_grid: input elevation grid
+  fd_grid:   input FD grid
+  fa_grid:    output FA grid 
+  return the flow value of cell (r, c)
+*/
+int compute_flow_at_point(const Grid* elev_grid, const Grid* fd_grid, Grid* fa_grid, int r, int c); 
+
+```
+
+This will be an opportunity to apply dynamic programming. Small changes in your code  for computing the FA grid will make the difference between linear and quadratic (worst-case) (in terms of the number of points in the grid). 
+
+### Flooding 
+
+To flood a terrain, we imagine the terrain is surrounded by a giant ocean and imagine an infinite amount of rain falling over the terrain  with no ground infiltration.  The points in the terrain that drain to the ocean will send the rain to the ocean. For the other parts of the terrain water will accumulate in the pits and sinks which will start filling up, flowing over and merging with neighboring sinks, and so on, until they find a flow path to the ocean. 
+
+For every point in the terrain, we want the lowest level at which this point needs to be raised in order to flow to the ocean. As discussed in class, this can be modeled as a shortest path problem as follows. 
+
+Given a path between the ocean and a point p, the point p   will need to rise to the largest height along this path in order to flow to the ocean. We say that the cost of a path is the height of the largest point along the path. 
+
+Then among all possible paths from the ocean to p, we want the  path with the smallest cost. 
+
+We want to to compute the optimal paths from the ocea to all points in teh grid. 
+
+You'll recognize this as a variant of the SSSP problem, which can be solved by adjusting Dijkstra's algorithm to use this different way to compute the cost of a path (getting the max point along the path, rather than adding the points on the path as in the standard shortest path problem). 
 
 
 
@@ -206,40 +255,30 @@ int flows_into(const Grid* fd_grid, int a, int b, int c, int d);
 
 ### Visualizing flow direction and accumulation
 
-You need to create a couple  of bitmaps:
+You need to create maps for the FD and FA grids. 
 
-* FD grayscale
-* FA color interval
-* FA overlayed on hillshade
-
-You can use the function that creates a grayscale pixel buffer from a
-grid, which you wrote in the previous project.  I wanted to see the
-flat areas clearly, so I wrote a new function to create a (grayscale)
-pixel buffer from a FD grid, which sets the points which are FLAT_DIR
-or PIT_DIR in red.  This allows to see clearly the flat areas in the
-FD map. 
+For the FD grid: You can use the function that creates a grayscale pixel buffer from a grid, which you wrote in the previous project. This is a good point to start. We want to see the flat areas in the FD grid (more)  clearly, so write a new function to create a (grayscale) pixel buffer from a FD grid, which sets the points which are FLAT_DIR
+or PIT_DIR in red.  This will allow to see clearly the flat areas in the FD map. 
 
 ```
 grid_flowdir_to_pixelbuffer(const Grid* fd_grid, PixelBuffer* pb);
 ```
 
-For the flow accumulation, you want to create a color interval
-bitmap. For a start, you can use the function that createts a color
-interval bitmap which you wrote for the first project. But it won't
-look good, because the values in the FA grid are not uniformly
-distributed, but very skewed towards low values.  You will need to
-write a new function to create a pixel bufefr from a FA grid, which
-sets the values for the intervals in such a way to be able to see the
-ridges and the river network. This will take some experimenting, and
-depends on the terrain to some extent.
+For the FA grid: For a start, you can use the function that creates a color
+interval bitmap which you wrote for the first project. It won't
+look great, because the values in the FA grid are not uniformly
+distributed: there are many  points with low FA values and you will want to define the intervals so that only the points in the river network will be shown in blue.  
+
+Write a new function to create a pixel buffer from a FA grid. In this function you'll want to set the intervals in such a way to be able to see the ridges and the river network. This will take some experimenting, and depends on the terrain to some extent.
 
 ```
 void grid_flowaccu_to_pixelbuffer(const Grid* flow_grid, PixelBuffer* pb);
 ```
 
- A good  point to start  is to use the maximum value in the FA grid  (_fa_grid->max_value_).  Points with values above say c * _log(maxfa)_ or so are small rivers --- find what value of _c_ looks good.  Then choose a larger value (perhaps twice that) for th enext interval.
+The maps below use  4 intervals to show flow accumulation: the first one is for the ridges, the second is for the areas with very low flow (most of the terrain), the third one is for the small rivers, and the fourth one is for larger rivers.
 
-The maps below use  4 intervals to show flow accumulation, with the first one being the ridges, the second being the areas with very low flow (most of teh terrain), teh third one being small rivers, and the fourth one being larger rivers.
+A good  point to start  is to use the maximum value in the FA grid  (_fa_grid->max_value_).  Points with values above say a small constant c * _log(maxfa)_ are small rivers --- find what value of _c_ looks good.  Then choose a larger value (perhaps twice that) for the next interval.
+
 
 
 
