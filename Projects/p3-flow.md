@@ -64,6 +64,7 @@ flow network will look better on a mountainous terrain, but the effects of handl
 _Test datasets:_ You can download the datasets used to generate the
 maps on this page [here](https://tildesites.bowdoin.edu/~ltoma/teaching/DEM/). 
 
+!()[datasets.png]
 
 ### Overview
 
