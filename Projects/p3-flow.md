@@ -6,7 +6,7 @@ nav_order: 11
 
 ## Project 3:  Computing Flow on Terrains  
 
-(editing in progress) 
+(todo: add pics, and pqueue example) 
 
 *** 
 * __Assigned:__ Thursday, October 12
