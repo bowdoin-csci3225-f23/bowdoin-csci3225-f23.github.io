@@ -442,7 +442,7 @@ so on. Write code incrementally, in small pieces at a time, so that
 you always know where the error is coming from. Use the bitmaps and
 prints to know what you are computing at all times.
 
-Put differently, if you don't start early, you won't be able to finish, and if you don't approach coding incrementally, you won't
+Put differently, if you don't start early, you likely  won't be able to finish, and if you don't approach coding incrementally, you likely won't
 be able to debug your code.
 
 Enjoy!
