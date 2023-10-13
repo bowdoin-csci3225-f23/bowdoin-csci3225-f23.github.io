@@ -511,7 +511,7 @@ writing fd.asc
 writing fa.asc
 ```
 
-For Southport, which is a relatively flat terrain at 2m resolution, we see that handling the plateaus doe snot bring much benefit, and the FD still shows many points that are left unassigned (pits). Flooding in this case brings a significant improvement in the flow.  
+For Southport, which is a relatively flat terrain at 2m resolution, we see that handling the plateaus does not bring much benefit, and the FD still shows many points that are left unassigned (from where we infer they must be pits). Flooding in this case brings a significant improvement in the flow.  
 
 ![](p3-southport-fa.png)
 
