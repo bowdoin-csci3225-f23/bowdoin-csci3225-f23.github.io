@@ -65,10 +65,10 @@ largest flood is from slr=0.0 to slr=1.0, total 2761813 cells
 	* map.flooded-over-hillshade.bmp: flooded grid with discrete colors overlayed on hillshade
 
 
-
 ![](p2-sp-hs.png)
 ![](p2-sp-slr123.png)
 
+![](p2-closeup.png)
 
 
 
@@ -461,7 +461,7 @@ Enjoy!
 
 ### Results for Southport
 
-![](p2-closeup.png)
+
 
 
 ```
