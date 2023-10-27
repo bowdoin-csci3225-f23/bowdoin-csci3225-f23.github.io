@@ -163,7 +163,39 @@ When your code needs to work with large datasets, hundreds of millions pf points
 
 We will have a tournament and prizes! Stay tuned. 
 
+### The Report
 
+You will write a report showcasing your work including:
+
+1. The dataset you used, location, number of rows and columns, resolution and provenance.
+    
+1. Results. Run your code with set1.asc and YOUR_DATASET.asc on a well chosen viewpoint. 
+
+1. Maps. For each dataset create viewshed-over-hillshade bitmap. 
+    
+    Note that if the bitmaps are large you should NOT add them to the repository (github won’t let you anyways).
+
+   1. Bugs and extra features.
+
+1. Effort. Time you spent in: thinking, Programming; Testing; documenting; total.
+
+1. Reflection. Prompts: how challenging did you find this project? what did you learn by doing this project? What did you wish you did differently? If you worked as a team, how did that go? What would you like to explore further? — you don’t need to address all.
+
+
+### What to turn in
+
+    Check in your code to the github repository
+    Message me the report.
+
+### Final remarks
+
+As always, starting early and making progress every day is important so that your learning is rewarding and enjoyable. Coding projects become overwhelming if put off too long. Think one piece at a time, and remember this is an opportunity to learn.
+
+A 3000-level class means you work towards being independent and debugging your code independently. Use the internet as much as you can, to answer your questions on how to do things in C/C++, syntax and so on. Write code incrementally, in small pieces at a time, so that you always know where the error is coming from. Use the bitmaps and prints to know what you are computing at all times.
+
+Put differently, if you don’t start early, you likely won’t be able to finish, and if you don’t approach coding incrementally, you likely won’t be able to debug your code. 
+
+Enjoy!
 
 
 
