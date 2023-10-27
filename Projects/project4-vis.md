@@ -47,4 +47,21 @@ Eventually you will run your code on Mt. Rainier,  which you can download direct
 ![](p4-rainier-color-over-hillshade-small.png)
 ![](p4-rainier-googlemaps.png)
 
+### Algorithm
+
+We talked about three different algorithms to compute  the viewshed of a point: 
+* The straightforward algorithm
+* The radial-sweep algorithm proposed by [Van Kreveld](). 
+* The algorithm that computes horizons in a concentric sweep
+
+The radial sweep algorithm assumes cells have constant altitude/zenith throughout their span, which creates some artifacts in practice. So we are not going to use this algorithm.   
+
+The concentric sweep algorithm  involves merging horizons which in turn involves computing intersection of segments on the horizon. This is tricky to write and get all special cases correct. Furthermore determining if a point is visible comes down to determining if a point is above or below a segment of the horizon, which is numerically unstable when points are very close to lines. So we are not going to use this algorithm either.   
+
+For this project you will implement the first algorithm: given a viewpoint _v_, traverse the grid and for each point _p_, determine if _p_ is visible from _v_.  As discussed in class, there are a couple of steps: 
+* find all the intersection points _q_ between the horizonal projection of the segment _vp_ and the grid lines
+* for each such point _q_ interpolate its height based on the grid segment it is on and compute the altitude of _q_ with respect to _v_
+* point _p_ is visible if all the intersection points have the altitude below the altitude of _p_, and invisible otherwise. 
+
+
 
