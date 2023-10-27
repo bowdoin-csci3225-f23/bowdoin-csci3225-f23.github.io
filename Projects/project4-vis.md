@@ -42,6 +42,8 @@ will compute the viewshed of point (r=1000, c=1000), standing 10 above ground le
 
 To start you can use any of the datasets  from previous projects.  
 
+Test datasets: You can download the datasets [here](https://tildesites.bowdoin.edu/~ltoma/teaching/DEM/)
+
 Eventually you will run your code on Mt. Rainier,  which you can download directly from [OpenTopography](https://portal.opentopography.org/datasetMetadata?otCollectionID=OT.072023.26910.2). I have downloaded a dataset  which I'll share with all of you so that we can compare results.  It has _ncols=26765_ and _nrows=24286_, at below 1m resolution, for a total _n = 650M_ points. 
 
 ![](p4-rainier-color-over-hillshade-small.png)
