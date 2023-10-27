@@ -4,7 +4,7 @@ title: --Project 4 (Visibility)
 nav_order: 12
 ---
 
-[IN PROGRESS] 
+[mostly done, a few more edits and pics to be added] 
 
 ## Project 4:  Visibility on Terrains  
 
