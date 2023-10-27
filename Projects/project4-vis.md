@@ -149,7 +149,20 @@ A new piece in this project will be working with a large dataset.  The Mt. Raini
 
 Obviously, you do not want to test your code on this large dataset until it works smoothly on the smaller sets. 
 
-But keep this in mind  as you  design and write your code. Be aware of the memory footprint of your code (how much RAM is used at any given point).  The elevation grid and the viewshed grid will both have to be  in memory, theres no way around that.  That will be 5.2GB of RAM.  If your code uses a hillshade grid, that's 2.6GB more.   In this case, you will want to create the hillshade grid and the hillshade bitmap __before__ you create the visibilty grid. The hillshade grid can be deleted once you created the pixel buffer. 
+But keep this in mind  as you  design and write your code. Be aware of the memory footprint of your code (how much RAM is used at any given point).  The elevation grid and the viewshed grid will both have to be  in memory.  That will be 5.2GB of RAM.  If your code uses a hillshade grid, that's 2.6GB more.   In this case, you will want to create the hillshade grid and the hillshade bitmap __before__ you create the visibilty grid. The hillshade grid can be deleted once you created the pixel buffer. 
+
+In addition to the elevation and viewshed grids, you will also need two pixel buffers, which are also large. The pixel buffers are needed before and after the viewshed computation, and  the operating system  will figure this out and page them out into virtual memory if necessary. 
+
+So the main thing  is to be aware of the memory footprint of your code, the size of the RAM on your laptop, and  delete a grid and a buffer as soon as you don't need it. 
+
+
+When your code needs to work with large datasets, hundreds of millions pf points, small variations in how you will have a large impact. One extra instruction, if executed 600 million times, will add a few extra seconds to your code.   
+
+
+### Fastest code award 
+
+We will have a tournament and prizes! Stay tuned. 
+
 
 
 
