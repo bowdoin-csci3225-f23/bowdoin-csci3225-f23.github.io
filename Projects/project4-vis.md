@@ -66,7 +66,7 @@ For this project you will implement the first algorithm: given a viewpoint _v_, 
 
 ### Overview
 
-The structure of the code is fairly simple.  You will start by reading the command line arguments and then printing them.  
+The structure of the code is fairly simple.  You will start by reading the command line arguments (and printing them).  
 
 ```
 (base) ltoma@XVR66RXWMT code % ./vis -e ~/DEMs/set1-30m.asc -r 100 -c 100 -v vis.asc 
@@ -76,9 +76,9 @@ running with arguments:
 	vp=(100, 100, 0.0)
 ```
 
-Then you will read the elevation gri,  print some basic information about it (grid.c has a function to do this), and create a hillshade bitmap (note:  my Mt. Rainier hillshade looked reversed, which is either because something is reverted in my code, or it is a visual effect. In any case,  I generated a gradient colormap on the hillshade which looks better).
+Then you will read the elevation gri,  print some basic information about it (grid.c has a function to do this), and create a hillshade bitmap (note:  my Mt. Rainier hillshade looked reversed, which is either because something is reverted in my code, or it is a visual effect. In any case,  I generated a gradient colormap on the hillshade which looked better).
 
-The main part of the project is to compute the viewshed grid from the given viewpoint and then create a bitmap overlayed on the hillshade of the terrain. You will save the viewshed  grid to disk (grid.c has a function to do that) and free the memory for the grids and the pixel buffers.
+You will create and initialize a viewshed grid, compute the viewshed,  create a bitmap overlayed on the hillshade of the terrain and save the viewshed  grid to disk (grid.c has a function to do that). Finally you will free the memory for the grids and the pixel buffers.
 ```
 compute_viewshed_grid(elev_grid, vis_grid, vr, vc, vh);
 // create bitmap "map.vis-over-hillshade.bmp"
@@ -146,30 +146,28 @@ You will spend most of your time writing the ```is_point_visible(..)``` function
 
 A new piece in this project will be working with a large dataset.  The Mt. Rainier dataset has a little over 650 million points and the ascii file _mtrainier.asc_ uses 11GB of disk space.  When you load it as a grid in memory, which stores  elevation as a _float_,  the elevation grid will occupy 4 x 650M = 2.6GB of memory.  This is large!   (Obviously, you do not want to test your code on this large dataset until it works smoothly on the smaller sets.) 
 
-The running time of your algorithm will depend on its CPU efficiency and main memory efficiency. 
+The theoretical complexity of the viewshed algorithm is $O(n \sqrt n)$. This is evaluated as the total number of instructions executed by the algorithm  and is expressed using asymptotic notation,  which hides all the constants in the running time. Algorithms that are in the same class of asymptotic complexity  are considered equivalent asymptotically.  There are two reasons for doing this: 
 
-__CPU efficiency:__  When we say that an algorithm is linear, what we mean is that its CPU or computation efficiency is linear.  This is the standard default measure of efficiency, and its evaluated as the total number of instructions exxecuted by the algorithm  assuming: 
-1. all data fits in memory
-2. all memory accesses take the same amount of time
-3. and all instructions are equal.
-The CPU efficiency is evaluated using asymptotic notation,  which hides all the constants in the running time. Algorithms that are in the same class of asymptotic complexity  are considered equivalent asymptotically.  There are two reasons for doing this: 
-1. Counting instructions and assuming all instructions are equal  --- this is not accurate anywayys
-2. It places the emphasis on optimizing the code  first at al algorithmic  level, which should always be the first step. 
+* Counting instructions while assuming all instructions are equal  means the constants are not accurate 
+* It places the emphasis on optimizing at algorithmic level, while ignoring the constants, which should always be the first step. 
 
-When your code needs to work with large datasets, hundreds of millions pf points, small variations in th enumbr and type of instructions will have a large impact in the running time. One more expensive instruction, if executed 600 million times, will add extra time to your code.   
+The theoretical complexity of an algorithm  assumes that: 
+* all data fits in memory
+* all memory accesses take the same amount of time
+* all instructions take the same amount of time.
 
-The first rule of optimization is: __don't optimize yet__.  Only start optimizing once your code is fully debugged and works flawlessly.  Do not worry about small things, the compiler will optimize the code for you (note the -O3 flag in the Makefile means you ask the compiler to optimize as much as it can). 
+In practice, these assumptions are not completely accurate and the running time will also depend on the type of instructions executed (some instructions are slower) and on the number and type of memory accesses.
 
-Be aware of the expensive instructions vs cheap instrictions.  Multiplying or dividing by two, addition, increment --- all these are instructions that run in a few clock cycles or machine instructions.  Instructions like division and multiplications are more expensive. And library functions like computing trigonometric functions, arc tangents, and so one take 100 cycles or so.  If we can avoid using these the code will get a big speed up.  
+__Instructions are not all equal:__  When your code needs to work with large datasets, small variations in the number and type of instructions will have a large impact on the running time. One more expensive instruction, if executed 600 million times, will add significant extra time to your code.   Be aware of the expensive instructions vs cheap instrictions.  Multiplying or dividing by two, addition, increment --- all these are instructions that run in a few clock cycles or machine instructions.  Instructions like division and multiplications are more expensive. And library functions like computing trigonometric functions, arc tangents, and so one take 100 cycles or so.  If we can avoid using these the code will get a big speed up.  
 
-Extra challenge: If you want to learn more about code optimization, check out using a profiler tool, which will give you exact statistics on how many times each function in the code is called and what percentage of the running time it make up for. You do not want to optimize a function that makes up for a small percentage of teh running time.  You will want to focus your efforts on the function that has most impact on the running time. 
+Extra challenge: If you want to dig more into code optimization, check out using a  profiler tool, which will give you exact statistics on how many times each function in the code is called and what percentage of the running time it makes up for. The rule of thumb is that you do not want to optimize a function that makes up for a small percentage of the running time.  You will want to focus your efforts on the function that has most impact on the running time. 
 
-
-__Main memory efficiency:__  Be aware of the memory footprint of your code (how much RAM is used at any given point).  The elevation grid and the viewshed grid will both have to be in memory, which will be around 5.2GB of RAM.  If your code uses a hillshade grid, that's 2.6GB more.   In this case, plan it so that the hillshade and teh viewshed grid do not exist at the same time, i.e.  create the hillshade grid and the hillshade bitmap and then delete the hillshade grid, __before__ you create the visibilty grid (not that the hillshade grid can be deleted once you copied it into the pixel buffer). 
+__Memory efficiency:__   Data is stored in a hirarchy of caches, and the difference in speed between accessing data in cache versus main memory versus extenal memory can be several orders of magnitude.  Be aware of the memory footprint of your code (how much RAM is used at any given point).  The elevation grid and the viewshed grid will both have to be in memory, which will be around 5.2GB of RAM.  If your code uses a hillshade grid, that's 2.6GB more.   In this case, plan it so that the hillshade and teh viewshed grid do not exist at the same time, i.e.  create the hillshade grid and the hillshade bitmap and then delete the hillshade grid, __before__ you create the visibilty grid (not that the hillshade grid can be deleted once you copied it into the pixel buffer). 
 
 In addition to the elevation and viewshed grids, you will also need two pixel buffers, which are also large. The pixel buffers are needed before and after the viewshed computation, and  the operating system  will figure this out and page them out into virtual memory if necessary. 
 
 So the main thing  is to be aware of the main memory (RAM) footprint of your code especially as compared to  the size of the main memory on your laptop. If for other project you did not worry about freeing memory, for this one you will want to delete a grid and a buffer as soon as you don't need them.
+
 
 
 ### Fastest code award 
