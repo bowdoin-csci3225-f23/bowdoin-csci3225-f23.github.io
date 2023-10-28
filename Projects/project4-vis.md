@@ -202,6 +202,27 @@ Enjoy!
 
 ## Results 
 
+![](p4-set1.png)
+
+set1 viewshed size: 
+
+```
+Set1 vp=(250, 250)
+h=0:   viewshed size=11978
+h=10:  viewshed size=14486
+h=50:  viewshed size=25327
+h=200: viewshed size=52570
+```
+
+![](p4-southport.png)
+
+Southport viewshed sizes: 
+```
+southport vp=(1000, 1000)
+e=0:  viewshed size=555941
+e=10: viewshed size=1059023
+e=50: viewshed size=3669179
+```
 
 
 
