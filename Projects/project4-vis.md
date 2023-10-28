@@ -11,7 +11,7 @@ nav_order: 12
 
 *** 
 * __Assigned:__ Saturday, October 28
-* __Due:__ Wednesday  November 1st 
+* __Due:__ Wednesday  November 8th 
 * Group policy: Partner-optional
 
 ***
