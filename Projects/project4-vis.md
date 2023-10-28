@@ -146,21 +146,19 @@ You will spend most of your time writing the ```is_point_visible(..)``` function
 
 A new piece in this project will be working with a large dataset.  The Mt. Rainier dataset has a little over 650 million points and the ascii file _mtrainier.asc_ uses 11GB of disk space.  When you load it as a grid in memory, which stores  elevation as a _float_,  the elevation grid will occupy 4 x 650M = 2.6GB of memory.  This is large!   (Obviously, you do not want to test your code on this large dataset until it works smoothly on the smaller sets.) 
 
-The theoretical complexity of the viewshed algorithm is $O(n \sqrt n)$. This is evaluated as the total number of instructions executed by the algorithm  and is expressed using asymptotic notation,  which hides all the constants in the running time. Algorithms that are in the same class of asymptotic complexity  are considered equivalent asymptotically.  There are two reasons for doing this: 
-
-* Counting instructions while assuming all instructions are equal  means the constants are not accurate 
-* It places the emphasis on optimizing at algorithmic level, while ignoring the constants, which should always be the first step. 
-
-The theoretical complexity of an algorithm  assumes that: 
+The theoretical complexity of the viewshed algorithm is $O(n \sqrt n)$. This is evaluated as the total number of instructions executed by the algorithm assuming that: 
 * all data fits in memory
 * all memory accesses take the same amount of time
 * all instructions take the same amount of time.
+
+Theoretical complexity  is expressed using asymptotic notation,  which hides all the constants in the running time. 
+Algorithms that are in the same class of asymptotic complexity  are considered equivalent.  There are two reasons for doing this: First, counting instructions while assuming all instructions are equal  means the constants are not accurate anyways. Second, by ignoring the constants the emphasis is placed on optimizing at the algorithmic level first,  which should always be the first step. 
 
 In practice, these assumptions are not completely accurate and the running time will also depend on the type of instructions executed (some instructions are slower) and on the number and type of memory accesses.
 
 __Instructions are not all equal:__  When your code needs to work with large datasets, small variations in the number and type of instructions will have a large impact on the running time. One more expensive instruction, if executed 600 million times, will add significant extra time to your code.   Be aware of the expensive instructions vs cheap instrictions.  Multiplying or dividing by two, addition, increment --- all these are instructions that run in a few clock cycles or machine instructions.  Instructions like division and multiplications are more expensive. And library functions like computing trigonometric functions, arc tangents, and so one take 100 cycles or so.  If we can avoid using these the code will get a big speed up.  
 
-Extra challenge: If you want to dig more into code optimization, check out using a  profiler tool, which will give you exact statistics on how many times each function in the code is called and what percentage of the running time it makes up for. The rule of thumb is that you do not want to optimize a function that makes up for a small percentage of the running time.  You will want to focus your efforts on the function that has most impact on the running time. 
+Extra challenge: If you want to dig more into code optimization, check out using a profiler tool, which will give you exact statistics on how many times each function in the code is called and what percentage of the running time it makes up for. The rule of thumb is that you do not want to optimize a function that makes up for a small percentage of the total running time.  You will want to focus your efforts on the function that has most impact on the running time. 
 
 __Memory efficiency:__   Data is stored in a hirarchy of caches, and the difference in speed between accessing data in cache versus main memory versus extenal memory can be several orders of magnitude.  Be aware of the memory footprint of your code (how much RAM is used at any given point).  The elevation grid and the viewshed grid will both have to be in memory, which will be around 5.2GB of RAM.  If your code uses a hillshade grid, that's 2.6GB more.   In this case, plan it so that the hillshade and teh viewshed grid do not exist at the same time, i.e.  create the hillshade grid and the hillshade bitmap and then delete the hillshade grid, __before__ you create the visibilty grid (not that the hillshade grid can be deleted once you copied it into the pixel buffer). 
 
