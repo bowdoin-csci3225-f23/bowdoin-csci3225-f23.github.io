@@ -170,7 +170,7 @@ So the main thing  is to be aware of the main memory (RAM) footprint of your cod
 
 ### Fastest code award 
 
-We will have a tournament and prizes! Stay tuned. 
+We will have prizes for the fastest code! Stay tuned for details.  
 
 ### The Report
 
