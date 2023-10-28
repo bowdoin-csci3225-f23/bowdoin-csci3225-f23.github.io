@@ -23,3 +23,7 @@ nav_order: 5
 | Thu 10/12 | Viewsheds (2)  | | 
 |Tue 10/17 | Viewsheds (3) | |
 |Thu 10/19 | Line simplification algorithms | |
+| Tue 10/24 | Terrain simplification algorithms | | 
+| Thu 10/26 | _class cancelled - work on project 3_ | | 
+| Tue 10/31 | Terrain simplification | | 
+| Thu 11/2  |  | | 
