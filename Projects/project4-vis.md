@@ -179,17 +179,10 @@ We will have a tournament and prizes! Stay tuned.
 You will write a report showcasing your work including:
 
 1. The dataset you used, location, number of rows and columns, resolution and provenance.
-    
 1. Results. Run your code with set1.asc and YOUR_DATASET.asc on a well chosen viewpoint. 
-
-1. Maps. For each dataset create viewshed-over-hillshade bitmap. 
-    
-    Note that if the bitmaps are large you should NOT add them to the repository (github won’t let you anyways).
-
-   1. Bugs and extra features.
-
+1. Maps. For each dataset create viewshed-over-hillshade bitmap.  Note that if the bitmaps are large you should NOT add them to the repository (github won’t let you anyways).
+1. Bugs and extra features.
 1. Effort. Time you spent in: thinking, Programming; Testing; documenting; total.
-
 1. Reflection. Prompts: how challenging did you find this project? what did you learn by doing this project? What did you wish you did differently? If you worked as a team, how did that go? What would you like to explore further? — you don’t need to address all.
 
 
