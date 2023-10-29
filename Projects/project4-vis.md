@@ -18,7 +18,7 @@ nav_order: 12
 
 Have you ever wondered what would be the view from the top of  Mt. Rainier at 14,410 ft?  In this project you will (partially) answer this question, with several days of work and sweat over debugging, but without the strenous and difficult climb:   You will write code to compute the viewshed of an arbitrary  point on a terrain, download high resolution data for Mt. Rainier from OpenTopo, and use your code to compute viewsheds  of points that fall approximately on the top. 
 
-Some interesting facts from NASA (https://earthobservatory.nasa.gov/images/145548/mount-rainier)
+Some interesting facts from NASA about [Mt. Rainier](https://earthobservatory.nasa.gov/images/145548/mount-rainier).
 
 __Input:__ As input, your code will take the name of an elevation grid, the coordinates (r,c) of the viewpoint, the elevation of the viewpoint above the terrain, and the name of the viewshed grid to be created. 
 
