@@ -225,8 +225,8 @@ e=50: viewshed size=3669179
 ```
 
 
-For Mt. Rainier, it turns out it is not easy at all to find a spot on the rim of teh crater with good visibility of the surroundings. Inside the crater  all you can see is the crater.  Outside the crater there are deep valleys and the view is obstructed as well.  
-Looking for a point at the foothills of the mountain, with good visibility of the top crater is not easy either.  
+For Mt. Rainier, it turns out it is not easy at all to find a spot on the rim of the crater with good visibility of the surroundings. Inside the crater  all you can see is the crater.  Outside the crater there are deep valleys and the view is obstructed as well.  
+Looking for a point at the foothills of the mountain with good visibility of the top crater is not easy either.  
 
 Below are some of the attempts. Reading a grid in memory takes about 180 seconds, and computing the viewshed takes 30-40 seconds. 
 
@@ -234,6 +234,6 @@ Below are some of the attempts. Reading a grid in memory takes about 180 seconds
 
 ![](p4-rainier2.png)
 
-![](p4-rainier3.png)![](p4-rainier4.png)
+![](p4-rainier5.png)
 
 
