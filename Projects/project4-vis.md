@@ -4,8 +4,6 @@ title: --Project 4 (Visibility)
 nav_order: 12
 ---
 
-[need to add mtrainier results] 
-
 ## Project 4:  Visibility on Terrains  
 
 
