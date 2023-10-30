@@ -122,20 +122,24 @@ This function is where you'll spend most of your time.
 
 ### Structure of your code 
 
-In order to work with grids and pixel buffers you will use the same files as before: 
+To work with grids and pixel buffers you will use the same files as before: 
 
-    stb_image_write.h
-    pixel_buffer.h, pixel_buffer.c
-    grid.h, grid.c
+* stb_image_write.h
+* pixel_buffer.h, pixel_buffer.c
+* grid.h, grid.c
 
 From the previous project you’ll use:
 
-    map.h, map.c: Need to include grid.h and pixel_buffer.h. All functions to create bitmaps from grids are here.  If you want to create a separate function to visualize a viewshed grid, you will  add it here. 
+* map.h, map.c: Need to include grid.h and pixel_buffer.h. All functions to create bitmaps from grids are here.  
+    	If you want to create a separate function to visualize a viewshed grid, you will  add it here. 
 
 You’ll create the following additional files:
 
-    vis.hpp, vis.cpp: Need to include grid.h. All the functions to compute the viewshed are here. The main functions that you need to implement are in the header, but you will need to add more helper functions.
-    vismain.c: The main() function is here. Read command line arguments from the user, create the viewshed grid,  and create the bitmaps. Includes grid.h, map.h, vis.hpp.
+* vis.hpp, vis.cpp: Need to include grid.h. All the functions to compute the viewshed are here. 
+          The main functions that you need to implement are in the header, but you will need to add more helper functions.
+   
+* vismain.c: The main() function is here. Read command line arguments from the user, create the viewshed grid,  
+          and create the bitmaps. Includes grid.h, map.h, vis.hpp.
 
 Once you accept the code on github classroom, a good place to start is writing your ```main()``` in ```vismain.c```:  read the command line arguments, read the elevation grid and create the hillshade map, create the viewshed grid and compute it. As you get things to compile, start with an empty ```compute_viewshed_grid()```function, and then gradually add the code in, one small piece at a time. 
 
@@ -160,11 +164,9 @@ __Instructions are not all equal:__  When your code needs to work with large dat
 
 Extra challenge: If you want to dig more into code optimization, check out using a profiler tool, which will give you exact statistics on how many times each function in the code is called and what percentage of the running time it makes up for. The rule of thumb is that you do not want to optimize a function that makes up for a small percentage of the total running time.  You will want to focus your efforts on the function that has most impact on the running time. 
 
-__Memory efficiency:__   Data is stored in a hirarchy of caches, and the difference in speed between accessing data in cache versus main memory versus extenal memory can be several orders of magnitude.  Be aware of the memory footprint of your code (how much RAM is used at any given point).  The elevation grid and the viewshed grid will both have to be in memory, which will be around 5.2GB of RAM.  If your code uses a hillshade grid, that's 2.6GB more.   In this case, plan it so that the hillshade and teh viewshed grid do not exist at the same time, i.e.  create the hillshade grid and the hillshade bitmap and then delete the hillshade grid, __before__ you create the visibilty grid (not that the hillshade grid can be deleted once you copied it into the pixel buffer). 
+__Memory efficiency:__   Data is stored in a hirarchy of caches, and the difference in speed between accessing data in cache versus main memory versus extenal memory can be several orders of magnitude.  Be aware of the memory footprint of your code (how much RAM it uses at any given time).  The elevation grid and the viewshed grid will both have to be in memory, which will be around 5.2GB of RAM.  If your code uses a hillshade grid, that's 2.6GB more.   In this case, plan it so that the hillshade and the viewshed grid do not exist at the same time, i.e.  create the hillshade grid and the hillshade bitmap and then delete the hillshade grid, __before__ you create the visibilty grid (not that the hillshade grid can be deleted once you copied it into the pixel buffer).   In addition to the elevation and viewshed grids, you will also need two pixel buffers, which are also large. 
 
-In addition to the elevation and viewshed grids, you will also need two pixel buffers, which are also large. The pixel buffers are needed before and after the viewshed computation, and  the operating system  will figure this out and page them out into virtual memory if necessary. 
-
-So the main thing  is to be aware of the main memory (RAM) footprint of your code especially as compared to  the size of the main memory on your laptop. If for other project you did not worry about freeing memory, for this one you will want to delete a grid and a buffer as soon as you don't need them.
+So the main thing  is to be aware of the main memory (RAM) footprint of your code especially as compared to  the size of the main memory on your laptop. If for other project you did not worry about freeing memory, for this one you will want to delete a grid and a buffer as soon as you don't need them. If the memory footprint is larger than the available RAM, the system will place the data onto external memory, which will be 2-3 orders of magnitude slower to access than main  memory. 
 
 
 
