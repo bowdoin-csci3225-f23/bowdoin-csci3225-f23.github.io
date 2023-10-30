@@ -178,8 +178,12 @@ There will be prizes for the fastest code! Stay tuned for details.
 
 You will write a report showcasing your work including:
 
-1. The dataset you used, location, number of rows and columns, resolution and provenance.
-1. Results. Run your code with set1.asc and YOUR_DATASET.asc on a well chosen viewpoint. 
+1. The dataset(s) you used, location, number of rows and columns, resolution and provenance.
+1. Results.
+    * Run your code with set1.asc vp=(250,250), h=0, 10, 50, 100.
+    * Run your code on southport.asc, vp=(1000,1000)
+    * Run your code on MtRainier on one of the viewpoints in the figure below
+    * Run  your code on YOUR_DATASET.asc on a well chosen viewpoint.
 1. Maps. For each dataset create viewshed-over-hillshade bitmap.  Note that if the bitmaps are large you should NOT add them to the repository (github won’t let you anyways).
 1. Bugs and extra features.
 1. Effort. Time you spent in: thinking, Programming; Testing; documenting; total.
