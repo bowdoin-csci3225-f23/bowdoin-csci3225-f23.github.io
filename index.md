@@ -39,7 +39,7 @@ From a computer science perspective, GIS and geospatial data provide a
 rich source of algorithmic problems. Furthermore these problems require efficient solutions
 that work well in practice and scale up to large data.
 
-This class explores algorithmic problems in GIS. Topics include
+This class explores algorithmic problems in GIS. Topics will be selected from: 
 contour lines and contour trees, drainage, watersheds, flooding,
 modeling sea level rise, visibility, line simplification and surface
 simplification, LiDAR data, Delaunay traingulations, Voronoi diagrams,
