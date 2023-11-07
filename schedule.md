@@ -27,5 +27,5 @@ nav_order: 5
 | Thu 10/26 | _class cancelled - work on project 3_ | | 
 | Tue 10/31 | Terrain simplification | | 
 | Thu 11/2  | Space filling curves | | 
-| Tue 11/7  | Space filling curves. | [Lab(OpenMP) 1 ](https://bowdoin-csci3225-f23.github.io/Labs/openmp/lab1/) | 
+| Tue 11/7  | Space filling curves. | [Lab 1 (OpenMP)](https://bowdoin-csci3225-f23.github.io/Labs/openmp/lab1/) | 
 | Thu 11/9  | OpenMP. | |   
