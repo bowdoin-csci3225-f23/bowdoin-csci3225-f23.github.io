@@ -1,6 +1,6 @@
 ---
 layout: default 
-title: --Lab: OpenMP
+title: --Lab:OpenMP
 nav_order: 29
 ---
 
