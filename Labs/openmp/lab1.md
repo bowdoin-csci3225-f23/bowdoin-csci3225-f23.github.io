@@ -58,6 +58,8 @@ Overall the advantage of OpenMP is a good trade-off between simplicity of use an
 
 ### Hello world with OpenMP threads
 
+The OpenMP functions are included in a header file called ```omp.h```, which you need to include at the top of your code. 
+ 
 OpenMP lets you specify which region of your code you want to run in parallel. 
 To specify a region that is to be run in parallel you use a pragma block:  The basic directive is:
 
@@ -71,7 +73,7 @@ To specify a region that is to be run in parallel you use a pragma block:  The b
 When the master thread reaches this line, it forks additional threads to carry out the work enclosed in the block following the #pragma construct. The block is executed by all threads in parallel. The original thread will be denoted as master thread with thread-id 0.
 
 
-Example, let's have multiple threads write  "Hello, world" in parallel.  Let's create the following file, and save it as ```hellosmp.c```.   The OpenMP functions are included in a header file called ```omp.h```.
+_hellosmp.c:_  We'll have multiple threads write  "Hello, world" in parallel.  Let's create the following file, and save it as ```hellosmp.c```.  
 
 ```
 #include < stdio.h >
