@@ -67,7 +67,7 @@ It's also pretty easy to get OpenMP to work on a Mac. A quick search with google
 
 ```gcc -fopenmp hellosmp.c  -o  hellosmp```
 
-If you get an error message saying that ``openmp``` is unknown, that means your compiler does not have ```openmp`` support.
+If you get an error message like so, that means your compiler does not have ```openmp``` support.
 
 ```
 hellosmp.c:12:10: fatal error: 'omp.h' file not found
