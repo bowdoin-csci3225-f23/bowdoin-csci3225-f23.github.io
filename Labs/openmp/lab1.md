@@ -118,6 +118,7 @@ Example (C program): Display "Hello, world" using multiple threads.
 
 ```
 #include < stdio.h >
+#include <omp.h>
 
 int main(void)
 {
