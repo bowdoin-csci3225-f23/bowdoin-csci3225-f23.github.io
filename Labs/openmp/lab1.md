@@ -57,17 +57,51 @@ OpenMP has directives that allow the programmer to:
   * specify how the works is divided between threads (scheduling) 
 
 
+### Hello world with OpenMP threads
+
+OpenMP lets you specify which region of your code you want to run in parallel. 
+To specify a region that is to be run in parallel you use a pragma block:  The basic directive is:
+
+```
+#pragma omp parallel 
+{
+
+
+}
+```
+
+When the master thread reaches this line, it forks additional threads to carry out the work enclosed in the block following the #pragma construct. The block is executed by all threads in parallel. The original thread will be denoted as master thread with thread-id 0.
+
+
+Example, let's have multiple threads write  "Hello, world" in parallel.  Let's create the following file, and save it as ```hellosmp.c```.   The OpenMP functions are included in a header file called ```omp.h```.
+
+```
+#include < stdio.h >
+#include <omp.h>
+
+int main(void)
+{
+    #pragma omp parallel
+    {
+    printf("Hello, world.\n");
+    }
+
+  return 0;
+}
+```
+
+
 ### Compiling and running OpenMP code
 
-The OpenMP functions are included in a header file called omp.h . The public linux machines dover and foxcroft have gcc/g++ installed with OpenMP support. All you need to do is use the -fopenmp flag on the command line:
+The public linux machines dover and foxcroft have gcc/g++ installed with OpenMP support. All you need to do is use the _-fopenmp_ flag on the command line:
 
 ```gcc -fopenmp hellosmp.c  -o  hellosmp```
 
-It's also pretty easy to get OpenMP to work on a Mac. A quick search with google reveals that the native apple compiler clang is installed without openmp support. When you installed gcc it probably got installed without openmp support. To test, go to the terminal and try to compile something:
+OpenMP on a Mac:  When you type _gcc_ this is linked to _clang_, the native apple compiler, which  is installed without _openmp_ support.  To test, go to the terminal and try to compile something:
 
 ```gcc -fopenmp hellosmp.c  -o  hellosmp```
 
-If you get an error message like so, that means your compiler does not have ```openmp``` support.
+If you get an error message like so, that means your compiler does not have openMP support.
 
 ```
 hellosmp.c:12:10: fatal error: 'omp.h' file not found
@@ -99,39 +133,6 @@ gcc            gcc-13         gcc-ar-13      gcc-nm-13      gcc-ranlib-13
 
 Works!
 
-
-
-### Specifying the parallel region (creating threads)
-
-The basic directive is:
-
-```
-#pragma omp parallel 
-{
-
-
-}
-```
-
-When the master thread reaches this line, it forks additional threads to carry out the work enclosed in the block following the #pragma construct. The block is executed by all threads in parallel. The original thread will be denoted as master thread with thread-id 0.
-
-
-Example (C program): Display "Hello, world" using multiple threads.
-
-```
-#include < stdio.h >
-#include <omp.h>
-
-int main(void)
-{
-    #pragma omp parallel
-    {
-    printf("Hello, world.\n");
-    }
-
-  return 0;
-}
-```
 
 Use flag -fopenmp to compile using gcc:
 
