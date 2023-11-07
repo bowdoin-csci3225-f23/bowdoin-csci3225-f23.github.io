@@ -129,7 +129,7 @@ gcc            gcc-13         gcc-ar-13      gcc-nm-13      gcc-ranlib-13
 ```
 4. The guess here is that gcc-13 is the latest version, so I use it to compile:
 
-```gcc-13  -fopenmp hellosmp.c ```
+```gcc-13  -fopenmp hellosmp.c -o hellosmp```
 
 Works!
 
