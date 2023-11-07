@@ -89,12 +89,12 @@ Here's what I did:
 
 3. Then type ```gcc``` and press tab; it will complete with all the versions of gcc installed:
 
-```$gcc
-gcc           gcc-6         gcc-ar-6      gcc-nm-6      gcc-ranlib-6  gccmakedep    
+```(base) ltoma@XVR66RXWMT openMP % gcc
+gcc            gcc-13         gcc-ar-13      gcc-nm-13      gcc-ranlib-13
 ```
-4. The obvious guess here is that gcc-6 is the latest version, so I use it to compile:
+4. The guess here is that gcc-13 is the latest version, so I use it to compile:
 
-```gcc-6  -fopenmp hellosmp.c ```
+```gcc-13  -fopenmp hellosmp.c ```
 
 Works!
 
