@@ -69,7 +69,8 @@ It's also pretty easy to get OpenMP to work on a Mac. A quick search with google
 
 If you get an error message saying that ``openmp``` is unknown, that means your compiler does not have ```openmp`` support.
 
-```hellosmp.c:12:10: fatal error: 'omp.h' file not found
+```
+hellosmp.c:12:10: fatal error: 'omp.h' file not found
 #include 
          ^
 1 error generated.
