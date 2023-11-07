@@ -36,7 +36,7 @@ Other useful materials:
 
 OpenMP is a library for parallel programming in the SMP (symmetric multi-processors, or shared-memory processors) model. When programming with OpenMP, all threads share memory and data. OpenMP supports C, C++ and Fortran. The OpenMP functions are included in a header file called ```omp.h```.
 
-__OpenMP program structure:__ An OpenMP program has sections that are sequential and sections that are parallel. In general an OpenMP program starts with a sequential section in which it sets up the environment, initializes the variables, and so on.
+Program structure: An OpenMP program has sections that are sequential and sections that are parallel. In general an OpenMP program starts with a sequential section in which it sets up the environment, initializes the variables, and so on.
 
 When run, an OpenMP program will use one thread (in the sequential sections), and several threads (in the parallel sections).
 
@@ -46,15 +46,14 @@ A section of code that is to be executed in parallel is marked by a special dire
 
 Each thread has an ID attached to it that can be obtained using a runtime library function (called```omp_get_thread_num()```). The ID of the master thread is 0.
 
-__Why OpenMP?__ More efficient, and lower-level parallel code is possible, however OpenMP hides the low-level details and allows the programmer to describe the parallel code with high-level constructs, which is as simple as it can get.
+When specifying a parallel region, we'll also: 
+* specify whether the variables in the parallel section are private or shared
+* specify how/if the threads are synchronized
+* specify how to parallelize loops
+* specify how the works is divided between threads (scheduling) 
 
-OpenMP has directives that allow the programmer to:
+Overall the advantage of OpenMP is a good trade-off between simplicity of use and efficiency: it  hides the low-level details and allows the programmer to describe the parallel code with high-level constructs. There are other, more efficient and more general parallel libraries and lower-level parallel code is possible (e.g. OpenMPI). 
 
-  * specify the parallel region
-  * specify whether the variables in the parallel section are private or shared
-  * specify how/if the threads are synchronized
-  *  specify how to parallelize loops
-  * specify how the works is divided between threads (scheduling) 
 
 
 ### Hello world with OpenMP threads
@@ -65,7 +64,6 @@ To specify a region that is to be run in parallel you use a pragma block:  The b
 ```
 #pragma omp parallel 
 {
-
 
 }
 ```
