@@ -78,7 +78,7 @@ make: *** [hellosmp.o] Error 1
 
 Here's what I did:
 
-1. I installed Homebrew, the missing package manager for MacOS, http://brew.sh/index.html
+1. I installed [Homebrew](http://brew.sh/index.html)
 
 ```/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```
 
