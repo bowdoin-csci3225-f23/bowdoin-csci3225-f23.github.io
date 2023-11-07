@@ -8,7 +8,7 @@ nav_order: 29
 ## Lab: Programming with OpenMP 
 
 
-We'll use the OpenMP hands-on tutorial by Tim Mattson from Intel, available on YouTube [here](https://www.youtube.com/watch?v=6jFkNjhJ-Z4&list=PLLX-Q6B8xqZ8n8bwjGdzBJ25X2utwnoEG&index=3). You'll need to go through the first 10 videos (modules 1 through 5)
+We'll use the OpenMP  tutorial by Tim Mattson from Intel, available on YouTube [here](https://www.youtube.com/watch?v=6jFkNjhJ-Z4&list=PLLX-Q6B8xqZ8n8bwjGdzBJ25X2utwnoEG&index=3). You'll need to go through the first 10 videos (modules 1 through 5)
 
 *  01: intro (4.5 min)
 *  02: part 1 (8 min) Module 1
@@ -34,9 +34,9 @@ Other useful materials:
 ### OpenMP in a nutshell
 
 
-OpenMP is a library for parallel programming in the SMP (symmetric multi-processors, or shared-memory processors) model. When programming with OpenMP, all threads share memory and data. OpenMP supports C, C++ and Fortran. The OpenMP functions are included in a header file called omp.h .
+OpenMP is a library for parallel programming in the SMP (symmetric multi-processors, or shared-memory processors) model. When programming with OpenMP, all threads share memory and data. OpenMP supports C, C++ and Fortran. The OpenMP functions are included in a header file called ```omp.h```.
 
-OpenMP program structure: An OpenMP program has sections that are sequential and sections that are parallel. In general an OpenMP program starts with a sequential section in which it sets up the environment, initializes the variables, and so on.
+__OpenMP program structure:__ An OpenMP program has sections that are sequential and sections that are parallel. In general an OpenMP program starts with a sequential section in which it sets up the environment, initializes the variables, and so on.
 
 When run, an OpenMP program will use one thread (in the sequential sections), and several threads (in the parallel sections).
 
@@ -44,17 +44,17 @@ There is one thread that runs from the beginning to the end, and it's called the
 
 A section of code that is to be executed in parallel is marked by a special directive ```omp pragma```. When the execution reaches a parallel section (marked by omp pragma), this directive will cause slave threads to form. Each thread executes the parallel section of the code independently. When a thread finishes, it joins the master. When all threads finish, the master continues with code following the parallel section.
 
-Each thread has an ID attached to it that can be obtained using a runtime library function (called omp_get_thread_num()). The ID of the master thread is 0.
+Each thread has an ID attached to it that can be obtained using a runtime library function (called```omp_get_thread_num()```). The ID of the master thread is 0.
 
-Why OpenMP? More efficient, and lower-level parallel code is possible, however OpenMP hides the low-level details and allows the programmer to describe the parallel code with high-level constructs, which is as simple as it can get.
+__Why OpenMP?__ More efficient, and lower-level parallel code is possible, however OpenMP hides the low-level details and allows the programmer to describe the parallel code with high-level constructs, which is as simple as it can get.
 
 OpenMP has directives that allow the programmer to:
 
-   * specify the parallel region
-   * specify whether the variables in the parallel section are private or shared
-   * specify how/if the threads are synchronized
-   *  specify how to parallelize loops
-   * specify how the works is divided between threads (scheduling) 
+  * specify the parallel region
+  * specify whether the variables in the parallel section are private or shared
+  * specify how/if the threads are synchronized
+  *  specify how to parallelize loops
+  * specify how the works is divided between threads (scheduling) 
 
 
 ### Compiling and running OpenMP code
@@ -98,6 +98,7 @@ gcc           gcc-6         gcc-ar-6      gcc-nm-6      gcc-ranlib-6  gccmakedep
 Works!
 
 
+
 ### Specifying the parallel region (creating threads)
 
 The basic directive is:
@@ -113,7 +114,7 @@ The basic directive is:
 When the master thread reaches this line, it forks additional threads to carry out the work enclosed in the block following the #pragma construct. The block is executed by all threads in parallel. The original thread will be denoted as master thread with thread-id 0.
 
 
-Example (C program): Display "Hello, world." using multiple threads.
+Example (C program): Display "Hello, world" using multiple threads.
 
 ```
 #include < stdio.h >
@@ -128,6 +129,7 @@ int main(void)
   return 0;
 }
 ```
+
 Use flag -fopenmp to compile using gcc:
 
 ```
@@ -135,6 +137,7 @@ $ gcc -fopenmp hello.c -o hello
 ```
 
 Output on a computer with two cores, and thus two threads:
+
 ```
 Hello, world.
 Hello, world.
@@ -142,6 +145,7 @@ Hello, world.
 On dover, I got 24 hellos, for 24 threads. On my desktop I get (only) 8. How many do you get?
 
 Note that the threads are all writing to the standard output, and there is a race to share it. The way the threads are interleaved is completely arbitrary, and you can get garbled output:
+
 ```
 Hello, wHello, woorld.
 rld.
