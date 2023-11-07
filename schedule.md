@@ -28,4 +28,4 @@ nav_order: 5
 | Tue 10/31 | Terrain simplification | | 
 | Thu 11/2  | Space filling curves | | 
 | Tue 11/7  | Space filling curves. | [Lab OpenMP](https://bowdoin-csci3225-f23.github.io/Labs/openmp/lab1/) | 
-| Thu 11/9  | OpenMP. ||   
+| Thu 11/9  | OpenMP. | |   
