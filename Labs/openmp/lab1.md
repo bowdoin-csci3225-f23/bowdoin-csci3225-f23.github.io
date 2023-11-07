@@ -134,19 +134,19 @@ gcc            gcc-13         gcc-ar-13      gcc-nm-13      gcc-ranlib-13
 Works!
 
 
-Use flag -fopenmp to compile using gcc:
+Since we don't specify how many threads we want, we get OpenMP's default value (which seems to be  the number of cores on the machine).  On dover, I got 24 hellos, for 24 threads. On my desktop I get (only) 8. How many do you get?
 
-```
-$ gcc -fopenmp hello.c -o hello
-```
-
-Output on a computer with two cores, and thus two threads:
 
 ```
 Hello, world.
 Hello, world.
+Hello, world.
+Hello, world.
+Hello, world.
+Hello, world.
+Hello, world.
+Hello, world.
 ```
-On dover, I got 24 hellos, for 24 threads. On my desktop I get (only) 8. How many do you get?
 
 Note that the threads are all writing to the standard output, and there is a race to share it. The way the threads are interleaved is completely arbitrary, and you can get garbled output:
 
