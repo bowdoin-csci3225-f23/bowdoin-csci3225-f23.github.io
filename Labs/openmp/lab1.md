@@ -1,20 +1,20 @@
 ## Programming with OpenMP 
 
 
-  We'll use the OpenMP hands-on tutorial by Tim Mattson from Intel, available on YouTube [here](). 
- You'll need to go through the first 10 videos (modules 1 through 5)
-      *  01: intro (4.5 min)
-      *  02: part 1 (8 min) Module 1
-      *  02: part 2 (7 min) Module 1
-      *  03: Module 2 (5 min) compiling
-      *  04: Discussion 1 (10 min)
-      *  05: Module 3 (11.5 min) creating threads
-      *  06: Discussion 2 (11 min) the simple PI program in parallel
-      *  07: Module 4 (8 min) synchronization
-      *  08: Discussion 3 (5 min) overhead and eliminating false sharing
-      *  09: part 1 Module 5 (10 min) parallel loops
-      *  09: part 2 Module 5 (7 min) parallel loops
-       * 10: Discussion 4 (6.5 min) parallel PI program wrap -up 
+We'll use the OpenMP hands-on tutorial by Tim Mattson from Intel, available on YouTube [here](https://www.youtube.com/watch?v=6jFkNjhJ-Z4&list=PLLX-Q6B8xqZ8n8bwjGdzBJ25X2utwnoEG&index=3). You'll need to go through the first 10 videos (modules 1 through 5)
+
+*  01: intro (4.5 min)
+*  02: part 1 (8 min) Module 1
+*  02: part 2 (7 min) Module 1
+*  03: Module 2 (5 min) compiling
+*  04: Discussion 1 (10 min)
+*  05: Module 3 (11.5 min) creating threads
+*  06: Discussion 2 (11 min) the simple PI program in parallel
+*  07: Module 4 (8 min) synchronization
+*  08: Discussion 3 (5 min) overhead and eliminating false sharing
+*  09: part 1 Module 5 (10 min) parallel loops
+*  09: part 2 Module 5 (7 min) parallel loops
+* 10: Discussion 4 (6.5 min) parallel PI program wrap -up 
 
 Other useful materials:
 
