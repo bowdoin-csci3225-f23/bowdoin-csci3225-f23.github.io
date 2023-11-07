@@ -1,4 +1,11 @@
-## Programming with OpenMP 
+---
+layout: default 
+title: --OpenMP
+nav_order: 21
+---
+
+
+## Lab: Programming with OpenMP 
 
 
 We'll use the OpenMP hands-on tutorial by Tim Mattson from Intel, available on YouTube [here](https://www.youtube.com/watch?v=6jFkNjhJ-Z4&list=PLLX-Q6B8xqZ8n8bwjGdzBJ25X2utwnoEG&index=3). You'll need to go through the first 10 videos (modules 1 through 5)
