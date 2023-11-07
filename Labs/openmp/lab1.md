@@ -113,21 +113,22 @@ make: *** [hellosmp.o] Error 1
 
 Here's what I did:
 
-1. I installed [Homebrew](http://brew.sh/index.html)
+* I installed [Homebrew](http://brew.sh/index.html)
 
 ```/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```
 
-2. Then I asked brew to install gcc:
+* Then I asked brew to install gcc:
 
 ``` brew install gcc```
 
-3. Then type ```gcc``` and press tab; it will complete with all the versions of gcc installed:
+* Then type ```gcc``` and press tab; it will complete with all the versions of gcc installed:
 
 ```
 (base) ltoma@XVR66RXWMT openMP % gcc
 gcc            gcc-13         gcc-ar-13      gcc-nm-13      gcc-ranlib-13
 ```
-4. The guess here is that gcc-13 is the latest version, so I use it to compile:
+
+* The guess here is that gcc-13 is the latest version, so I use it to compile:
 
 ```gcc-13  -fopenmp hellosmp.c -o hellosmp```
 
