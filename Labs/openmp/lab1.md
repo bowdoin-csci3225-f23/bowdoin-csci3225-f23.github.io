@@ -156,4 +156,4 @@ Hello, wHello, woorld.
 rld.
 ```
 
-Understanding race conditions, how they can happen and how to avoid them, is at the core of parallel programming.  But more about that next time. 
+Understanding race conditions, how they can happen and how to avoid them, is at the core of parallel programming.  
