@@ -165,9 +165,8 @@ Write a report summarizing the findings. Include the following:
    * Did you parallelize anything else, and how/why/why not
 * Experimental evaluation of parallelizing the viewshed: 
    * Include a table showing for each dataset, the time takes to compute the viewshed with nb. of threads = 1, 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 30, 35, 40; and the speedup in each case, which is defined as $T_1/T_n$, the ratio between the time to run with one thread and the time to run with $n$ threads. Ideally we would hope to see the speedup grow linearly with the number of threads, but of course that rarely happens in practice  
-     
 *  If you parallelize any other parts of the code, include a table with the timing and  the speedup.
-*  Findings
+* Findings
 * Bugs and extra features.
 * Effort. Time you spent in: thinking, Programming; Testing; documenting; total.
 * Reflection. Prompts: how challenging did you find this project? what did you learn by doing this project? What did you wish you did differently? If you worked as a team, how did that go? What would you like to explore further? — you don’t need to address all.
