@@ -65,6 +65,12 @@ Let's list the components above  from most time-consuming to least time-consumin
 As we consider parallelization, __we want to start with the parts of the code that are the most time-consuming__ so that the impact of the parallelization is biggest.  In this case, it is the computation of the viewshed grid. 
 
 
+* For example, if the total compute time break down is 10% from function A (e.g. computing the viewshed), and 90% from function B (e.g. creating pixels buffers); if we speed up function A by a factor of two, the new runinng time will be T'=.1 x.5T + .9T = .95T, and  the overall  speedup  will be 1.05 (i.e. almost neglijable --- do not speed up the part of your code that accounts for 10% of your running time). 
+
+* For example, if the total compute time break down is 90% from function A  and 10% from function B, and  if we manage to speed up function A by a factor of two, the new runinng time will be T'=.9 x.5T + .1T = .55T, and  the overall  speedup will be 1.81.
+  
+
+
 
 ### Parallelizing computing the viewshed grid 
 
@@ -96,18 +102,31 @@ Once you finished parallelizing and testing the viewshed computation, you can mo
 
 
 
+
+### The experimental analysis
+
+Start by running your code  on your laptop: 
+
+* __Nb threads:__  1, 2, 3, 4 ...
+* __Datasets:__  _set1.asc, southport.asc, rainier.asc_ We want to be able to compare the times  so everyone should use the following viewpoints: 
+  *  set1.asc: vp = (250, 250, 10)
+  *  southport.asc: vp = (1000, 1000, 10)
+  *  rainier.asc: vp=(18900, 21500, 100) 
+* __Check correctness:__ For each test, make sure you check  the output to see it looks right (ie not scrambled).
+* __Check performance:__ For each test, write down the time for each piece that you measure, and the total compute time. 
+
+
 ### Timing
 
 __Total compute time:__  Keep track of the total time spent in  the compute parts of the code, excluding the time to read in the elevation grid from disk, the time to write the visibility grid to disk, and the time to write the bitmaps. 
 
-You will want to  print this time as you run with various number of threads (and record it).  
-For example, the total time may be 10 seconds with 1 thread, 7 seconds with 2 cores, and so on.  This overall time will reflect  all parts of the code that you parallelize.   This is the overall speedup of your parallelization.  
+You will want to  print this time as you run with various number of threads, and record it.  
+For example, the total time may be 10 seconds with 1 thread, 7 seconds with 2 cores, and so on.  This is the overall speedup of your parallelization, accounting for all parts of the code that you parallalize.  
 
 
+Additionally, for each part that you parallelize, time it separately, and print that time, so that you can see the impact of the parallelization for that particular part of the code.  
 
-Additionally, for each part that you parallelize, your code should time it separately, and print that time (so that you can see the speedup of the parallelization for that particular part).  
-
-For example, you will parallelize the viewshed, so you want to time the function to compute the viewshed separately, like so:  
+* For example, you will parallelize the viewshed, so you want to time the function to compute the viewshed separately, like so:  
 
 ```
 double t1, t2;
@@ -117,7 +136,7 @@ t2 = omp_get_wtime();
 printf("Done.  Compute the viewshed: time = %.3f milliseconds\n", (t2-t1)*1000);
 ```
 
-If you also parallelize creating a hillshade grid, you want to time that separately as well: 
+* If you also parallelize creating a hillshade grid, you want to time that separately as well: 
 ```
 t1 = omp_get_wtime();
 //compute a hillshade grid 
@@ -125,7 +144,7 @@ t2 = omp_get_wtime();
 printf("Done.  Compute a hillshade grid: time = %.3f milliseconds\n", (t2-t1)*1000);
 ```
 
-And if you parallelize creating a pixel buffer, you want to time that separately as well:
+* And if you parallelize creating a pixel buffer, you want to time that separately as well:
 ```
 t1 = omp_get_wtime(); 
 //hillshade grid to pixel buffer 
@@ -133,20 +152,7 @@ t2 = omp_get_wtime();
 printf("Done.  Create hillshade pixel buffer: time = %.3f milliseconds\n", (t2-t1)*1000);
 ```
 
-So basically, time separately each piece of code you parallelize, so that you can run with various number of threads and see the impact on the runing time for parallelizing that specific part. 
-
-
-
-### The experimental analysis
-
-Start by running your code  on your laptop,  with ```NB_THREADs = 1, 2, 3,4 ...```.
-
-* __Datasets:__  _set1.asc, southport.asc, rainier.asc_ So that we can compare the timings everyone shoud use the following viewpoints: 
-  *  set1.asc: vp = (250, 250, 10)
-  *  southport.asc: vp = (1000, 1000, 10)
-  *  rainier.asc: vp=(18900, 21500, 100) 
-* __Check correctness:__ For each test, make sure you check  the output to see it looks right (ie not scrambled).
-* __Check performance:__ For each test, write down the time for each piece that you measure, and the total compute time. 
+So basically, time separately each piece of code you parallelize, so that you can run with various number of threads and see the impact on the runing time for parallelizing that specific part. And the total compute time will show the impact of the parallelization on the overall running time. 
 
 
 
