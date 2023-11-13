@@ -14,7 +14,7 @@ nav_order: 12
 
 ***
 
-You have seen that computing what is visible from a point on a terrain takes a couple of milliseconds on a small terrain, and a couple of hours (!) on Mt Rainier (650 million points). In this project you will  improve the performance of your viewshed code via parallelization: you will use OpenMP to parallelize your viewshed code from project 4, run an experimental analysis to evaluate the speedup, and write a brief report to describe your work and findings. 
+You have seen that computing what is visible from a point on a terrain takes a couple of milliseconds on a small terrain, and a couple of hours (!) on Mt Rainier (650 million points). In this project you will  improve the performance of your viewshed code via parallelization: you will use OpenMP to parallelize your viewshed code from project 4, run an experimental analysis to evaluate the speedup, and write a report to describe your work and findings. 
 
 
 
@@ -26,13 +26,13 @@ project. On the command line you will specify the elevation grid,
 viewshed grid and the viewpoint row, column and elevation. For example, 
 ``` ./flow ~/DEMs/rainier.asc vis.asc 1000 1000 10  ```
 will compute the viewshed of point (r=1000, c=1000), standing 10 above
-ground level, and save the viewshed grid as _vis.asc_. The number of threads can be specified as an optional command line argument (with a default value of 1), or as a ```#define NB_THREADS ...``` at the top of your code. When running on the HPC grid  the number of threads will be specified on the command line when submitting the job.
+ground level, and save the viewshed grid as _vis.asc_. The number of threads can be specified as an optional command line argument (with a default value of 1), or as a ```#define NB_THREADS ...``` at the top of your code. When running on the HPC grid  the number of threads will be specified on the command line when submitting the job.  When you run a parallel section and you do not specify how many threads you want, teh compiler will give you a default value which most likely is the number of cores available on the machine. 
 
 
-### Parallelizing your code (with OpenMP)
+### Parallelizing your code
 
-Let's consider what are the components of your viewshed code  from project 4: 
-* reading the elevation grid from disk into a grid in memory;
+Let's consider what are the components of your viewshed code from project 4: 
+* reading the elevation grid from disk into a grid in memory
 * creating a hillshade grid
 * creating a pixel buffer (call it _pb1_) corresponding to the hillshade grid
 * creating a pixel buffer (call it _pb2_) corresponding to a color-interval-gradient map of the elevation grid
@@ -42,13 +42,12 @@ Let's consider what are the components of your viewshed code  from project 4:
 * creating a pixel buffer (_pb2_) corresponding to the viewshed
 * overlaying _pb2_ on top of _pb1_
 * writing the pixel buffer _pb1_ to a bitmap
-* writing the _vis_grid_ to file 
+* writing the visibility grid to file 
 
-Any part that involves reading from disk or writing to disk is I/O-bound (i.e. its running time is dominated by I/O)  and unlikely to benefit from parallelization.  Reading the grid from disk into memory, writing the files to
-disk, writing the bitmaps --- all of these are IO/bound and unlikely
-to benefit from parallelizing.
+Any part of the code that involves reading from disk or writing to disk is I/O-bound (i.e. its running time is dominated by I/O):  the CPU on the coe on which it's running is idle whil waiting for the disk to read the pages from disk into memory. Adding more cores to an I/O-bound process is unlikely to give any benefits.   In terms of the viewshed code: reading the grid from disk into memory, writing the files to
+disk, writing the bitmaps --- all of these are IO/bound and unlikely to benefit from parallelizing.
 
-Generally speaking you want to parallize the compute-intensive parts of your
+Generally speaking you want to parallize the _compute-intensive_ parts of your
 code. This leaves us with : 
 * creating a hillshade grid
 * creating a pixel buffer (call it _pb1_) corresponding to the hillshade grid
