@@ -44,7 +44,7 @@ Let's consider what are the components of your viewshed code  from project 4:
 * writing the pixel buffer _pb1_ to a bitmap
 * writing the _vis_grid_ to file 
 
-Any part that involves reading from disk or writing to disk is IO-bound and unlikely to benefit from parallelization.  Reading the grid from disk into memory, writing the files to
+Any part that involves reading from disk or writing to disk is I/O-bound (i.e. its running time is dominated by I/O)  and unlikely to benefit from parallelization.  Reading the grid from disk into memory, writing the files to
 disk, writing the bitmaps --- all of these are IO/bound and unlikely
 to benefit from parallelizing.
 
