@@ -72,36 +72,36 @@ Therefore your first task is to parallelize the function that  computes the view
 
 ```
 /* 
- elev_grid: input elevation grid
- vis_grid: output viewshed grid, initialized to 0
- vr, vc, vh: viewpoint row, column, height
-
- populates vis_grid with values, a point is set to 1 if its visible from (vr,vc,vh)
+  elev_grid: input elevation grid
+  vis_grid: output viewshed grid, initialized to 0
+  vr, vc, vh: viewpoint row, column, height
+  vis_grid: will be populated with values, a point is set to 1 if its visible from (vr,vc,vh)
 */
 void compute_viewshed_grid(const Grid* elev_grid, Grid* vis_grid, int vr, int vc, int vh);
-
 ```
 
-This function calls a _for_ loop to determine if each point _(r,c)_ in
+This function calls a _for_ loop to determine if each point in
 the grid is visible, and can be parallized using the constructs we saw
 in class (```#pragma omp parallel``` and ```#pragma omp for```).
 
 
-__Debugging:__  __Check your output every single time you modify something.__ Debugging parallel programs is notoriously hard, because  the threads can interleave in many ways and it's hard to picture what causes the error.  If your output looks scrambled, its most likely due to a race condition. Consider again if your variables need to be shared or private. Remember that shared variables need to be updated in critical sections, which basically serialize the code, so you want to be careful with how much synchromization you put in.
+__Debugging:__  __Check your output every single time you modify something.__ Debugging parallel programs is notoriously tricky, because  the threads can interleave in many ways and it's hard to picture what causes the error.  If your output looks scrambled, its most likely due to a race condition. Consider again if your variables need to be shared or private. Remember that shared variables need to be updated in critical sections, which basically serialize the code, so you want to be careful to not put in too much synchronization (which will slow down your code), but sufficient (so that there are no race conditions). 
 
-__Schedules:__  Determining that a point q is visible may take anywhere from $O(1)$ time  to $O(\sqrt n)$ time,  and when the taks are not equal this will lead to some threads finishing faster and being idle, which will slow down the speedup.  You will want to experiment with various schedules, static and dynamic.
+__Schedules:__  Determining that a point q is visible may take anywhere from $O(1)$ time  to $O(\sqrt n)$ time,  and when the taks are not equal this will lead to some threads finishing faster and being idle, which will slow down the code.   You will want to experiment with the various _schedules_ available as options for the ```#pragma omp for``` (static and dynamic).
 
 
 ### Parallelizing the computation of pixel buffers 
 
-Once you finished parallelizing and testing the viewshed computation, you can move to the other targets for parallelization:   the functions that compute on pixel-buffers. All of these functions consist of  for loops that write a value at every pixel. Before you launch into parallelizing these functions, measure how long they take and how long they take  compared with computing the viewshed. If computing a pixel buffer is a very small fraction of the time to compute the viewshed, it's probably not worth it to parallelize because it will have a very small impact in the overall running time.
+Once you finished parallelizing and testing the viewshed computation, you can move to the other, smaller targets for parallelization:   the functions that compute on pixel-buffers. All of these functions consist of  for loops that write a value at every pixel. Before you launch into parallelizing these functions, measure how long they take as compared with the time it takes to compute the viewshed. If computing a pixel buffer is a very small fraction of the time to compute the viewshed, it's probably not worth it to parallelize because the speedup will have a very small impact in the overall running time.
 
 
 
 ### Timing
 
-For each part that you parallelize, your code should time it separately, and print that time,  so that
-you can see the speedup of the parallelization.  For example, if you parallelize computing the viewshed you want to time it separately: 
+For each part that you parallelize, your code should time it separately, and print that time  (so that
+you can see the speedup of the parallelization).  
+
+For example, you want to time the function to compute the viewshed separately, like so:  
 
 ```
 double t1, t2;
@@ -114,8 +114,9 @@ printf("Done.  Compute the viewshed: time = %.3f milliseconds\n", (t2-t1)*1000);
 ```
 
 If you also parallelize creating a hillshade grid, you want to time that separately as well: 
+```
 double t1, t2;
-t1 = omp_get_wtime(); 
+t1 = omp_get_wtime();
 
 ///compute a hillshade grid 
 
