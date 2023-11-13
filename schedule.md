@@ -32,7 +32,7 @@ nav_order: 5
 | Tue 11/14 | OpenMP  |  | |
 | Thu 11/16 | Working with Lidar data  |  | |
 | Tue 11/21 | Working with Lidar data  | |  |
-| Thu 11/23 | _THANKSGIVING BREAK_ | | |
+| _Thu 11/23_ | _no class -- THANKSGIVING BREAK_ | | |
 | Tue  11/28 | Working with Lidar data | | | 
 | Thu  11/30  | Working with Lidar data| | |
 | Tue  12/5 | Projects | | |
