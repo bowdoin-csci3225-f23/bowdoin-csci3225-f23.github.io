@@ -74,7 +74,7 @@ As we consider parallelization, __we want to start with the parts of the code th
 
 ### Parallelizing computing the viewshed grid 
 
-Therefore your first task is to parallelize the function that  computes the viewshed grid: 
+Therefore your main task is to parallelize the function that  computes the viewshed grid: 
 
 ```
 /* 
@@ -160,15 +160,22 @@ So basically, time separately each piece of code you parallelize, so that you ca
 
 ### The Report
 
-Write a report summarizing the findings. Include the following: 
+Summarize yoru work and findings in a brief report. Include the following: 
 
 * Parallelization:
-   * How you parallelized your viewshed function
-   * Did you parallelize anything else, and how/why/why not
-* Experimental evaluation of parallelizing the viewshed: 
-   * Include a table showing for each dataset, the time takes to compute the viewshed with nb. of threads = 1, 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 30, 35, 40; and the speedup in each case, which is defined as $T_1/T_n$, the ratio between the time to run with one thread and the time to run with $n$ threads. Ideally we would hope to see the speedup grow linearly with the number of threads, but of course that rarely happens in practice  
-*  If you parallelize any other parts of the code, include a table with the timing and  the speedup.
-* Findings
+   * What parts of teh code did you parallelize and how/why? Comment on what you tried and wohat worked/did not work. 
+* Experimental evaluation 
+   * Include a table showing for each dataset, the total running time with various number of threads (below T4 means the running time with 4 threads)
+
+   | ---------------------|-----|---|---|---|----|-----|---|----|---|---| 
+   | Dataset and viewpoint | T1 | T2| T4| T8 | T12| T16| T20|T24|T30| T40|
+   | set1 vp=(250,250,50) |    |    |   |    |   |    |    |    |   |   |
+   | southport vp=(1000,1000,10) |    |    |   |    |   |    |    |    |   |   |
+   | rainier vp=(19500,21000,100) |    |    |   |    |   |    |    |    |   |   |
+  
+
+Also show the __speedup__ in each case, which is defined as T1/Tn, the ratio between the time to run with one thread and the time to run with _n_ threads. Ideally we would hope to see the speedup grow linearly with the number of threads, but of course that rarely happens in practice. 
+* Findings: Comment on your findings.
 * Bugs and extra features.
 * Effort. Time you spent in: thinking, Programming; Testing; documenting; total.
 * Reflection. Prompts: how challenging did you find this project? what did you learn by doing this project? What did you wish you did differently? If you worked as a team, how did that go? What would you like to explore further? — you don’t need to address all.
@@ -177,7 +184,7 @@ Write a report summarizing the findings. Include the following:
 
 ### What to turn in
 
-    Check in your code to the github repository
-    Message me the report.
+* Check in your code to the github repository
+* Message me the report.
 
 
