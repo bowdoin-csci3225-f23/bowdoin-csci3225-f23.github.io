@@ -163,11 +163,11 @@ So basically, time separately each piece of code you parallelize, so that you ca
 Summarize yoru work and findings in a brief report. Include the following: 
 
 * Parallelization:
-   * What parts of teh code did you parallelize and how/why? Comment on what you tried and wohat worked/did not work. 
+   * What parts of the code did you parallelize and how/why? Comment on what you tried and what worked/did not work. 
 * Experimental evaluation 
    * Include a table showing for each dataset, the total running time with various number of threads (below T4 means the running time with 4 threads)
 
-   | ---------------------|-----|---|---|---|----|-----|---|----|---|---| 
+   | ---------------------|-|-|-|-|-|-|-|-|-|-| 
    | Dataset and viewpoint | T1 | T2| T4| T8 | T12| T16| T20|T24|T30| T40|
    | set1 vp=(250,250,50) |    |    |   |    |   |    |    |    |   |   |
    | southport vp=(1000,1000,10) |    |    |   |    |   |    |    |    |   |   |
