@@ -4,7 +4,7 @@ title: --Project 5 (Parallel vis)
 nav_order: 12
 ---
 
-## Project 5:  Parallel viewshed    
+## Project 5:  Parallel viewshed with OpenMP   
 
 
 *** 
@@ -48,22 +48,21 @@ Any part of the code that involves reading from disk or writing to disk is I/O-b
 disk, writing the bitmaps --- all of these are IO/bound and unlikely to benefit from parallelizing.
 
 Generally speaking you want to parallize the _compute-intensive_ parts of your
-code. This leaves us with : 
+code. This leaves us with the following list of candidates : 
 * creating a hillshade grid
-* creating a pixel buffer (call it _pb1_) corresponding to the hillshade grid
-* creating a pixel buffer (call it _pb2_) corresponding to a color-interval-gradient map of the elevation grid
-* overlaying _pb2_ on top of _pb1_
+* creating a pixel buffer  corresponding to the hillshade grid
+* creating a pixel buffer  corresponding to a color-interval-gradient map of the elevation grid
+* overlaying one pixel buffer on top of another one 
 * computing the viewshed grid
-* creating a pixel buffer (_pb2_) corresponding to the viewshed
+* creating a pixel buffer corresponding to the viewshed
   
 
-Let's list the steps above  from most time-consuming to least time-consuming: 
+Let's list the components above  from most time-consuming to least time-consuming: 
 * computing the viewshed grid
 * computing the hillshade grid
 * creating pixel buffers and overlaying pixel buffers.
 
-
-As you consider parallelization, you want to start with the parts of the code that are the most time-consuming. In this case, it is the computation of the viewshed grid. 
+As we consider parallelization, __we want to start with the parts of the code that are the most time-consuming__ so that the impact of the parallelization is biggest.  In this case, it is the computation of the viewshed grid. 
 
 
 
