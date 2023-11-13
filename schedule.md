@@ -19,7 +19,7 @@ nav_order: 5
 | Tue 9/26 | _class cancelled - work on project 2_ | [Project2](https://bowdoin-csci3225-f23.github.io/Projects/project2-slr/) | |
 | Thu 9/28 | _class cancelled - work on project 2_|| |
 | Tue 10/3 | Drainage on flat areas. | |  [Lab 8](https://bowdoin-csci3225-f23.github.io/Labs/lab8/) | 
-| Thu 10/5 | Watersheds and watershed hierarchy. Viewsheds.  | | |
+| Thu 10/5 | Watersheds and watershed hierarchy. Viewsheds (1).  | | |
 | Thu 10/12 | Viewsheds (2)  | [Project3](https://bowdoin-csci3225-f23.github.io/Projects/p3-flow/) | |
 |Tue 10/17 | Viewsheds (3) | | |
 |Thu 10/19 | Line simplification algorithms | | |
@@ -27,7 +27,7 @@ nav_order: 5
 | Thu 10/26 | _class cancelled - work on project 3_ | [Project4](https://bowdoin-csci3225-f23.github.io/Projects/project4-vis/) | |
 | Tue 10/31 | Terrain simplification | | |
 | Thu 11/2  | Space filling curves | | |
-| Tue 11/7  | Space filling curves. | [Lab 1 (OpenMP)](https://bowdoin-csci3225-f23.github.io/Labs/openmp/lab1/) | |
+| Tue 11/7  | Space filling curves. | | [Lab 1 (OpenMP)](https://bowdoin-csci3225-f23.github.io/Labs/openmp/lab1/) |
 | Thu 11/9  | OpenMP. | |   |
 | Tue 11/14 | OpenMP  |  | |
 | Thu 11/16 | Working with Lidar data  |  | |
