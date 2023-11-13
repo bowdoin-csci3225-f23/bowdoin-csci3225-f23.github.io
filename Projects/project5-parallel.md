@@ -103,7 +103,7 @@ Once you finished parallelizing and testing the viewshed computation, you can mo
 
 
 
-### The experimental analysis
+## The experimental analysis
 
 Start by running your code  on your laptop: 
 
@@ -116,15 +116,16 @@ Start by running your code  on your laptop:
 * __Check performance:__ For each test, write down the time for each piece that you measure, and the total compute time. 
 
 
-### Timing
+## Timing
 
-__Total compute time:__  Keep track of the total time spent in  the compute parts of the code, excluding the time to read in the elevation grid from disk, the time to write the visibility grid to disk, and the time to write the bitmaps. 
+Total compute time: Keep track of the total time spent in  the compute parts of the code, excluding the time to read in the elevation grid from disk, the time to write the visibility grid to disk, and the time to write the bitmaps. 
 
 You will want to  print this time as you run with various number of threads, and record it.  
-For example, the total time may be 10 seconds with 1 thread, 7 seconds with 2 cores, and so on.  This is the overall speedup of your parallelization, accounting for all parts of the code that you parallalize.  
+For example, the total time may be 10 seconds with 1 thread,  6 seconds with 2 threads.  This is the overall speedup of your parallelization, accounting for all parts of the code that you parallalize.  
 
 
 Additionally, for each part that you parallelize, time it separately, and print that time, so that you can see the impact of the parallelization for that particular part of the code.  
+   * With the example above, when running with 2 cores,  the viewshed  went from 8 seconds with one core to 4 seconds with 2 cores, so the total time dropped from 2+8=10 seconds to  2+4 = 6 seconds.     
 
 * For example, you will parallelize the viewshed, so you want to time the function to compute the viewshed separately, like so:  
 
