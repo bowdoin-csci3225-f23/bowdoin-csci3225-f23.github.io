@@ -19,7 +19,8 @@ The goal of this project is modeling and computing flow on terrains. You will cr
 *  v1: leave FD on  flat areas unassigned
 *  v2: assign FD on flat areas that have spill points, but do nothing to handle flat areas surrounded by higher grounds (pits)
 *  v3: flood the terrain to raise the pits; assign FD on the flooded terrain  as in v2
-  More details on each of thesed steps below. In addition to the code, you will write a report to showcase your work.
+
+More details on each of thesed steps below. In addition to the code, you will write a report to showcase your work.
 
 
 __Input__: an elevation grid
