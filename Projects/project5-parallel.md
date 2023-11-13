@@ -1,6 +1,6 @@
 ---
 layout: default 
-title: --Project 5 (Parallel viewshed)
+title: --Project 5 (Parallel vis)
 nav_order: 12
 ---
 
