@@ -24,7 +24,7 @@ nav_order: 5
 |Tue 10/17 | Viewsheds (3) | | |
 |Thu 10/19 | Line simplification algorithms | | |
 | Tue 10/24 | Terrain simplification algorithms | | | 
-| Thu 10/26 | _class cancelled - work on project 3_ | [Project4](https://bowdoin-csci3225-f23.github.io/Projects/project4-vis/): Viewshed| |
+| Thu 10/26 | _class cancelled - work on project 3_ | [Project4](https://bowdoin-csci3225-f23.github.io/Projects/project4-vis/): Viewsheds | |
 | Tue 10/31 | Terrain simplification | | |
 | Thu 11/2  | Space filling curves | | |
 | Tue 11/7  | Space filling curves. | | [Lab 1 (OpenMP)](https://bowdoin-csci3225-f23.github.io/Labs/openmp/lab1/) |
