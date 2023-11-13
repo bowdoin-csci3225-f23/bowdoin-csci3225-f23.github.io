@@ -193,8 +193,8 @@ You will write a report showcasing your work including:
 
 ### What to turn in
 
-    Check in your code to the github repository
-    Message me the report.
+* Check in your code to the github repository
+* Message me the report.
 
 ### Final remarks
 
