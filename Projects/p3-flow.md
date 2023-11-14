@@ -513,8 +513,10 @@ writing fd.asc
 writing fa.asc
 ```
 
-For Southport, which is a relatively flat terrain at 2m resolution, we see that handling the plateaus does not bring much benefit, and the FD still shows many points that are left unassigned (from where we infer they must be pits). Flooding in this case brings a significant improvement in the flow.  
+The images below show close-ups for Southport, which is a relatively flat terrain at 2m resolution.  We see that handling the plateaus does not bring much benefit because when handling plateaus  the FD still shows many points that are left unassigned . The third image shows FD after flooding --- flooding in this case brings a significant improvement in the flow.  
 
 ![](p3-southport-fa.png)
+
+Below is an even closer close-up for Southport --- th efirst image shows the FD after they plateas are handled. Note many orange points where FD is still undefined (we infer they must be pits). The second image shows the flow computed based on these FD, and we see the FA values are low and no network is formed. The last image shows the FA network computed with FD based on the flooded terrain ---we see that the flow network is now connected and looks as expected. 
 
 ![](p3-southport-flooding.png)
