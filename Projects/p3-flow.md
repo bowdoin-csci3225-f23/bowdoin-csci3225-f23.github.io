@@ -15,7 +15,7 @@ nav_order: 11
 
 ***
 
-The goal of this project is modeling and computing flow on terrains. You will create a program to compute and visualize three increasingly complex versions of the  flow/drainage  network derived from D8 flow direction (FD) and flow accumulation (FA): 
+The goal of this project is modeling and computing flow on terrains. You will create a program to compute and visualize three increasingly more complex versions of the  flow/drainage  network derived from D8 flow direction (FD) and flow accumulation (FA): 
 *  v1: leave FD on  flat areas unassigned
 *  v2: assign FD on flat areas that have spill points, but do nothing to handle flat areas surrounded by higher grounds (pits)
 *  v3: flood the terrain to raise the pits; assign FD on the flooded terrain  as in v2
