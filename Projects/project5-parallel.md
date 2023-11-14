@@ -128,7 +128,6 @@ Additionally, for each part that you parallelize, time it separately, and print 
    * With the example above, when running with 2 cores,  the viewshed  went from 8 seconds with one core to 4 seconds with 2 cores, so the total time dropped from 2+8=10 seconds to  2+4 = 6 seconds.     
 
 * For example, you will parallelize the viewshed, so you want to time the function to compute the viewshed separately, like so:  
-
 ```
 double t1, t2;
 t1 = omp_get_wtime(); 
