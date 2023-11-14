@@ -160,7 +160,7 @@ So basically, time separately each piece of code you parallelize, so that you ca
 
 ### The Report
 
-Summarize yoru work and findings in a brief report. Include the following: 
+Summarize your work and findings in a brief report. Include the following: 
 
 * Parallelization:
    * What parts of the code did you parallelize and how/why? Comment on what you tried and what worked/did not work. 
