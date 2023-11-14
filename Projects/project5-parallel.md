@@ -26,7 +26,7 @@ project. On the command line you will specify the elevation grid,
 viewshed grid and the viewpoint row, column and elevation. For example, 
 ``` ./flow ~/DEMs/rainier.asc vis.asc 1000 1000 10  ```
 will compute the viewshed of point (r=1000, c=1000), standing 10 above
-ground level, and save the viewshed grid as _vis.asc_. The number of threads can be specified as an optional command line argument (with a default value of 1), or as a ```#define NB_THREADS ...``` at the top of your code. When running on the HPC grid  the number of threads will be specified on the command line when submitting the job.  When you run a parallel section and you do not specify how many threads you want, teh compiler will give you a default value which most likely is the number of cores available on the machine. 
+ground level, and save the viewshed grid as _vis.asc_. The number of threads can be specified as an optional command line argument (with a default value of 1), or as a ```#define NB_THREADS ...``` at the top of your code. When running on the HPC grid  the number of threads will be specified on the command line when submitting the job.  When you run a parallel section and you do not specify how many threads you want, the compiler will give you a default value (which may be the number of cores available on the machine). 
 
 
 ### Parallelizing your code
