@@ -165,7 +165,7 @@ Summarize your work and findings in a brief report. Include the following:
 * Parallelization:
    * What parts of the code did you parallelize and how/why? Comment on what you tried and what worked/did not work. 
 * Experimental evaluation 
-   * Include a table showing for each dataset, the total running time with various number of threads: 1, 2, 3, 4, 8, 12 (below T2 means the running time with 2 threads, etc). 
+   * Include a table showing for each dataset, the total running time with various number of threads: 1, 2, 3, 4, 8, 12 (in the table below T2 means the running time with 2 threads, etc). 
 
    | ---------------------|-|-|-|-|-|-|-|-|-|-| 
    | Dataset and viewpoint | T1 | T2| T3| T4 | T8| T12| 
