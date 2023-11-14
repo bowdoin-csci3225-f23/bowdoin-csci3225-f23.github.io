@@ -61,12 +61,12 @@ Let's list the components above  from most time-consuming to least time-consumin
 * computing the hillshade grid
 * creating pixel buffers and overlaying pixel buffers.
 
-As we consider parallelization, __we want to start with the parts of the code that are the most time-consuming__ so that the impact of the parallelization is biggest.  In this case, it is the computation of the viewshed grid. 
+As we consider parallelization, __we want to start with the parts of the code that are the most time-consuming__ so that the impact of the parallelization is the largest possible.  In this case, it is the computation of the viewshed grid. 
 
 
-* For example, if the total compute time break down is 10% from function A (e.g. computing the viewshed), and 90% from function B (e.g. creating pixels buffers); if we speed up function A by a factor of two, the new runinng time will be T'=.1 x.5T + .9T = .95T, and  the overall  speedup  will be 1.05 (i.e. almost neglijable --- do not speed up the part of your code that accounts for 10% of your running time). 
+* For example, if the total compute time break down is 10% on function A (e.g. computing the viewshed), and 90% on function B (e.g. creating pixels buffers); if we speed up function A by a factor of two, the new runinng time will be T'=.1 x.5T + .9T = .95T, and  the overall  speedup  will be 1.05, i.e. almost neglijable --- you do not speed up the part of your code that accounts for 10% of your running time! 
 
-* For example, if the total compute time break down is 90% from function A  and 10% from function B, and  if we manage to speed up function A by a factor of two, the new runinng time will be T'=.9 x.5T + .1T = .55T, and  the overall  speedup will be 1.81.
+* On the other hand, if the total compute time break down is 90%  on function A  and 10% on function B, and  if we manage to speed up function A by a factor of two, the new runinng time will be T'=.9 x.5T + .1T = .55T, and  the overall  speedup will therefore be 1.81.
   
 
 
@@ -92,7 +92,7 @@ in class (```#pragma omp parallel``` and ```#pragma omp for```).
 
 __Debugging:__  __Check your output every single time you modify something.__ Debugging parallel programs is notoriously tricky, because  the threads can interleave in many ways and it's hard to picture what causes the error.  If your output looks scrambled, its most likely due to a race condition. Consider again if your variables need to be shared or private. Remember that shared variables need to be updated in critical sections, which basically serialize the code, so you want to be careful to not put in too much synchronization (which will slow down your code), but sufficient (so that there are no race conditions). 
 
-__Schedules:__  Determining that a point _q_ is visible may take anywhere from O(1) time  to traversing all the points in a row or column of the grid.  Therefore some threads will get assigned to compute points that finish fast, others will compute points that take longer ---- the tasks are not equal this will lead to some threads finishing faster and being idle. Overall this will slow down the code.   You will want to experiment with the various _schedules_ available as options for the ```#pragma omp for``` (static and dynamic).
+__Schedules:__  Determining that a point _q_ is visible may take anywhere from O(1) time  to traversing all the points in a row or column of the grid.  Therefore some threads will get assigned to compute points that finish fast, others will compute points that take longer ---- the tasks are not equal and this will lead to some threads finishing faster and being idle. Overall this will slow down the code.   You will want to experiment with the various _schedules_ available as options for the ```#pragma omp for``` (static and dynamic) --- and see if the times are better than with the default work sharing.
 
 
 ### Parallelizing the computation of pixel buffers 
@@ -106,7 +106,7 @@ Once you finished parallelizing and testing the viewshed computation, you can mo
 
 Start by running your code  on your laptop: 
 
-* __Nb threads:__  1, 2, 3, 4 ...
+* __Nb threads:__  1, 2, 3, 4, 8, 12
 * __Datasets:__  _set1.asc, southport.asc, rainier.asc_ We want to be able to compare the times  so everyone should use the following viewpoints: 
   *  set1.asc: vp = (250, 250, 10)
   *  southport.asc: vp = (1000, 1000, 10)
@@ -119,12 +119,12 @@ Start by running your code  on your laptop:
 
 Total compute time: Keep track of the total time spent in  the compute parts of the code, excluding the time to read in the elevation grid from disk, the time to write the visibility grid to disk, and the time to write the bitmaps. 
 
-You will want to  print this time as you run with various number of threads, and record it.  
+Your code should print this time as you run with various number of threads.  
 For example, the total time may be 10 seconds with 1 thread,  6 seconds with 2 threads.  This is the overall speedup of your parallelization, accounting for all parts of the code that you parallalize.  
 
 
-Additionally, for each part that you parallelize, time it separately, and print that time, so that you can see the impact of the parallelization for that particular part of the code.  
-   * With the example above, when running with 2 cores,  the viewshed  went from 8 seconds with one core to 4 seconds with 2 cores, so the total time dropped from 2+8=10 seconds to  2+4 = 6 seconds.     
+Additionally, for each part that you parallelize, time it separately, and print that time, so that you can see the effect of the parallelization for that particular part of the code.  
+   * With the same example as above, we also keeping track of the viewshed time:  the viewshed  went from 8 seconds with one core to 4 seconds with 2 cores, so the total time dropped from 2+8=10 seconds to  2+4 = 6 seconds.     We see that the drop from 10 seconds to 6 seconds is explained by the speedup of the viewshed, and it makes sense.
 
 * For example, you will parallelize the viewshed, so you want to time the function to compute the viewshed separately, like so:  
 ```
@@ -151,7 +151,7 @@ t2 = omp_get_wtime();
 printf("Done.  Create hillshade pixel buffer: time = %.3f milliseconds\n", (t2-t1)*1000);
 ```
 
-So basically, time separately each piece of code you parallelize, so that you can run with various number of threads and see the impact on the runing time for parallelizing that specific part. And the total compute time will show the impact of the parallelization on the overall running time. 
+So basically, time separately each component of code you parallelize, so that you can see the speedup of parallelizing it. The total compute time will show the overall speedup of  parallelization the code. 
 
 
 
