@@ -188,16 +188,15 @@ for example  (assume you have cd-ed to the directory where you have your project
 hpcsub -N 1 -n 8 -cmd ./vis southport.asc  vis.asc  1000 1000 10 
 ```
 
-_Datasets:_ The command above is assuming that you have the file _southport.asc_ in the current directory.    __AVOID copying data in your directory__. You can access a variety of grids from ```/mnt/research/gis/DEM/```. The Mt Rainier dataset is there, also Southport,  and many more (```ls /mnt/research/gis/DEM/``` to see the content).  Use the full path to the dataset in your command ```/mnt/research/gis/DEM/southport.asc```. 
+_Datasets:_ The command above is assuming that you have the file _southport.asc_ in the current directory.    __AVOID copying data in your directory__. You can access a variety of grids from ```/mnt/research/gis/DEM/```. The Mt Rainier dataset is there, also Southport,  and many more;  ```ls /mnt/research/gis/DEM/``` to see the content.  Use the full path to the dataset in your command, for e.g.  ```/mnt/research/gis/DEM/southport.asc```. 
 
-_Output files:_ Unless you specify otherwise, your code will generate the output files (visibility grid and bitmaps) in the current directory.  When you run with the large dataset, just comment out the line that saves the visibility grid (we don't need for timing). Also comment out the line that saves the hillshade bitmap. The only output file of your code shoud be the viewshed-overlayed-on-the-hillshade bitmap. The bitmap can get quite large, so instead of saving it in the current directory (which may exceed your quota), use the following temporary space: ```/mnt/hpc/tmp/username/```.  In your code,  update the path where you save the bitmap: 
+_Output files:_ Unless you specify otherwise, your code will generate the output files (visibility grid and bitmaps) in the current directory.  When you run with a large dataset, just comment out the line that saves the visibility grid (we don't need it for timing). Also comment out the line that saves the hillshade bitmap. The only output file of your code should be the viewshed-overlayed-on-the-hillshade bitmap. The bitmap can get quite large, so instead of saving it in the current directory (which may exceed your quota), use the following temporary space: ```/mnt/hpc/tmp/username/```.  In your code,  update the path where you save the bitmap (replace username with your username).
 
 ```
  save_pixel_buffer_to_file(&pb, "/mnt/hpc/tmp/username/map.viewshed-over-hillshade.bmp");
 ```
-(replace username with your username).  
-
-So to submit to the grid you can use _hpcsub_ and specify the command  like so: 
+  
+So to submit to the grid you would use something  like so: 
 
 ```
 hpcsub -N 1 -n 8 -cmd ./vis /mnt/research/gis/DEM/mtrainier.asc  18900  21500 100 
@@ -237,7 +236,7 @@ If you submit this with "sbatch -N 1 -n 8 myscript.sh", the value of $SLURM_NPRO
 
 ### Exclusive use of a machine 
 
-Once you submit a job to the grid, the scheduler decides  what node to allocate to your job. There are different types of nodes on the grid, with slightly different specs.   If you request 8 cores, and the node has more cores available, the remaining ones will likely be allocated to a different job. For most purpose sharing is not a problem, but since we are timing  experiments any interference will affect the timings.  We want to request the same machine, and request it exclusively: 
+Once you submit a job to the grid, the scheduler decides  what node to allocate to your job. There are different types of nodes on the grid, with slightly different specs.   If you request 8 cores, and the node has more cores available, the remaining ones will likely be allocated to a different job. For most purposes sharing is not a problem, but since we are timing  experiments other jobs competing to access the shared memory will affect the timings.  We want to request the same machine, and request it exclusively: 
 
 ```
 sbatch -N 1 -n 8 --nodelist=moose30 --exclusive myscript.sh
@@ -253,7 +252,7 @@ If two users send a job to _moose30_, the first job sent would run, and the job 
 
 When the job is done, you will see the output (what would have been printed on the screen) in the  directory from where you started the job, as ```slurm.oxxxx```, where xxxx is the ID number of the job. You will also get emails telling you  that the job was received, and when it was completed. 
 
-### The Report
+## The Report
 
 Summarize your work and findings in a brief report. Include the following: 
 
@@ -277,7 +276,7 @@ Also show the __speedup__ in each case, which is defined as T1/Tn, the ratio bet
 
   
 
-### What to turn in
+## What to turn in
 
 * Check in your code to the github repository
 * Message me the report.
