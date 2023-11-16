@@ -163,38 +163,34 @@ Since the Mt. Rainier dataset takes a long time,  we'll run the experiments invo
 1. You can access Bowdoin's public Unix servers, _dover_ and _foxcroft_, by opening a terminal and  logging in via ssh: ```
 ssh dover```.
 
-2. When you login to the unix servers you access your home directory on the unix partition (this is likely empty unless you've used the unix server for other classes). Create a folder  and clone your github project here.
-
-Note that in order to be able to clone  you need to have set up your SSH-key pair on _dover_. You have two options: 
+2. When you login to the unix servers you access your home directory on the unix partition (this is likely empty unless you've used the unix server for other classes). Create a folder  and clone your github project here. Note that in order to be able to clone  you need to have set up your SSH-key pair on _dover_. You have two options: 
   * either you copy you SSH-key pair from your laptop to dover; or, 
-  * you create a new SSH-key pair and  register it with your Github account (for e.g. I have a different SSH-key pair for each machine I use, and I added them all to my github account).  Check out the [setup lab](https://compgeom-s23.github.io/Projects/P0-setup/) for a refresher on where to find these keys and how to generate one.
+  * you create a new SSH-key pair and  register it with your Github account (for e.g. I have a different SSH-key pair for each machine I use, and I added them all to my github account).  Check out the [setup lab](https://compgeom-s23.github.io/Projects/P0-setup/) for a refresher on where to find these keys and how to generate new ones.
 
-3. Compile your project on dover. To see the specs of the compiler type ```gcc --version``` --- this is different than the _clang_ compile ron your allple laptop and there may be (hopefully small) differences. 
+3. Compile your project on dover. To see the specs of the compiler type ```gcc --version```. This is different than the _clang_ compiler on your apple laptop and there may be (hopefully small) differences. 
 
 
 ### The HPC cluster 
 
-We'll use [Bowdoin HPC cluster](https://hpc.bowdoin.edu/hpcwiki/index.php?title=Linuxhelp:Slurmcluster]. To access the cluster you login in to the cluster headnode called _slurm_. Slurm accepts jobs, puts them in a queue until they can be executed, sends them to the compute nodes and manages the execution.
+We'll use [Bowdoin HPC cluster](https://hpc.bowdoin.edu/hpcwiki/index.php?title=Linuxhelp:Slurmcluster). To access the cluster you login to the cluster headnode called _slurm_. Slurm accepts jobs, puts them in a queue until they can be executed, sends them to the compute nodes and manages the execution.
 
 ```
 ssh slurm
 ```
-Once on Slurm you see the same  unix partition as  on _dover_ (or _foxcroft_). Go to the folder where you have your visibility project. 
-
-To submit a job on the command line you  will use: 
+Once on Slurm you see the same  home directory as  on _dover_ (or _foxcroft_). Go to the folder where you have placed your visibility project.  To submit a job on the command line use: 
 
 ```
 hpcsub -N 1 -n 8 -cmd (your command here)
 ```
 
-for example  (assume you have cd-ed to the directory where you have your project ). 
+for example  (assume you have cd-ed to the directory where you have your project so that the executable _vis_ is in the current directory). 
 ```
 hpcsub -N 1 -n 8 -cmd ./vis southport.asc  vis.asc  1000 1000 10 
 ```
 
-_Datasets:_ The command above is assuming that you have the file _southport.asc_ in the current directory.    __ AVOID copying data in your directory__. You can access a variety of grids from ```/mnt/research/gis/DEM/```. The Mt Rainier dataset is there, also Southport,  and many more (```ls /mnt/research/gis/DEM/``` to see the contents).  Use the full path in your command ```/mnt/research/gis/DEM/southport.asc```. 
+_Datasets:_ The command above is assuming that you have the file _southport.asc_ in the current directory.    __AVOID copying data in your directory__. You can access a variety of grids from ```/mnt/research/gis/DEM/```. The Mt Rainier dataset is there, also Southport,  and many more (```ls /mnt/research/gis/DEM/``` to see the content).  Use the full path to the dataset in your command ```/mnt/research/gis/DEM/southport.asc```. 
 
-_Output files:_ Unless you specify otehrwise, your code will generate the output files (visibility grid and bitmaps) in the current directory.  When you run with the large dataset, just comment out the line that saves the visibility grid; it's not needed. Also comment out the line that saves the hillshade bitmap. The only output file of your code shoud be the viewshed-overlayed-on-the-hillshade bitmap. The bitmap can get quite large, so instead of saving it in the current directory (which may exceed your quota), use the following temporary space: ```/mnt/hpc/tmp/username/```.  In your code,  update the path where you save the bitmap: 
+_Output files:_ Unless you specify otherwise, your code will generate the output files (visibility grid and bitmaps) in the current directory.  When you run with the large dataset, just comment out the line that saves the visibility grid (we don't need for timing). Also comment out the line that saves the hillshade bitmap. The only output file of your code shoud be the viewshed-overlayed-on-the-hillshade bitmap. The bitmap can get quite large, so instead of saving it in the current directory (which may exceed your quota), use the following temporary space: ```/mnt/hpc/tmp/username/```.  In your code,  update the path where you save the bitmap: 
 
 ```
  save_pixel_buffer_to_file(&pb, "/mnt/hpc/tmp/username/map.viewshed-over-hillshade.bmp");
@@ -207,7 +203,7 @@ So to submit to the grid you can use _hpcsub_ and specify the command  like so:
 hpcsub -N 1 -n 8 -cmd ./vis /mnt/research/gis/DEM/mtrainier.asc  18900  21500 100 
 ```
 
-The other way to submit a job to the grid is to  create a script (a text file) that contains teh commands you want to run. This is  more convenient.   A sample script called _myscript.sh_ might look like this (you can create a new file with an editor like _nano_ or _vim_):
+The other way to submit a job to the grid is to  create a script (a text file) that contains the commands you want to run. This is  more convenient.   A sample script called _myscript.sh_ might look like this (you can create a new file with an editor like _nano_ or _vim_):
 ```
 #!/bin/bash
 #SBATCH --mail-type=BEGIN,END,FAIL
@@ -219,13 +215,14 @@ To run your job (with just one core), use :
 ```
 sbatch myscript.sh
 ```
+Note that if you specify the command as _./vis_ ie in the current directory, you need to have the script in the  same directory as _./vis_.  
 
 If your code has OpenMP  and  can use multiple cores, you can  request a number of cores: 
 ```
 sbatch -N 1 -n (number-of-cpus-to-use) myscript.sh
 ```
 
-From [HPC www](https://hpc.bowdoin.edu/hpcwiki/index.php?title=Linuxhelp:Slurmcluster]: It is important to note that the program you are running must be able to support multiple CPUs, and you need to be able to tell it how many CPUs to use. If the program is only written to support a single CPU, it will not be able to use multiple CPUs simply by requesting them. The "-n (number of CPUs)" option simply tells the HPC Cluster that you are requesting that specific number of CPUs, and has no direct connection to the actual program that you are running.
+From [HPC www](https://hpc.bowdoin.edu/hpcwiki/index.php?title=Linuxhelp:Slurmcluster): It is important to note that the program you are running must be able to support multiple CPUs, and you need to be able to tell it how many CPUs to use. If the program is only written to support a single CPU, it will not be able to use multiple CPUs simply by requesting them. The "-n (number of CPUs)" option simply tells the HPC Cluster that you are requesting that specific number of CPUs, and has no direct connection to the actual program that you are running.
 
 Note that you also have to tell your program how many CPU cores to use, usually by passing an option to the program. To make it a little easier, you can replace the number of CPU cores in the submit script with "$SLURM_NPROCS". The $SLURM_NPROCS variable is the value of the number of cores that you asked for in the sbatch command.
 
@@ -240,9 +237,8 @@ If you submit this with "sbatch -N 1 -n 8 myscript.sh", the value of $SLURM_NPRO
 
 ### Exclusive use of a machine 
 
-Once you submit a job to the grid, the scheduler decides  what node to allocate to your job. There are different types of nodes on the grid, with slightly different specs.   It's also very likely that if you request 8 cores, and the node has more cores available, the remaining ones will be allocated to a different job. For most purpose sharing is not a problem, but since we are timing  experiments any interference will affect the timings. 
+Once you submit a job to the grid, the scheduler decides  what node to allocate to your job. There are different types of nodes on the grid, with slightly different specs.   If you request 8 cores, and the node has more cores available, the remaining ones will likely be allocated to a different job. For most purpose sharing is not a problem, but since we are timing  experiments any interference will affect the timings.  We want to request the same machine, and request it exclusively: 
 
-We want to request the same machine, and request it exclusively: 
 ```
 sbatch -N 1 -n 8 --nodelist=moose30 --exclusive myscript.sh
 ```
@@ -255,7 +251,7 @@ If two users send a job to _moose30_, the first job sent would run, and the job 
 
 
 
-When the job is done, you will see the output (what would have been printed on the screen) in the  directory from where you started the job, as ```slurm.oxxxx```, where xxxx is teh ID number of the job. You will also get emails telling you  that the job was received, and when it was completed. 
+When the job is done, you will see the output (what would have been printed on the screen) in the  directory from where you started the job, as ```slurm.oxxxx```, where xxxx is the ID number of the job. You will also get emails telling you  that the job was received, and when it was completed. 
 
 ### The Report
 
