@@ -154,11 +154,11 @@ printf("Done.  Create hillshade pixel buffer: time = %.3f milliseconds\n", (t2-t
 So basically, time separately each component of code you parallelize, so that you can see the speedup of parallelizing it. The total compute time will show the overall speedup of  parallelization the code. 
 
 
-### Running on the HPC grid 
+## Running on the HPC grid 
 
 Since the Mt. Rainier dataset takes a long time,  we'll run the experiments involving this dataset on the grid. 
 
-#### to the Linux partition (microwave)
+### to the Linux partition (microwave)
 
 1. You can access Bowdoin's public Unix servers, _dover_ and _foxcroft_, by opening a terminal and  logging in via ```ssh```: 
 
@@ -172,7 +172,7 @@ ssh dover
 3. Compile your project on dover. To see the specs of the compiler type ```gcc --version``` --- this is different than the _clang_ compile ron your allple laptop and there may be (hopefully small) differences. 
 
 
-#### The HPC cluster 
+### The HPC cluster 
 
 We'll use [Bowdoin HPC cluster](https://hpc.bowdoin.edu/hpcwiki/index.php?title=Linuxhelp:Slurmcluster]. To access the cluster you login in to the cluster headnode called _slurm_. Slurm accepts jobs, puts them in a queue until they can be executed, sends them to the compute nodes and manages the execution.
 
@@ -238,7 +238,7 @@ my-program-name -n $SLURM_NPROCS
 ```
 If you submit this with "sbatch -N 1 -n 8 myscript.sh", the value of $SLURM_NPROCS will be 8. 
 
-#### Exclusive use of a machine 
+### Exclusive use of a machine 
 
 Once you submit a job to the grid, the scheduler decides  what node to allocate to your job. There are different types of nodes on the grid, with slightly different specs.   It's also very likely that if you request 8 cores, and the node has more cores available, the remaining ones will be allocated to a different job. For most purpose sharing is not a problem, but since we are timing  experiments any interference will affect the timings. 
 
