@@ -158,16 +158,16 @@ So basically, time separately each component of code you parallelize, so that yo
 
 Since the Mt. Rainier dataset takes a long time,  we'll run the experiments involving this dataset on the grid. 
 
-### to the Linux partition (microwave)
+### Setting up on the Linux partition (microwave)
 
-1. You can access Bowdoin's public Unix servers, _dover_ and _foxcroft_, by opening a terminal and  logging in via ```ssh```: 
+1. You can access Bowdoin's public Unix servers, _dover_ and _foxcroft_, by opening a terminal and  logging in via ssh: ```
+ssh dover```.
 
-```
-ssh dover
-```
-2. On dover you  have a home directory which is likely empty unless you ve used this server for other classes. Create a folder  and clone your github project here.  In order to be able to clone  you need to have set up your SSH-key pair on dover. You have two options: 
-  * either you copy you SSH-key pair from your laptop to dover.
-  * you create a new SSH-key pair and you register  it with your Github account (for e.g. I have a different SSH_key pair for each machine, and I added them all to my github account).  Check out the [setup lab](https://compgeom-s23.github.io/Projects/P0-setup/) for a refresher on where to find these keys and how to generate one.
+2. When you login to the unix servers you access your home directory on the unix partition (this is likely empty unless you've used the unix server for other classes). Create a folder  and clone your github project here.
+
+Note that in order to be able to clone  you need to have set up your SSH-key pair on _dover_. You have two options: 
+  * either you copy you SSH-key pair from your laptop to dover; or, 
+  * you create a new SSH-key pair and  register it with your Github account (for e.g. I have a different SSH-key pair for each machine I use, and I added them all to my github account).  Check out the [setup lab](https://compgeom-s23.github.io/Projects/P0-setup/) for a refresher on where to find these keys and how to generate one.
 
 3. Compile your project on dover. To see the specs of the compiler type ```gcc --version``` --- this is different than the _clang_ compile ron your allple laptop and there may be (hopefully small) differences. 
 
