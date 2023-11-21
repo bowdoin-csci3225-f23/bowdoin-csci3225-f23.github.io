@@ -21,12 +21,9 @@ You have seen that computing what is visible from a point on a terrain takes a c
 
 ### The interface 
 
-The interface of your code will be the same as for the viewshed
-project. On the command line you will specify the elevation grid,
-viewshed grid and the viewpoint row, column and elevation. For example, 
-``` ./flow ~/DEMs/rainier.asc vis.asc 1000 1000 10  ```
-will compute the viewshed of point (r=1000, c=1000), standing 10 above
-ground level, and save the viewshed grid as _vis.asc_. The number of threads can be specified as an optional command line argument (with a default value of 1), or as a ```#define NB_THREADS ...``` at the top of your code. When running on the HPC grid  the number of threads will be specified on the command line when submitting the job.  When you run a parallel section and you do not specify how many threads you want, the compiler will give you a default value (which may be the number of cores available on the machine). 
+The interface of your code will be the same as for the viewshed project. On the command line you will specify the elevation grid,
+viewshed grid and the viewpoint row, column and elevation. For example,  ``` ./flow ~/DEMs/rainier.asc vis.asc 1000 1000 10  ```
+will compute the viewshed of point (r=1000, c=1000), standing 10 above ground level, and save the viewshed grid as _vis.asc_. The number of threads should also be specified as a command line argument (you'll use this when running on the HPC grid). 
 
 
 ### Parallelizing your code
@@ -106,7 +103,7 @@ Once you finished parallelizing and testing the viewshed computation, you can mo
 
 Start by running your code  on your laptop: 
 
-* __Nb threads:__  1, 2, 3, 4, 8, 12
+* __Nb threads:__  1, 2, 3, 4, 8, 12 (also: 24, 32 when running on the cluster)
 * __Datasets:__  _set1.asc, southport.asc, rainier.asc_ We want to be able to compare the times  so everyone should use the following viewpoints: 
   *  set1.asc: vp = (250, 250, 10)
   *  southport.asc: vp = (1000, 1000, 10)
@@ -185,7 +182,7 @@ hpcsub -N 1 -n 8 -cmd (your command here)
 
 for example  (assume you have cd-ed to the directory where you have your project so that the executable _vis_ is in the current directory). 
 ```
-hpcsub -N 1 -n 8 -cmd ./vis southport.asc  vis.asc  1000 1000 10 
+hpcsub -N 1 -n 8 -cmd ./vis southport.asc  vis.asc  1000 1000 10 8
 ```
 
 _Datasets:_ The command above is assuming that you have the file _southport.asc_ in the current directory.    __AVOID copying data in your directory__. You can access a variety of grids from ```/mnt/research/gis/DEM/```. The Mt Rainier dataset is there, also Southport,  and many more;  ```ls /mnt/research/gis/DEM/``` to see the content.  Use the full path to the dataset in your command, for e.g.  ```/mnt/research/gis/DEM/southport.asc```. 
@@ -199,7 +196,7 @@ _Output files:_ Unless you specify otherwise, your code will generate the output
 So to submit to the grid you would use something  like so: 
 
 ```
-hpcsub -N 1 -n 8 -cmd ./vis /mnt/research/gis/DEM/mtrainier.asc  18900  21500 100 
+hpcsub -N 1 -n 8 -cmd ./vis /mnt/research/gis/DEM/mtrainier.asc  18900  21500 100 8
 ```
 
 The other way to submit a job to the grid is to  create a script (a text file) that contains the commands you want to run. This is  more convenient.   A sample script called _myscript.sh_ might look like this (you can create a new file with an editor like _nano_ or _vim_):
@@ -207,7 +204,7 @@ The other way to submit a job to the grid is to  create a script (a text file) t
 #!/bin/bash
 #SBATCH --mail-type=BEGIN,END,FAIL
 
-./vis /mnt/research/gis/DEM/mtrainier.asc  18900  21500 100
+./vis /mnt/research/gis/DEM/mtrainier.asc  18900  21500 100 $SLURM_NPROCS
 ##you can put more commands here 
 ```
 To run your job (with just one core), use : 
