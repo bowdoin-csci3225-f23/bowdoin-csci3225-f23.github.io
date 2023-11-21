@@ -16,7 +16,7 @@ nav_order: 12
 
 You have seen that computing what is visible from a point on a terrain takes a couple of milliseconds on a small terrain, and a couple of hours (!) on Mt Rainier (650 million points). In this project you will  improve the performance of your viewshed code via parallelization: you will use OpenMP to parallelize your viewshed code from project 4, run an experimental analysis to evaluate the speedup, and write a report to describe your work and findings. 
 
-
+The bulk of the work for this  project will be familiarizing yourself with the HPC grid and running experiments on the grid. In terms of actual programming, you need understand the basics of parallelization and race conditions and expect to write a couple of #pragma parallel for loops.
 
 
 ### The interface 
