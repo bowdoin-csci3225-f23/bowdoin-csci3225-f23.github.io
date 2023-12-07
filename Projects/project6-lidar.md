@@ -58,3 +58,12 @@ writing map.dsm-grayscale.bmp
 ![](p6-fr5.png)
 
 ****
+
+### Dataset ```house.las```
+
+![](p6-house1.png)
+![](p6-house2.png)
+![](p6-house3.png)
+![](p6-house4.png)
+![](p6-house5.png)
+
