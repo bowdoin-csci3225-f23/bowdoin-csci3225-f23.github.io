@@ -12,3 +12,13 @@ nav_order: 14
 * Group policy: Partner-optional
 
 ***
+
+### Dataset ```france.las```
+
+![](p6-fr1.png)
+![](p6-fr2.png)
+![](p6-fr3.png)
+![](p6-fr4.png)
+![](p6-fr5.png)
+
+****
