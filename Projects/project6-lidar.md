@@ -113,3 +113,22 @@ writing map.ground-interpolated.bmp
 ![](p6-house4.png)
 ![](p6-house5.png)
 ![](p6-house6.png)
+
+
+***
+### Dataset ```fusa.las```
+
+![](p6-fusa1.png)
+![](p6-fusa2.png)
+![](p6-fusa3.png)
+![](p6-fusa4.png)
+![](p6-fusa5.png)
+![](p6-fusa6.png)
+![](p6-fusa7.png)
+![](p6-fusa8.png)
+![](p6-fusa9.png)
+![](p6-fusa10.png)
+![](p6-fusa11.png)
+![](p6-fusa12.png)
+![](p6-fusa13.png)
+
