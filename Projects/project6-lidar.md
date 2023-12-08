@@ -118,9 +118,15 @@ writing map.ground-interpolated.bmp
 ***
 ### Dataset ```fusa.las```
 
+Pre-classified
+
 ![](p6-fusa1.png)
 ![](p6-fusa2.png)
 ![](p6-fusa3.png)
+
+
+Created by my code: 
+
 ![](p6-fusa4.png)
 ![](p6-fusa5.png)
 ![](p6-fusa6.png)
