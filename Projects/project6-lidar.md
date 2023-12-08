@@ -48,7 +48,26 @@ lidar_to_dsm: done
 grid dsm (0x600000658000):
 	n=101761 [rows=319,cols=319], range=[348.28, 362.93], avg value=352.9 nodata=37843 (37.2%)
 writing map.dsm-grayscale.bmp
-
+cc 1: source vertex (1,1)..done. 43250 points reached and marked as 1
+	cc_id=  1: size=43250, bbox=[1,237,1,237], bbox_fill=76.999763
+cc 2: breakline source vertex (3,217)..done. 24 points reached and marked as 2
+	cc_id=  2: size=   24, bbox=[3,7,217,221], bbox_fill=96.000000
+cc 3: source vertex (5,219)..done. 1 points reached and marked as 3
+	cc_id=  3: size=    1, bbox=[5,5,219,219], bbox_fill=100.000000
+cc 4: breakline source vertex (24,14)..done. 1 points reached and marked as 4
+	cc_id=  4: size=    1, bbox=[24,24,14,14], bbox_fill=100.000000
+cc 5: breakline source vertex (26,10)..done. 3 points reached and marked as 5
+	cc_id=  5: size=    3, bbox=[26,27,9,10], bbox_fill=75.000000
+[...]skipped
+cc size thresholds: T1=40mp(1294.4 cells), T2=1000mp(32360.5 cells), with 1cell=0.03mp
+writing map.ground-hillshade.bmp
+dilate nodata
+dilate nodata
+writing map.ground-hillshade.bmp
+interpolate_dtm_grid: 
+	added 3177 points to the queue
+interpolate_dtm_grid done. 
+writing map.ground-interpolated.bmp
 ```
 
 ![](p6-fr1.png)
@@ -107,12 +126,52 @@ interpolate_dtm_grid done.
 writing map.ground-interpolated.bmp
 ```
 
+Pre-classified, as shown by ```lidarview```
+
 ![](p6-house1.png)
+
 ![](p6-house2.png)
+
+Ground only: 
+
 ![](p6-house3.png)
+
+Created by my code: 
+
+Digital surface model, initial and after one erode: 
 ![](p6-house4.png)
-![](p6-house6.png)
-![](p6-house5.png)
+
+After one more erode: 
+
+![](p6-house-erode2.png)
+
+And a dilate: 
+
+![](p6-house-dilate.png)
+
+The hillshade: 
+
+![](p6-house-hillshade.png)
+
+Slope: 
+
+![](p6-house-slope.png)
+
+Breaklines (points in red are points with slope >= 45 deg):
+
+![](p6-house-breakline.png)
+
+Connected components, each shown with a different color:
+
+![](p6-house-cc.png)
+
+Attempt at classification (based on cc size and bbox fill): 
+
+![](p6-house-classified.png)
+
+And finally, the interpolated bare gound = digital __terrain__ model: 
+
+![](p6-house-dtm.png)
 
 
 
@@ -215,19 +274,19 @@ Slope:
 
 ![](p6-fusa9.png)
 
-Points shown in red are points with slope >= 45:
+Breaklines: Points shown in red are points with slope >= 45 deg:
 
 ![](p6-fusa10.png)
 
-Connected components, each shown with a separate color. 
+Connected components, each shown with a different color:
 
 ![](p6-fusa11.png)
 
-Classification: 
+Attempt at classification (based on cc size and bbox fill): 
 
 ![](p6-fusa12.png)
 
-Interpolated bare gound: 
+And finally, the interpolated bare gound = digital __terrain__ model: 
 
 ![](p6-fusa13.png)
 
