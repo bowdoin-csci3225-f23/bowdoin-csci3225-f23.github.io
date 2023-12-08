@@ -181,33 +181,53 @@ Pre-classified, as shown by ```lidarview```
 ![](p6-fusa2.png)
 
 ground only: 
+
 ![](p6-fusa1.png)
 
 buildings and vegetation:
+
 ![](p6-fusa3.png)
 
 
 Created by my code: 
 
 Digital surface model (dsm): 
+
 ![](p6-fusa4.png)
+
 Eroded:
+
 ![](p6-fusa5.png)
+
 Eroded again: 
+
 ![](p6-fusa6.png)
+
 Dilated: 
+
 ![](p6-fusa7.png)
+
 Hilllshade: 
+
 ![](p6-fusa8.png)
+
 Slope: 
+
 ![](p6-fusa9.png)
+
 Points shown in red are points with slope >= 45:
+
 ![](p6-fusa10.png)
+
 Connected components, each shown with a separate color. 
+
 ![](p6-fusa11.png)
+
 Classification: 
+
 ![](p6-fusa12.png)
 
 Interpolated bare gound: 
+
 ![](p6-fusa13.png)
 
