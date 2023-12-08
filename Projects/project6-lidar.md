@@ -61,17 +61,7 @@ lidar_to_dsm: done
 grid dsm (0x600000658000):
 	n=101761 [rows=319,cols=319], range=[348.28, 362.93], avg value=352.9 nodata=37843 (37.2%)
 writing map.dsm-grayscale.bmp
-cc 1: source vertex (1,1)..done. 43250 points reached and marked as 1
-	cc_id=  1: size=43250, bbox=[1,237,1,237], bbox_fill=76.999763
-cc 2: breakline source vertex (3,217)..done. 24 points reached and marked as 2
-	cc_id=  2: size=   24, bbox=[3,7,217,221], bbox_fill=96.000000
-cc 3: source vertex (5,219)..done. 1 points reached and marked as 3
-	cc_id=  3: size=    1, bbox=[5,5,219,219], bbox_fill=100.000000
-cc 4: breakline source vertex (24,14)..done. 1 points reached and marked as 4
-	cc_id=  4: size=    1, bbox=[24,24,14,14], bbox_fill=100.000000
-cc 5: breakline source vertex (26,10)..done. 3 points reached and marked as 5
-	cc_id=  5: size=    3, bbox=[26,27,9,10], bbox_fill=75.000000
-[...]skipped
+
 cc size thresholds: T1=40mp(1294.4 cells), T2=1000mp(32360.5 cells), with 1cell=0.03mp
 writing map.ground-hillshade.bmp
 dilate nodata
@@ -129,6 +119,17 @@ generate_slope:
 grid slope_grid: (0x6000018e9350):
 	n=57121 [rows=239,cols=239], range=[0.00, 1.52], avg value=0.3 nodata=1356 (2.4%)
 writing map.slope-on-hillshade.bmp
+cc 1: source vertex (1,1)..done. 43250 points reached and marked as 1
+	cc_id=  1: size=43250, bbox=[1,237,1,237], bbox_fill=76.999763
+cc 2: breakline source vertex (3,217)..done. 24 points reached and marked as 2
+	cc_id=  2: size=   24, bbox=[3,7,217,221], bbox_fill=96.000000
+cc 3: source vertex (5,219)..done. 1 points reached and marked as 3
+	cc_id=  3: size=    1, bbox=[5,5,219,219], bbox_fill=100.000000
+cc 4: breakline source vertex (24,14)..done. 1 points reached and marked as 4
+	cc_id=  4: size=    1, bbox=[24,24,14,14], bbox_fill=100.000000
+cc 5: breakline source vertex (26,10)..done. 3 points reached and marked as 5
+	cc_id=  5: size=    3, bbox=[26,27,9,10], bbox_fill=75.000000
+[...]skipped
 writing map.ground-hillshade.bmp
 dilate nodata
 dilate nodata
