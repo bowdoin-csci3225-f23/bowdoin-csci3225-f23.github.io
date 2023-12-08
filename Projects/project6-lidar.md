@@ -8,12 +8,25 @@ nav_order: 14
 
 
 *** 
-* __Due:__ by Saturday  December 16th, 1pm
+* __Due:__ by Saturday  December 16th, 1pm ( this is the exam day/time for this class in Polaris)
 * Group policy: Partner-optional
+
+The goal of this project is to obtain a digital terrain model (DTM) from Lidar data by  converting it to a grid, identifying the "bare ground" ie the points that represent the ground as opposed to noise, buildings and vegetation, removing the non-ground points (noise, buildings and vegetation), and interpolating the resulting "holes" in the ground into a full digital terrain model grid.  While identifying the ground vs non-groud points you will  be able to classify the non-ground objects as buildings or vegetation. 
+
+As usual, check in your code in the github repository and send me a report ---- containing: 
+1. images that showcare your results for the three dataset
+2. how do you classify ground vs non-ground (and vegetation vs buildings if you do that)
+3. a list of all parameters that can be tuned and their values 
+4. instructions on how to run your code.   
+5. Reflection: How did this project work for you? which of the six projects this semester was your favorite?
+
+Note that if your project is not fully working, your report should include  all the details on your process, what you tried and where you got stuck. 
 
 ***
 
-### Dataset ```france.las```
+
+
+# Dataset ```france.las```
 
 ```
 ./main data/france.txt      
@@ -78,7 +91,7 @@ writing map.ground-interpolated.bmp
 
 ****
 
-### Dataset ```house.las```
+# Dataset ```house.las```
 
 ```
 (base) ltoma@XVR66RXWMT code % ./main data/house.txt 
@@ -176,7 +189,7 @@ And finally, the interpolated bare gound = digital __terrain__ model:
 
 
 ***
-### Dataset ```fusa.las```
+# Dataset ```fusa.las```
 
 ```
 (base) ltoma@XVR66RXWMT code % ./main data/fusa.txt      
