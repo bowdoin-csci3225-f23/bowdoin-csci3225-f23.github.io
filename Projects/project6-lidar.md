@@ -20,7 +20,7 @@ As usual, check in your code in the github repository and send me a report ---- 
 4. instructions on how to run your code.   
 5. Reflection: How did this project work for you? which of the six projects this semester was your favorite?
 
-Note that if your project is not fully working, your report should include  all the details on your process, what you tried and where you got stuck. 
+Note that if your project is not fully working, your report should include  all the details on your process, what you tried and where you got stuck --- everything that shows your work process so that I can evaluate  for partial credit. 
 
 ***
 
