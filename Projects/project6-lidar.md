@@ -119,6 +119,63 @@ writing map.ground-interpolated.bmp
 ***
 ### Dataset ```fusa.las```
 
+```
+(base) ltoma@XVR66RXWMT code % ./main data/fusa.txt      
+read total 277573 points
+	bounding box:  x=[277750.00, 278000.00], y=[6122250.00,6122500.00], z=[42.21,64.35]
+lidar_to_dsm:
+	n=277573, sqrt(n) =526, corresponding cell_x = 0.5, cell_y=0.475
+	starting with: nrows = 527,  ncols =527, cellsize = 0.475
+	nb.last returns: 263370 (out of 277573 total points)
+	#points/cell     #cells
+	         0      97010
+	         1     101976
+	         2      75415
+	         3       2781
+	         4        516
+	         5         29
+	         6          2
+	     total     263370
+	       avg       0.95 (nb.points/cells)
+	       avg       1.46 (nb.points/non-empty cells)
+	grid size accepted.
+lidar_to_dsm: done
+
+grid dsm (0x60000315d200):
+	n=277729 [rows=527,cols=527], range=[42.21, 64.30], avg value=47.9 nodata=97010 (34.9%)
+writing map.dsm-grayscale.bmp
+lidar_to_bareground:
+erode
+erode
+dilate
+writing map.dtm1.hillshade.bmp
+generate_slope:
+grid slope_grid: (0x600003154060):
+	n=277729 [rows=527,cols=527], range=[0.00, 1.51], avg value=0.2 nodata=2104 (0.8%)
+writing map.slope-on-hillshade.bmp
+cc 1: source vertex (1,1)..done. 1 points reached and marked as 1
+	cc_id=  1: size=    1, bbox=[1,1,1,1], bbox_fill=100.000000
+cc 2: breakline source vertex (1,2)..done. 7 points reached and marked as 2
+	cc_id=  2: size=    7, bbox=[1,4,1,3], bbox_fill=58.333332
+cc 3: source vertex (1,4)..done. 218307 points reached and marked as 3
+	cc_id=  3: size=218307, bbox=[1,525,1,525], bbox_fill=79.204353
+cc 4: breakline source vertex (1,69)..done. 223 points reached and marked as 4
+	cc_id=  4: size=  223, bbox=[1,26,65,112], bbox_fill=17.868591
+cc 5: source vertex (1,71)..done. 543 points reached and marked as 5
+	cc_id=  5: size=  543, bbox=[1,24,67,110], bbox_fill=51.420456
+cc 6: breakline source vertex (1,194)..done. 140 points reached and marked as 6
+	cc_id=  6: size=  140, bbox=[1,17,194,233], bbox_fill=20.588236
+[...]skipped
+writing map.ground-hillshade.bmp
+dilate nodata
+dilate nodata
+writing map.ground-hillshade.bmp
+interpolate_dtm_grid: 
+	added 11353 points to the queue
+interpolate_dtm_grid done. 
+writing map.ground-interpolated.bmp
+```
+
 Pre-classified, as shown by ```lidarview```
 
 ![](p6-fusa2.png)
