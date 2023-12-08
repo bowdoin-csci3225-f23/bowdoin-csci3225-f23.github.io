@@ -61,8 +61,18 @@ lidar_to_dsm: done
 grid dsm (0x600000658000):
 	n=101761 [rows=319,cols=319], range=[348.28, 362.93], avg value=352.9 nodata=37843 (37.2%)
 writing map.dsm-grayscale.bmp
-
-cc size thresholds: T1=40mp(1294.4 cells), T2=1000mp(32360.5 cells), with 1cell=0.03mp
+cc 1: source vertex (1,1)..done. 70436 points reached and marked as 1
+	cc_id=  1: size=70436, bbox=[1,317,1,317], bbox_fill=70.093246
+cc 2: breakline source vertex (15,269)..done. 1877 points reached and marked as 2
+	cc_id=  2: size= 1877, bbox=[15,168,214,302], bbox_fill=13.694732
+cc 3: breakline source vertex (17,250)..done. 42 points reached and marked as 3
+	cc_id=  3: size=   42, bbox=[17,37,231,250], bbox_fill=10.000000
+cc 4: breakline source vertex (18,1)..done. 1652 points reached and marked as 4
+	cc_id=  4: size= 1652, bbox=[18,244,1,134], bbox_fill=5.430995
+cc 5: source vertex (21,1)..done. 5454 points reached and marked as 5
+	cc_id=  5: size= 5454, bbox=[21,105,1,125], bbox_fill=51.331764
+...[skipped]
+cc size thresholds: T1=40mp(404.8 cells), T2=1000mp(10120.6 cells), with 1cell=0.10mp
 writing map.ground-hillshade.bmp
 dilate nodata
 dilate nodata
@@ -73,11 +83,54 @@ interpolate_dtm_grid done.
 writing map.ground-interpolated.bmp
 ```
 
-![](p6-fr1.png)
-![](p6-fr2.png)
-![](p6-fr3.png)
-![](p6-fr4.png)
-![](p6-fr5.png)
+This dataset is not pre-classified. 
+
+Shown in 3D by ```lidarview```: 
+
+![](p6-france1.png)![](p6-france2.png)
+
+
+Created by my code: 
+
+Digital surface model, initial and after one erode: 
+
+![](p6-france-dsm.png)
+
+![](p6-france-erode1.png)
+
+After one more erode: 
+
+![](p6-france-erode2.png)
+
+And a dilate: 
+
+![](p6-france-dilate.png)
+
+The hillshade: 
+
+![](p6-france-hillshade.png)
+
+Slope: 
+
+![](p6-france-slope.png)
+
+Breaklines (points in red are points with slope >= 45 deg):
+
+![](p6-france-breakline.png)
+
+Connected components, each shown with a different color:
+
+![](p6-france-cc.png)
+
+Attempt at classification (based on cc size and bbox fill): 
+
+![](p6-france-classified.png)
+
+And finally, the interpolated bare gound = digital __terrain__ model: 
+
+![](p6-france-dtm.png)
+
+
 
 ****
 
