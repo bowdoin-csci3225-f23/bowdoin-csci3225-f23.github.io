@@ -15,7 +15,7 @@ The goal of this project is to obtain a digital terrain model (DTM) from Lidar d
 
 As usual, check in your code in the github repository and send me a report ---- containing: 
 1. images that showcare your results for the three dataset
-2. how do you classify ground vs non-ground (and vegetation vs buildings if you do that)
+2. describe how you classify ground vs non-ground (and vegetation vs buildings if you do that)
 3. a list of all parameters that can be tuned and their values 
 4. instructions on how to run your code.   
 5. Reflection: How did this project work for you? which of the six projects this semester was your favorite?
