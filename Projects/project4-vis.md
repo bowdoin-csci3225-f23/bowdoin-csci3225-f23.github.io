@@ -33,7 +33,7 @@ For example, running with
 ```
 or
 ```
-./flow ~/DEMs/rainier.asc vis.asc 1000 1000 10 
+./vis ~/DEMs/rainier.asc vis.asc 1000 1000 10 
 ```
 will compute the viewshed of point (r=1000, c=1000), standing 10 above ground level, and save the viewshed grid as _vis.asc_. 
 
